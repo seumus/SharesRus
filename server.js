@@ -26,14 +26,13 @@ app.get('/portfolio', function(req,res){
   });
 })
 
-app.post('/portfolio', function(req,res){
+app.post('/market', function(req,res){
   // console.log('body', req.body)
   MongoClient.connect(url, function(err, db) {
     var collection = db.collection('shares');
     collection.insert(
       {
-        // "name": req.body.name,
-        // "balance": req.body.value
+        req.body
       }
     )
     res.status(200).end()

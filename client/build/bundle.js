@@ -44,16 +44,19 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var Market = __webpack_require__(4);
 	var Portfolio = __webpack_require__(1);
 	var Stock = __webpack_require__(2);
 	var sampleShares = __webpack_require__(3);
 	
 	
 	window.onload = function(){
-	  var portfolio = new Portfolio();
+	  var market = new Market();
 	  for(share of sampleShares){
-	    portfolio.addStock(new Stock(share));
+	    market.addStock(new Stock(share));
 	  }
+	  console.log(market);
+	  market.sendStock();
 	};
 
 
@@ -74,6 +77,9 @@
 	  }
 	};
 	
+	
+	
+	
 	module.exports = Portfolio;
 	
 
@@ -82,6 +88,17 @@
 /* 2 */
 /***/ function(module, exports) {
 
+	var Stock = function(params) {
+	  this.name = params.name;
+	  this.epic = params.epic;
+	  this.price = params.price;
+	  this.quantity = params.quantity;
+	  this.buyPrice = params.buyPrice;
+	  this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
+	  this.buyDate = params.buyDate;
+	};
+	
+	module.exports = Stock;
 
 
 /***/ },
@@ -180,6 +197,34 @@
 	      "buyDate":"2014-04-04"
 	    }
 	  ]
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	var Market = function() {
+	  this.shares = []
+	}
+	
+	Market.prototype = {
+	  addStock: function(share){
+	    this.shares.push(share);
+	  },
+	  sendStock: function() {
+	    var url = "http://localhost:3000/market";
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function() {
+	      if (request.status === 200) {
+	      }
+	    };
+	    request.send(JSON.stringify(this.shares));
+	  }
+	}
+	
+	module.exports = Market;
 
 
 /***/ }
