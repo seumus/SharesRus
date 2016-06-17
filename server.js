@@ -32,8 +32,7 @@ app.post('/portfolio', function(req,res){
     var collection = db.collection('shares');
     collection.insert(
       {
-        // "name": req.body.name,
-        // "balance": req.body.value
+        "shares": req.body
       }
     )
     res.status(200).end()
