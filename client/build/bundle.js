@@ -44,16 +44,18 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Portfolio = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./portfolio/portfolio.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var Market = __webpack_require__(4);
+	var Portfolio = __webpack_require__(2);
 	var Stock = __webpack_require__(3);
 	var sampleShares = __webpack_require__(1);
 	
 	
 	window.onload = function(){
-	  var portfolio = new Portfolio();
+	  var market = new Market();
 	  for(share of sampleShares){
-	    portfolio.addStock(new Stock(share));
+	    market.addStock(new Stock(share));
 	  }
+	  console.log(market);
 	};
 
 
@@ -156,10 +158,54 @@
 
 
 /***/ },
-/* 2 */,
+/* 2 */
+/***/ function(module, exports) {
+
+	var Portfolio = function() {
+	  this.shares = []
+	}
+	
+	Portfolio.prototype = {
+	  addStock: function(share){
+	    this.shares.push(share);
+	  }
+	}
+	
+	module.exports = Portfolio;
+
+
+/***/ },
 /* 3 */
 /***/ function(module, exports) {
 
+	var Stock = function(params) {
+	  this.name = params.name;
+	  this.epic = params.epic;
+	  this.price = params.price;
+	  this.quantity = params.quantity;
+	  this.buyPrice = params.buyPrice;
+	  this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
+	  this.buyDate = params.buyDate;
+	};
+	
+	module.exports = Stock;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	var Market = function() {
+	  this.shares = []
+	}
+	
+	Market.prototype = {
+	  addStock: function(share){
+	    this.shares.push(share);
+	  }
+	}
+	
+	module.exports = Market;
 
 
 /***/ }

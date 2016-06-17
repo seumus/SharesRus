@@ -1,11 +1,11 @@
-var Portfolio = function() {
+var Market = function() {
   this.shares = []
 }
 
-Portfolio.prototype = {
+Market.prototype = {
   addStock: function(share){
     this.shares.push(share);
   }
 }
 
-module.exports = Portfolio;
+module.exports = Market;
