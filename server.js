@@ -11,4 +11,4 @@ app.use(bodyParser.urlencoded({extended: true}));
 var MongoClient = require('mongodb').MongoClient
 
 // Connection URL
-var url = 'mongodb://localhost:27017/bank';
+var url = 'mongodb://localhost:27017/shares';
