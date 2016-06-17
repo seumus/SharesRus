@@ -1,7 +1,15 @@
-var Porfolio = function() {
+
+var Portfolio = function() {
   this.shares = []
 }
 
-Porfolio.prototype = {
-  
-}
+
+
+Portfolio.prototype = {
+  addStock: function(share){
+    this.shares.push(share);
+  }
+};
+
+module.exports = Portfolio;
+
