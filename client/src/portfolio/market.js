@@ -5,6 +5,17 @@ var Market = function() {
 Market.prototype = {
   addStock: function(share){
     this.shares.push(share);
+  },
+  sendStock: function() {
+    var url = "http://localhost:3000/market";
+    var request = new XMLHttpRequest();
+    request.open("POST", url);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onload = function() {
+      if (request.status === 200) {
+      }
+    };
+    request.send(JSON.stringify(this.shares));
   }
 }
 
