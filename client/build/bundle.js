@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Portfolio = __webpack_require__(2);
+	var Portfolio = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./portfolio/portfolio.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var Stock = __webpack_require__(3);
 	var sampleShares = __webpack_require__(1);
 	
@@ -156,12 +156,7 @@
 
 
 /***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-
-
-/***/ },
+/* 2 */,
 /* 3 */
 /***/ function(module, exports) {
 
