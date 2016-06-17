@@ -1,0 +1,36 @@
+#scroller {
+  background: red;
+  height: 200px;
+  font-size: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+/*#scroller p {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   line-height: 50px;
+}*/
+
+#nav {
+  background-color: blue;
+  height: 30px;
+}
+
+#best-shares {
+  background-color: green;
+  height: 900px;
+  width: 20%;
+  display: inline-block;
+  float: right;
+}
+
+#main {
+  float: left;
+  height: 900px;
+  width: 80%;
+  background-color: orange;
+  display: inline-block;
+}
