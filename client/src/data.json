@@ -1,14 +1,4 @@
-new Mongo()
-new Mongo(localhost)
-new Mongo(localhost:27017)
-
-conn = new Mongo();
-db = conn.getDB("shares");
-
-db = connect("localhost:27017/shares");
-
-db.insert(
-[
+module.exports = [
     {
       "name": "Fusionex",
       "epic":"FXI",
@@ -99,4 +89,4 @@ db.insert(
       "pastCloseOfDayPrices": [115.00, 115.00, 115.50, 115.90, 116.30, 116.40, 116.80],
       "buyDate":"2014-04-04"
     }
-  ])
+  ]
