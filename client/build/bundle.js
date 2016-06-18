@@ -46,7 +46,7 @@
 
 	var Portfolio = __webpack_require__(2);
 	var Stock = __webpack_require__(3);
-	var sampleShares = __webpack_require__(1);
+	var sampleShares = __webpack_require__(4);
 	
 	
 	window.onload = function(){
@@ -58,7 +58,20 @@
 
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */
+/***/ function(module, exports) {
+
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+
+
+/***/ },
+/* 4 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -153,18 +166,6 @@
 	      "buyDate":"2014-04-04"
 	    }
 	  ]
-
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
 
 
 /***/ }
