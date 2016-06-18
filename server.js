@@ -16,9 +16,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-app.get('/portfolio', function(req,res){
+app.get('/market', function(req,res){
   MongoClient.connect(url, function(err, db) {
-    var collection = db.collection('portfolio');
+    var collection = db.collection('market');
     collection.find({}).toArray(function(err, docs) {
       res.json(docs);
       db.close();
@@ -27,14 +27,12 @@ app.get('/portfolio', function(req,res){
 })
 
 app.post('/market', function(req,res){
-  // console.log('body', req.body)
+  console.log('body', req.body)
+
   MongoClient.connect(url, function(err, db) {
-    var collection = db.collection('shares');
-    collection.insert(
-      {
-        req.body
-      }
-    )
+    var collection = db.collection('market');
+    collection.remove({});
+    collection.insert( req.body )
     res.status(200).end()
     db.close();
   });

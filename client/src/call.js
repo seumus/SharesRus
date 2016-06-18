@@ -1,12 +1,12 @@
-var makeCall = function(url, method, callBack) {
+var makeCall = function(callBack) {
   var request = new XMLHttpRequest();
   request.open(method, url);
 }
 
 function() {
-    var url = "http://localhost:3000/countries";
+    var url = "http://localhost:3000/market";
     var request = new XMLHttpRequest();
-    request.open("POST", url);
+    request.open("Get", url);
     request.setRequestHeader("Content-Type", "application/json");
     request.onload = function() {
       if (request.status === 200) {
