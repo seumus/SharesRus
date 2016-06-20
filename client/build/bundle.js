@@ -45,8 +45,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Market = __webpack_require__(1);
-	var Portfolio = __webpack_require__(2);
-	var Stock = __webpack_require__(3);
+	var Portfolio = __webpack_require__(3);
+	var Stock = __webpack_require__(2);
 	
 	
 	var market = new Market();
@@ -65,7 +65,7 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Stock = __webpack_require__(3);
+	var Stock = __webpack_require__(2);
 	
 	var Market = function() {
 	  this.shares = []
@@ -104,6 +104,23 @@
 /* 2 */
 /***/ function(module, exports) {
 
+	var Stock = function(params) {
+	  this.name = params.name;
+	  this.epic = params.epic;
+	  this.price = params.price;
+	  this.quantity = params.quantity;
+	  this.buyPrice = params.buyPrice;
+	  this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
+	  this.buyDate = params.buyDate;
+	};
+	
+	module.exports = Stock;
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
 	
 	var Portfolio = function() {
 	  this.shares = []
@@ -122,23 +139,6 @@
 	
 	module.exports = Portfolio;
 	
-
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-	var Stock = function(params) {
-	  this.name = params.name;
-	  this.epic = params.epic;
-	  this.price = params.price;
-	  this.quantity = params.quantity;
-	  this.buyPrice = params.buyPrice;
-	  this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
-	  this.buyDate = params.buyDate;
-	};
-	
-	module.exports = Stock;
 
 
 /***/ }
