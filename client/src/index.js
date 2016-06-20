@@ -74,9 +74,15 @@ var liOnClick = function() {
         var result = JSON.parse(request.responseText);
         var result = result.list.resources[0].resource.fields;
         console.log(result);
+        var infoBox = document.getElementById("company-description")
+        infoBox.innerText = result.name
       }
     }
     request.send(null);
+}
+
+var displayInfo = function() {
+
 }
 
 // var topTen = function(companies) {
