@@ -44,16 +44,16 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var BarChart= __webpack_require__(5);
-	var LineChart= __webpack_require__(6);
+	var BarChart= __webpack_require__(1);
+	var LineChart= __webpack_require__(2);
 	
-	var Market = __webpack_require__(1);
-	var Portfolio = __webpack_require__(3);
-	var Stock = __webpack_require__(2);
+	var Market = __webpack_require__(3);
+	var Portfolio = __webpack_require__(5);
+	var Stock = __webpack_require__(4);
 	
-	var companies = __webpack_require__(7);
-	var sampleShares = __webpack_require__(8);
-	var buisnesses = __webpack_require__(9)
+	var companies = __webpack_require__(6);
+	var sampleShares = __webpack_require__(7);
+	var buisnesses = __webpack_require__(8)
 	
 	
 	
@@ -334,9 +334,56 @@
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	// var data = require("data.json");
+	
+	var BarChart = function(data, container){
+	
+	  var chart = new Highcharts.Chart({
+	    chart: {
+	      type: 'bar',
+	      renderTo: container
+	    },
+	    title: {
+	      text: "Share Information"
+	    },
+	    series: data,
+	    xAxis: {categories: ['categories']},
+	  });
+	
+	}
+	
+	module.exports = BarChart;
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	var LineChart = function(data, container, date){
+	
+	    var chart = new Highcharts.Chart({
+	      chart: {
+	        renderTo: container
+	      },
+	      title: {
+	        text: "Share Information"
+	      },
+	      series: data,
+	      xAxis: {categories: date},
+	    });
+	
+	}
+	
+	module.exports = LineChart;
+
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Stock = __webpack_require__(2);
+	var Stock = __webpack_require__(4);
 	
 	var Market = function() {
 	  this.shares = []
@@ -372,7 +419,7 @@
 
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports) {
 
 	var Stock = function(params) {
@@ -389,7 +436,7 @@
 
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports) {
 
 	
@@ -413,55 +460,7 @@
 
 
 /***/ },
-/* 4 */,
-/* 5 */
-/***/ function(module, exports) {
-
-	// var data = require("data.json");
-	
-	var BarChart = function(data, container){
-	
-	  var chart = new Highcharts.Chart({
-	    chart: {
-	      type: 'bar',
-	      renderTo: container
-	    },
-	    title: {
-	      text: "Share Information"
-	    },
-	    series: data,
-	    xAxis: {categories: ['categories']},
-	  });
-	
-	}
-	
-	module.exports = BarChart;
-
-
-/***/ },
 /* 6 */
-/***/ function(module, exports) {
-
-	var LineChart = function(data, container, date){
-	
-	    var chart = new Highcharts.Chart({
-	      chart: {
-	        renderTo: container
-	      },
-	      title: {
-	        text: "Share Information"
-	      },
-	      series: data,
-	      xAxis: {categories: date},
-	    });
-	
-	}
-	
-	module.exports = LineChart;
-
-
-/***/ },
-/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -2988,7 +2987,7 @@
 	]
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3086,7 +3085,7 @@
 
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = [
