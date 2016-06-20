@@ -4,6 +4,7 @@
 <head>
   <title>SharesRUS</title>
   <link rel="stylesheet" type="text/css" href="main.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway+Dots" rel="stylesheet">
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="chart.js"></script>
   <script src="lineChart.js"></script>
@@ -41,7 +42,8 @@
 </marquee></div>
 
 <div>
-<h1 id="title"></h1>
+
+<h1 id="title"><img src="logo.png"></h1>
 <nav id="nav">
   <a href="">HOME</a>
   <a href="">SEARCH</a>
@@ -55,14 +57,22 @@
 </div>
 
 <div id="main">
+  
   <div id="dropdown">
     <div id="select-container"></div>
     <div id="company-list-container"></div>
-    <div id="company-description"></div>
+
   </div>
 
-  <div id="search-shares"></div>
+  <div id="search-shares">
+    <form>
+      <input type="Input" name="share-search">
+      <input type="Submit" name="search-submit">
+    </form>
+  </div>
+
   <div id="display">
+    <div id="company-description"></div>
 <!--     <div id="barChart1" width="500" height="400"></div>
     <div id="barChart2" width="500" height="400"></div> -->
     <div id="lineChart" width="500" height="400"></div>
