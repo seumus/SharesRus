@@ -1,6 +1,8 @@
 /*Index*/
 
-
+body {
+  background-color: grey;
+}
 
 #scroller {
   background: black;
@@ -12,8 +14,8 @@
 }
 
 #title {
-  background-color: white;
-  font-family: 'Bungee Shade', cursive;
+/*  background-color: white;*/
+/*  font-family: 'Bungee Shade', cursive;*/
   font-size: 70px;
   height: auto;
   margin: 0;
@@ -23,8 +25,9 @@
 }
 
 #nav {
-  background-color: blue;
+  background-color: char;
   height: 30px;
+  background-color: #383838;
 }
 
 #nav a {
@@ -37,34 +40,31 @@
 }
 
 #twitter {
-  background-color: green;
-  height: 900px;
+  height: 600px;
   width: 20%;
   display: inline-block;
   float: right;
+  overflow: scroll;
 }
 
 #dropdown {
   float: left;
-  height: 900px;
+  height: 600px;
   width: 20%;
-  background-color: orange;
   display: inline-block;
   overflow: scroll;
 }
 
 #search-shares { 
-  height: 100px;
+  height: 200px;
   width: 60%;
-  background-color: pink;
   display: inline-block;
   margin: 0px;
 }
 
 #display { 
-  height: 800px;
+  height: 400px;
   width: 60%;
-  background-color: red;
   display: inline-block;
   margin: 0px;
 }
