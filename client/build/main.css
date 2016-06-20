@@ -1,0 +1,105 @@
+/*Index*/
+
+
+
+#scroller {
+  background: black;
+  height: 50px;
+  font-size: 40px;
+  overflow: hidden;
+  position: relative;
+  color: white;
+}
+
+#title {
+  background-color: white;
+  font-family: 'Bungee Shade', cursive;
+  font-size: 70px;
+  height: auto;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#nav {
+  background-color: blue;
+  height: 30px;
+}
+
+#nav a {
+  display: inline-block;
+  float: right;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: black;
+  font-size: 25px;
+}
+
+#twitter {
+  background-color: green;
+  height: 900px;
+  width: 20%;
+  display: inline-block;
+  float: right;
+}
+
+#dropdown {
+  float: left;
+  height: 900px;
+  width: 20%;
+  background-color: orange;
+  display: inline-block;
+  overflow: scroll;
+}
+
+#search-shares { 
+  height: 100px;
+  width: 60%;
+  background-color: pink;
+  display: inline-block;
+  margin: 0px;
+}
+
+#display { 
+  height: 800px;
+  width: 60%;
+  background-color: red;
+  display: inline-block;
+  margin: 0px;
+}
+
+.plus {
+  color: green;
+}
+
+.minus {
+  color: red;
+}
+
+
+/*Main Page*/
+
+#share-search {
+  height: 150px;
+  background-color: white;
+}
+
+#results {
+  height: 750px;
+  background-color: magenta;
+}
+
+#search-form {
+  text-align: center;
+}
+
+#search {
+  margin: 0;
+  padding: 30px;
+}
+
+/*Portfolio*/
+
+
+
