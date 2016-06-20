@@ -4,8 +4,8 @@ var LineChart= require("./lineChart.js");
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
 var Stock = require('./portfolio/stock.js');
-var companies = require('./data.json');
-var sampleShares = require('./data3.json');
+var companies = require('./data3.json');
+var sampleShares = require('./data2.json');
 
 
 
