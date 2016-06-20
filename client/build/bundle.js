@@ -55,11 +55,10 @@
 	
 	  for(share of sampleShares){
 	    market.addStock(new Stock(share));
+	
 	  }
 	  console.log(market);
-	  if (market.shares.length < 11) {
-	    market.sendStock();
-	  }
+	  market.sendStock();
 	
 	};
 

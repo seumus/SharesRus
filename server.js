@@ -30,6 +30,7 @@ app.post('/market', function(req,res){
   // console.log('body', req.body)
   MongoClient.connect(url, function(err, db) {
     var collection = db.collection('market');
+    
     collection.insert(req.body)
     res.status(200).end()
     db.close();
