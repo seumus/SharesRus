@@ -1,36 +1,48 @@
+var BarChart= require("./chart.js");
+var LineChart= require("./lineChart.js");
+
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
 var Stock = require('./portfolio/stock.js');
-var companies = require('./data.json');
+var companies = require('./data3.json');
+var sampleShares = require('./data2.json');
 
-
-// var market = new Market();
-// market.getShares();
 
 
 
 window.onload = function(){
   var sectors = getSectors(companies);
   createSelect(sectors);
-  
+
+
+  changeInPriceData = getChangeInPriceData(sampleShares);
+  currentPriceData = getCurrentPriceData(sampleShares);
+  priceTrendData = getPriceTrend(sampleShares);
+
+  // console.log(data);
+  var container1 = document.getElementById("barChart1");
+  var container2 = document.getElementById("barChart2");
+  var container3 = document.getElementById("lineChart");
+
+  new BarChart(changeInPriceData, container1);
+  new BarChart(currentPriceData, container2);
+  new LineChart(priceTrendData, container3);
+
+
 };
 
 var getSectors = function(companies) {
   var sectorsAll = []   
   for( company of companies ) {
     sectorsAll.push(company.Sector);
-  } 
+  }
 
 
-  // In this scenario your unique array will run through all of the values in the duplicate array. The elem variable represents the value of the element in the array (mike,james,james,alex), the position is it’s 0-indexed position in the array (0,1,2,3…), and the duplicatesArray.indexOf(elem) value is just the index of the first occurrence of that element in the original array. So, because the element ‘james’ is duplicated, when we loop through all of the elements in the duplicatesArray and push them to the uniqueArray, the first time we hit james, our “pos” value is 1, and our indexOf(elem) is 1 as well, so James gets pushed to the uniqueArray. The second time we hit James, our “pos” value is 2, and our indexOf(elem) is still 1 (because it only finds the first instance of an array element), so the duplicate is not pushed. Therefore, our uniqueArray contains only unique values.
 
 var sectors = sectorsAll.filter(function(elem, pos) {
     return sectorsAll.indexOf(elem) == pos;
-  }); 
-
-
+  });
   return sectors;
-
 }
 
 var createSelect = function(sectors) {
@@ -46,6 +58,8 @@ var createSelect = function(sectors) {
    }
    div.appendChild(select);
 }
+
+
 
 var selectOnChange = function() {
   console.log(this.value);
@@ -90,6 +104,7 @@ var liOnClick = function(that) {
     request.send(null);
 }
 
+
 var getEverything = function(that) {
   var symbol = that.id;
  
@@ -111,26 +126,49 @@ var getEverything = function(that) {
 
 
 
+var getChangeInPriceData = function(shares) {
+  y = []
+  for (share of shares) {
+    var data = {name: share.name, data: [share.price - share.buyPrice]}
+    y.push(data)
+  }
+  // console.log(y);
+  return y
+}
 
 
+var getCurrentPriceData = function(shares) {
+  y = []
+  for (share of shares) {
+    var data = {
+      name: share.name,
+      data: [share.price]
+    }
+    y.push(data)
+  }
+  // console.log(y);
+  return y
+}
 
+var pastDays = function(share) {
+  x = []
+  for(index of share.pastCloseOfDayPrices) {
+    x.push(index)
+  }
+  return x
+  // console.log(x);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var getPriceTrend = function(shares) {
+  y=[]
+    for(share of shares) {
+      console.log(share);
+      var data = {
+        name: share.name,
+        data: pastDays(share)
+      }
+      console.log(data);
+      y.push(data)
+    }
+    return y
+  }
