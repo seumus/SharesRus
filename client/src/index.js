@@ -4,9 +4,6 @@ var Stock = require('./portfolio/stock.js');
 var companies = require('./data.json');
 
 
-// var market = new Market();
-// market.getShares();
-
 
 
 window.onload = function(){
@@ -21,15 +18,11 @@ var getSectors = function(companies) {
   }
 
 
-  // In this scenario your unique array will run through all of the values in the duplicate array. The elem variable represents the value of the element in the array (mike,james,james,alex), the position is it’s 0-indexed position in the array (0,1,2,3…), and the duplicatesArray.indexOf(elem) value is just the index of the first occurrence of that element in the original array. So, because the element ‘james’ is duplicated, when we loop through all of the elements in the duplicatesArray and push them to the uniqueArray, the first time we hit james, our “pos” value is 1, and our indexOf(elem) is 1 as well, so James gets pushed to the uniqueArray. The second time we hit James, our “pos” value is 2, and our indexOf(elem) is still 1 (because it only finds the first instance of an array element), so the duplicate is not pushed. Therefore, our uniqueArray contains only unique values.
 
 var sectors = sectorsAll.filter(function(elem, pos) {
     return sectorsAll.indexOf(elem) == pos;
   });
-
-
   return sectors;
-
 }
 
 var createSelect = function(sectors) {
@@ -45,6 +38,8 @@ var createSelect = function(sectors) {
    }
    div.appendChild(select);
 }
+
+
 
 var selectOnChange = function() {
   console.log(this.value);
@@ -83,3 +78,33 @@ var liOnClick = function() {
     }
     request.send(null);
 }
+
+// var topTen = function(companies) {
+//   var dataSave = []
+//   var i = 0
+//   // while (i < 10) {
+//     symbol = companies[i].Symbol
+//     // console.log(symbol);
+//     var request = new XMLHttpRequest();
+//     var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail";
+//
+//       request.open("GET", url);
+//       request.onload = function() {
+//
+//         if( request.status === 200 ) {
+//           var result = JSON.parse(request.responseText);
+//           var result = result.list.resources[0].resource.fields;
+//           console.log("result",result);
+//           // postData(result);
+//           dataSave.push(result)
+//
+//
+//         }
+//        }
+//
+//        request.send(null);
+//       i ++
+//     // }
+//     console.log("array",dataSave);
+//     // console.log(dataSave);
+//   }
