@@ -4,13 +4,17 @@ var LineChart= require("./lineChart.js");
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
 var Stock = require('./portfolio/stock.js');
+
 var companies = require('./data3.json');
 var sampleShares = require('./data2.json');
+var buisnesses = require('./sample.json')
+
 
 
 
 
 window.onload = function(){
+  banner(buisnesses);
   var sectors = getSectors(companies);
   createSelect(sectors);
 
@@ -20,14 +24,17 @@ window.onload = function(){
   priceTrendData = getPriceTrend(sampleShares);
 
   // console.log(data);
-  var container1 = document.getElementById("barChart1");
-  var container2 = document.getElementById("barChart2");
+  // var container1 = document.getElementById("barChart1");
+  // var container2 = document.getElementById("barChart2");
   var container3 = document.getElementById("lineChart");
 
-  new BarChart(changeInPriceData, container1);
-  new BarChart(currentPriceData, container2);
+  // new BarChart(changeInPriceData, container1);
+  // new BarChart(currentPriceData, container2);
   new LineChart(priceTrendData, container3);
 
+
+
+ 
 
 };
 
@@ -59,7 +66,29 @@ var createSelect = function(sectors) {
    div.appendChild(select);
 }
 
-
+var banner = function(companies){ 
+  var scroll = document.getElementById("scroll")
+  for (company of companies){
+    console.log(company)
+    console.log(company.pastCloseOfDayPrices[6])
+    var price = company.price - company.pastCloseOfDayPrices[6]
+    var priceChange = price.toFixed(2);
+    var currentPrice = company.price.toFixed(2)
+    console.log(priceChange)
+    var span1 = document.createElement('span')
+    var span2 = document.createElement('span')
+    span1.innerText = " --- "
+    span2.innerText = currentPrice + " - " + company.name + " - " + priceChange
+    if (priceChange > 0){
+      span2.classList.add("plus")
+    }
+    if (priceChange < 0){
+      span2.classList.add("minus")
+    }
+    scroll.appendChild(span1)
+    scroll.appendChild(span2)
+  }
+}
 
 var selectOnChange = function() {
   console.log(this.value);
@@ -214,3 +243,21 @@ var getPriceTrend = function(shares) {
     }
     return y
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
