@@ -80,7 +80,7 @@
 	
 	
 	
-	 
+	
 	
 	};
 	
@@ -112,15 +112,15 @@
 	   div.appendChild(select);
 	}
 	
-	var banner = function(companies){ 
+	var banner = function(companies){
 	  var scroll = document.getElementById("scroll")
 	  for (company of companies){
-	    console.log(company)
-	    console.log(company.pastCloseOfDayPrices[6])
+	    // console.log(company)
+	    // console.log(company.pastCloseOfDayPrices[6])
 	    var price = company.price - company.pastCloseOfDayPrices[6]
 	    var priceChange = price.toFixed(2);
 	    var currentPrice = company.price.toFixed(2)
-	    console.log(priceChange)
+	    // console.log(priceChange)
 	    var span1 = document.createElement('span')
 	    var span2 = document.createElement('span')
 	    span1.innerText = " --- "
@@ -137,7 +137,7 @@
 	}
 	
 	var selectOnChange = function() {
-	  console.log(this.value);
+	  // console.log(this.value);
 	  var div = document.getElementById("company-list-container");
 	  var ul = document.createElement('ul');
 	  if(div.childNodes[0]) {
@@ -170,12 +170,15 @@
 	    request.open("GET", url);
 	    request.onload = function() {
 	      if( request.status === 200 ) {
-	        console.log("HI");
+	        // console.log("HI");
 	        var result = JSON.parse(request.responseText);
 	        var result = result.query.results.quote;
-	        console.log(result);
-	        var infoBox = document.getElementById("company-description")
-	        infoBox.innerText = result.name
+	        console.log("THIS ONE",result);
+	        var container3 = document.getElementById("lineChart");
+	        var priceTrendData2 = getPriceTrendCont(result)
+	        var dates = getDates(result)
+	        new LineChart(priceTrendData2, container3, dates);
+	
 	      }
 	    }
 	    request.send(null);
@@ -233,7 +236,9 @@
 	      if(request.status === 200) {
 	        var result = JSON.parse(request.responseText);
 	        var result = result.list.resources[0].resource.fields;
-	        console.log(result);
+	        console.log("THIS",result);
+	        var infoBox = document.getElementById("company-description")
+	        infoBox.innerText = result.name
 	      }
 	    }
 	    request.send(null);
@@ -276,37 +281,56 @@
 	  // console.log(x);
 	}
 	
+	var pastDaysCont = function(share) {
+	  x = []
+	  for(index of share) {
+	    x.push(index.close)
+	  }
+	  return x
+	  // console.log(x);
+	}
+	
+	var getPriceTrendCont = function(shares) {
+	  var y=[]
+	  var close = []
+	  for(share of shares) {
+	    close.push(parseInt(share.Close))
+	    }
+	    console.log(close);
+	      // console.log(share);
+	      var data = {
+	        name: 'share',
+	        data: close
+	      }
+	      // console.log(data);
+	      y.push(data)
+	      console.log("y",y);
+	      return y
+	    }
+	
+	
+	
 	var getPriceTrend = function(shares) {
 	  y=[]
 	    for(share of shares) {
-	      console.log(share);
+	      // console.log(share);
 	      var data = {
 	        name: share.name,
 	        data: pastDays(share)
 	      }
-	      console.log(data);
+	      // console.log(data);
 	      y.push(data)
 	    }
 	    return y
 	  }
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	  var getDates = function(shares) {
+	    y = []
+	    for(share of shares) {
+	      y.push(share.Date)
+	    }
+	    return y
+	  }
 
 
 /***/ },
@@ -338,7 +362,7 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	var LineChart = function(data, container){
+	var LineChart = function(data, container, date){
 	
 	    var chart = new Highcharts.Chart({
 	      chart: {
@@ -348,7 +372,7 @@
 	        text: "Share Information"
 	      },
 	      series: data,
-	      xAxis: {categories: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"]},
+	      xAxis: {categories: date},
 	    });
 	
 	}
