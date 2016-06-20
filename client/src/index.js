@@ -12,7 +12,7 @@ window.onload = function(){
   for(share of sampleShares){
     market.addStock(new Stock(share));
   }
-  console.log(market);
+  // console.log(market);
   changeInPriceData = getChangeInPriceData(sampleShares);
   currentPriceData = getCurrentPriceData(sampleShares);
   priceTrendData = getPriceTrend(sampleShares);
@@ -34,7 +34,7 @@ var getChangeInPriceData = function(shares) {
     var data = {name: share.name, data: [share.price - share.buyPrice]}
     y.push(data)
   }
-  console.log(y);
+  // console.log(y);
   return y
 }
 
@@ -47,19 +47,29 @@ var getCurrentPriceData = function(shares) {
     }
     y.push(data)
   }
-  console.log(y);
+  // console.log(y);
   return y
+}
+
+var pastDays = function(share) {
+  x = []
+  for(index of share.pastCloseOfDayPrices) {
+    x.push(index)
+  }
+  return x
+  // console.log(x);
 }
 
 var getPriceTrend = function(shares) {
   y=[]
-  for(share of shares) {
-    var data = {
-      name: share.name,
-      data: [share.price]
+    for(share of shares) {
+      console.log(share);
+      var data = {
+        name: share.name,
+        data: pastDays(share)
+      }
+      console.log(data);
+      y.push(data)
     }
-    y.push(data)
+    return y
   }
-  return y
-  }
-}
