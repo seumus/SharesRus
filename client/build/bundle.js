@@ -44,10 +44,14 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Market = __webpack_require__(1);
+	var BarChart= __webpack_require__(1);
+	var LineChart= __webpack_require__(6);
+	
+	var Market = __webpack_require__(2);
 	var Portfolio = __webpack_require__(3);
-	var Stock = __webpack_require__(2);
-	var companies = __webpack_require__(4);
+	var Stock = __webpack_require__(4);
+	var companies = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./data.json\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var sampleShares = __webpack_require__(7);
 	
 	
 	
@@ -55,6 +59,20 @@
 	window.onload = function(){
 	  var sectors = getSectors(companies);
 	  createSelect(sectors);
+	
+	  changeInPriceData = getChangeInPriceData(sampleShares);
+	  currentPriceData = getCurrentPriceData(sampleShares);
+	  priceTrendData = getPriceTrend(sampleShares);
+	
+	  // console.log(data);
+	  var container1 = document.getElementById("barChart1");
+	  var container2 = document.getElementById("barChart2");
+	  var container3 = document.getElementById("lineChart");
+	
+	  new BarChart(changeInPriceData, container1);
+	  new BarChart(currentPriceData, container2);
+	  new LineChart(priceTrendData, container3);
+	
 	};
 	
 	var getSectors = function(companies) {
@@ -154,13 +172,90 @@
 	//     console.log("array",dataSave);
 	//     // console.log(dataSave);
 	//   }
+	
+	
+	
+	  // console.log(market);
+	
+	
+	
+	var getChangeInPriceData = function(shares) {
+	  y = []
+	  for (share of shares) {
+	    var data = {name: share.name, data: [share.price - share.buyPrice]}
+	    y.push(data)
+	  }
+	  // console.log(y);
+	  return y
+	}
+	
+	var getCurrentPriceData = function(shares) {
+	  y = []
+	  for (share of shares) {
+	    var data = {
+	      name: share.name,
+	      data: [share.price]
+	    }
+	    y.push(data)
+	  }
+	  // console.log(y);
+	  return y
+	}
+	
+	var pastDays = function(share) {
+	  x = []
+	  for(index of share.pastCloseOfDayPrices) {
+	    x.push(index)
+	  }
+	  return x
+	  // console.log(x);
+	}
+	
+	var getPriceTrend = function(shares) {
+	  y=[]
+	    for(share of shares) {
+	      console.log(share);
+	      var data = {
+	        name: share.name,
+	        data: pastDays(share)
+	      }
+	      console.log(data);
+	      y.push(data)
+	    }
+	    return y
+	  }
 
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	// var data = require("data.json");
+	
+	var BarChart = function(data, container){
+	
+	  var chart = new Highcharts.Chart({
+	    chart: {
+	      type: 'bar',
+	      renderTo: container
+	    },
+	    title: {
+	      text: "Share Information"
+	    },
+	    series: data,
+	    xAxis: {categories: ['categories']},
+	  });
+	
+	}
+	
+	module.exports = BarChart;
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Stock = __webpack_require__(2);
+	var Stock = __webpack_require__(4);
 	
 	var Market = function() {
 	  this.shares = []
@@ -196,23 +291,6 @@
 
 
 /***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	var Stock = function(params) {
-	  this.name = params.name;
-	  this.epic = params.epic;
-	  this.price = params.price;
-	  this.quantity = params.quantity;
-	  this.buyPrice = params.buyPrice;
-	  this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
-	  this.buyDate = params.buyDate;
-	};
-	
-	module.exports = Stock;
-
-
-/***/ },
 /* 3 */
 /***/ function(module, exports) {
 
@@ -238,6 +316,46 @@
 
 /***/ },
 /* 4 */
+/***/ function(module, exports) {
+
+	var Stock = function(params) {
+	  this.name = params.name;
+	  this.epic = params.epic;
+	  this.price = params.price;
+	  this.quantity = params.quantity;
+	  this.buyPrice = params.buyPrice;
+	  this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
+	  this.buyDate = params.buyDate;
+	};
+	
+	module.exports = Stock;
+
+
+/***/ },
+/* 5 */,
+/* 6 */
+/***/ function(module, exports) {
+
+	var LineChart = function(data, container){
+	
+	    var chart = new Highcharts.Chart({
+	      chart: {
+	        renderTo: container
+	      },
+	      title: {
+	        text: "Share Information"
+	      },
+	      series: data,
+	      xAxis: {categories: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"]},
+	    });
+	
+	}
+	
+	module.exports = LineChart;
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
