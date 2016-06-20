@@ -9,7 +9,6 @@ var sampleShares = require('./data2.json');
 
 
 
-
 window.onload = function(){
   var sectors = getSectors(companies);
   createSelect(sectors);
@@ -27,6 +26,13 @@ window.onload = function(){
   new BarChart(changeInPriceData, container1);
   new BarChart(currentPriceData, container2);
   new LineChart(priceTrendData, container3);
+
+  var twit = document.getElementById("twitter-link");
+  var name = "https://twitter.com/AbbVie";
+  // var name = name.split(" ");
+  twit.setAttribute('href', name);
+
+  console.log(twit);
 
 
 };
