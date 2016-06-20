@@ -1,5 +1,7 @@
 /*Index*/
 
+
+
 #scroller {
   background: black;
   height: 50px;
@@ -11,9 +13,12 @@
 
 #title {
   background-color: white;
+  font-family: 'Bungee Shade', cursive;
+  font-size: 70px;
   height: auto;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
 }
 
@@ -31,7 +36,7 @@
   font-size: 25px;
 }
 
-#best-shares {
+#twitter {
   background-color: green;
   height: 900px;
   width: 20%;
@@ -39,12 +44,29 @@
   float: right;
 }
 
-#main {
+#dropdown {
   float: left;
   height: 900px;
-  width: 80%;
+  width: 20%;
   background-color: orange;
   display: inline-block;
+  overflow: scroll;
+}
+
+#search-shares { 
+  height: 100px;
+  width: 60%;
+  background-color: pink;
+  display: inline-block;
+  margin: 0px;
+}
+
+#display { 
+  height: 800px;
+  width: 60%;
+  background-color: red;
+  display: inline-block;
+  margin: 0px;
 }
 
 .plus {
@@ -54,7 +76,6 @@
 .minus {
   color: red;
 }
-
 
 
 /*Main Page*/
