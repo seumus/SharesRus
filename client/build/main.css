@@ -5,6 +5,7 @@ body {
 }
 
 #scroller {
+  font-family: 'Raleway Dots', cursive;
   background: black;
   height: 50px;
   font-size: 40px;
@@ -53,16 +54,19 @@ body {
   width: 20%;
   display: inline-block;
   overflow: scroll;
+  list-style-type: none;
 }
 
-#search-shares { 
+
+#search-shares {
   height: 200px;
   width: 60%;
   display: inline-block;
   margin: 0px;
 }
 
-#display { 
+
+#display {
   height: 400px;
   width: 60%;
   display: inline-block;
@@ -99,7 +103,8 @@ body {
   padding: 30px;
 }
 
+ul li {
+  list-style-type: none;
+}
+
 /*Portfolio*/
-
-
-

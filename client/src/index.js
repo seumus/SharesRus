@@ -39,7 +39,7 @@ window.onload = function(){
 };
 
 var getSectors = function(companies) {
-  var sectorsAll = []   
+  var sectorsAll = []
   for( company of companies ) {
     sectorsAll.push(company.Sector);
   }
@@ -116,7 +116,7 @@ var selectOnChange = function() {
 }
 
 var liOnClick = function(that) {
-  
+
   var symbol = that.id;
 
   var request = new XMLHttpRequest();
@@ -128,16 +128,57 @@ var liOnClick = function(that) {
         var result = JSON.parse(request.responseText);
         var result = result.query.results.quote;
         console.log(result);
+        var infoBox = document.getElementById("company-description")
+        infoBox.innerText = result.name
       }
     }
     request.send(null);
 }
 
 
+var displayInfo = function() {
+
+}
+
+// var topTen = function(companies) {
+//   var dataSave = []
+//   var i = 0
+//   // while (i < 10) {
+//     symbol = companies[i].Symbol
+//     // console.log(symbol);
+//     var request = new XMLHttpRequest();
+//     var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail";
+//
+//       request.open("GET", url);
+//       request.onload = function() {
+//
+//         if( request.status === 200 ) {
+//           var result = JSON.parse(request.responseText);
+//           var result = result.list.resources[0].resource.fields;
+//           console.log("result",result);
+//           // postData(result);
+//           dataSave.push(result)
+//
+//
+//         }
+//        }
+//
+//        request.send(null);
+//       i ++
+//     // }
+//     console.log("array",dataSave);
+//     // console.log(dataSave);
+//   }
+
+
+
+  // console.log(market);
+
+
 var getEverything = function(that) {
   var symbol = that.id;
- 
- 
+
+
     var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
 
     var request = new XMLHttpRequest();
@@ -149,8 +190,9 @@ var getEverything = function(that) {
         console.log(result);
       }
     }
-    request.send(null); 
+    request.send(null);
 }
+
 
 
 
