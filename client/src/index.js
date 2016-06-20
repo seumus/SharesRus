@@ -4,7 +4,7 @@ var LineChart= require("./lineChart.js");
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
 var Stock = require('./portfolio/stock.js');
-var sampleShares = require('./data.json');
+var sampleShares = require('./data3.json');
 
 
 window.onload = function(){
