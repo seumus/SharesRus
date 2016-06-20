@@ -4,12 +4,16 @@ var LineChart= require("./lineChart.js");
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
 var Stock = require('./portfolio/stock.js');
+
 var companies = require('./data3.json');
 var sampleShares = require('./data2.json');
+var buisnesses = require('./sample.json')
+
 
 
 
 window.onload = function(){
+  banner(buisnesses);
   var sectors = getSectors(companies);
   createSelect(sectors);
 
@@ -19,12 +23,12 @@ window.onload = function(){
   priceTrendData = getPriceTrend(sampleShares);
 
   // console.log(data);
-  var container1 = document.getElementById("barChart1");
-  var container2 = document.getElementById("barChart2");
+  // var container1 = document.getElementById("barChart1");
+  // var container2 = document.getElementById("barChart2");
   var container3 = document.getElementById("lineChart");
 
-  new BarChart(changeInPriceData, container1);
-  new BarChart(currentPriceData, container2);
+  // new BarChart(changeInPriceData, container1);
+  // new BarChart(currentPriceData, container2);
   new LineChart(priceTrendData, container3);
 
   var twit = document.getElementById("twitter-link");
@@ -35,10 +39,13 @@ window.onload = function(){
   console.log(twit);
 
 
+
+ 
+
 };
 
 var getSectors = function(companies) {
-  var sectorsAll = []   
+  var sectorsAll = []
   for( company of companies ) {
     sectorsAll.push(company.Sector);
   }
@@ -65,7 +72,29 @@ var createSelect = function(sectors) {
    div.appendChild(select);
 }
 
-
+var banner = function(companies){ 
+  var scroll = document.getElementById("scroll")
+  for (company of companies){
+    console.log(company)
+    console.log(company.pastCloseOfDayPrices[6])
+    var price = company.price - company.pastCloseOfDayPrices[6]
+    var priceChange = price.toFixed(2);
+    var currentPrice = company.price.toFixed(2)
+    console.log(priceChange)
+    var span1 = document.createElement('span')
+    var span2 = document.createElement('span')
+    span1.innerText = " --- "
+    span2.innerText = currentPrice + " - " + company.name + " - " + priceChange
+    if (priceChange > 0){
+      span2.classList.add("plus")
+    }
+    if (priceChange < 0){
+      span2.classList.add("minus")
+    }
+    scroll.appendChild(span1)
+    scroll.appendChild(span2)
+  }
+}
 
 var selectOnChange = function() {
   console.log(this.value);
@@ -93,7 +122,7 @@ var selectOnChange = function() {
 }
 
 var liOnClick = function(that) {
-  
+
   var symbol = that.id;
 
   var request = new XMLHttpRequest();
@@ -105,16 +134,57 @@ var liOnClick = function(that) {
         var result = JSON.parse(request.responseText);
         var result = result.query.results.quote;
         console.log(result);
+        var infoBox = document.getElementById("company-description")
+        infoBox.innerText = result.name
       }
     }
     request.send(null);
 }
 
 
+var displayInfo = function() {
+
+}
+
+// var topTen = function(companies) {
+//   var dataSave = []
+//   var i = 0
+//   // while (i < 10) {
+//     symbol = companies[i].Symbol
+//     // console.log(symbol);
+//     var request = new XMLHttpRequest();
+//     var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail";
+//
+//       request.open("GET", url);
+//       request.onload = function() {
+//
+//         if( request.status === 200 ) {
+//           var result = JSON.parse(request.responseText);
+//           var result = result.list.resources[0].resource.fields;
+//           console.log("result",result);
+//           // postData(result);
+//           dataSave.push(result)
+//
+//
+//         }
+//        }
+//
+//        request.send(null);
+//       i ++
+//     // }
+//     console.log("array",dataSave);
+//     // console.log(dataSave);
+//   }
+
+
+
+  // console.log(market);
+
+
 var getEverything = function(that) {
   var symbol = that.id;
- 
- 
+
+
     var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
 
     var request = new XMLHttpRequest();
@@ -126,8 +196,9 @@ var getEverything = function(that) {
         console.log(result);
       }
     }
-    request.send(null); 
+    request.send(null);
 }
+
 
 
 
@@ -178,3 +249,21 @@ var getPriceTrend = function(shares) {
     }
     return y
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

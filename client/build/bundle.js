@@ -50,12 +50,16 @@
 	var Market = __webpack_require__(1);
 	var Portfolio = __webpack_require__(3);
 	var Stock = __webpack_require__(2);
+	
 	var companies = __webpack_require__(7);
 	var sampleShares = __webpack_require__(8);
+	var buisnesses = __webpack_require__(9)
+	
 	
 	
 	
 	window.onload = function(){
+	  banner(buisnesses);
 	  var sectors = getSectors(companies);
 	  createSelect(sectors);
 	
@@ -65,12 +69,12 @@
 	  priceTrendData = getPriceTrend(sampleShares);
 	
 	  // console.log(data);
-	  var container1 = document.getElementById("barChart1");
-	  var container2 = document.getElementById("barChart2");
+	  // var container1 = document.getElementById("barChart1");
+	  // var container2 = document.getElementById("barChart2");
 	  var container3 = document.getElementById("lineChart");
 	
-	  new BarChart(changeInPriceData, container1);
-	  new BarChart(currentPriceData, container2);
+	  // new BarChart(changeInPriceData, container1);
+	  // new BarChart(currentPriceData, container2);
 	  new LineChart(priceTrendData, container3);
 	
 	  var twit = document.getElementById("twitter-link");
@@ -81,10 +85,13 @@
 	  console.log(twit);
 	
 	
+	
+	 
+	
 	};
 	
 	var getSectors = function(companies) {
-	  var sectorsAll = []   
+	  var sectorsAll = []
 	  for( company of companies ) {
 	    sectorsAll.push(company.Sector);
 	  }
@@ -111,7 +118,29 @@
 	   div.appendChild(select);
 	}
 	
-	
+	var banner = function(companies){ 
+	  var scroll = document.getElementById("scroll")
+	  for (company of companies){
+	    console.log(company)
+	    console.log(company.pastCloseOfDayPrices[6])
+	    var price = company.price - company.pastCloseOfDayPrices[6]
+	    var priceChange = price.toFixed(2);
+	    var currentPrice = company.price.toFixed(2)
+	    console.log(priceChange)
+	    var span1 = document.createElement('span')
+	    var span2 = document.createElement('span')
+	    span1.innerText = " --- "
+	    span2.innerText = currentPrice + " - " + company.name + " - " + priceChange
+	    if (priceChange > 0){
+	      span2.classList.add("plus")
+	    }
+	    if (priceChange < 0){
+	      span2.classList.add("minus")
+	    }
+	    scroll.appendChild(span1)
+	    scroll.appendChild(span2)
+	  }
+	}
 	
 	var selectOnChange = function() {
 	  console.log(this.value);
@@ -139,7 +168,7 @@
 	}
 	
 	var liOnClick = function(that) {
-	  
+	
 	  var symbol = that.id;
 	
 	  var request = new XMLHttpRequest();
@@ -151,16 +180,57 @@
 	        var result = JSON.parse(request.responseText);
 	        var result = result.query.results.quote;
 	        console.log(result);
+	        var infoBox = document.getElementById("company-description")
+	        infoBox.innerText = result.name
 	      }
 	    }
 	    request.send(null);
 	}
 	
 	
+	var displayInfo = function() {
+	
+	}
+	
+	// var topTen = function(companies) {
+	//   var dataSave = []
+	//   var i = 0
+	//   // while (i < 10) {
+	//     symbol = companies[i].Symbol
+	//     // console.log(symbol);
+	//     var request = new XMLHttpRequest();
+	//     var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail";
+	//
+	//       request.open("GET", url);
+	//       request.onload = function() {
+	//
+	//         if( request.status === 200 ) {
+	//           var result = JSON.parse(request.responseText);
+	//           var result = result.list.resources[0].resource.fields;
+	//           console.log("result",result);
+	//           // postData(result);
+	//           dataSave.push(result)
+	//
+	//
+	//         }
+	//        }
+	//
+	//        request.send(null);
+	//       i ++
+	//     // }
+	//     console.log("array",dataSave);
+	//     // console.log(dataSave);
+	//   }
+	
+	
+	
+	  // console.log(market);
+	
+	
 	var getEverything = function(that) {
 	  var symbol = that.id;
-	 
-	 
+	
+	
 	    var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
 	
 	    var request = new XMLHttpRequest();
@@ -172,8 +242,9 @@
 	        console.log(result);
 	      }
 	    }
-	    request.send(null); 
+	    request.send(null);
 	}
+	
 	
 	
 	
@@ -224,6 +295,24 @@
 	    }
 	    return y
 	  }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 /***/ },
@@ -2978,6 +3067,103 @@
 	   }
 	 ]
 
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	module.exports = [
+	    {
+	      "name": "Fusionex",
+	      "epic":"FXI",
+	      "price": 120.00,
+	      "quantity": 2000,
+	      "buyPrice": 80.00,
+	      "pastCloseOfDayPrices": [92.00, 89.00, 103.00, 125.00, 108.00, 98.00, 110.00],
+	      "buyDate":"2014-11-15"
+	    },
+	    {
+	      "name": "Empiric Student Prop",
+	      "epic":"ESP",
+	      "price": 112.00,
+	      "quantity": 3500,
+	      "buyPrice": 100.00,
+	      "pastCloseOfDayPrices": [90.00, 78.50, 82.50, 110.00, 109.00, 109.00, 110.50],
+	      "buyDate":"2013-10-23"
+	    },
+	    {
+	      "name": "Worldpay",
+	      "epic":"WGP",
+	      "price": 301.00,
+	      "quantity": 1000,
+	      "buyPrice": 209.40,
+	      "pastCloseOfDayPrices": [232.60, 220.00, 222.00, 221.60, 240.00, 238.00, 235.40],
+	      "buyDate":"2015-12-22"
+	    },
+	    {
+	      "name": "Pets At Home",
+	      "epic":"PETS",
+	      "price": 247.40,
+	      "quantity": 2500,
+	      "buyPrice": 250.50,
+	      "pastCloseOfDayPrices": [230.00, 232.30, 235.90, 236.60, 237.00, 240.00, 242.70],
+	      "buyDate":"2014-08-23"
+	    },
+	    {
+	      "name": "Cyprotex",
+	      "epic":"CRX",
+	      "price": 87.00,
+	      "quantity": 5000,
+	      "buyPrice": 90.00,
+	      "pastCloseOfDayPrices": [92.00, 91.00, 91.50, 92.10, 92.70, 91.00, 88.70],
+	      "buyDate":"2015-01-11"
+	    },
+	    {
+	      "name": "Robinson",
+	      "epic":"RBN",
+	      "price": 202.00,
+	      "quantity": 5000,
+	      "buyPrice": 80.50,
+	      "pastCloseOfDayPrices": [201.00, 200.50, 200.00, 202.30, 202.40, 202.10, 203.00],
+	      "buyDate":"2014-04-10"
+	    },
+	    {
+	      "name": "Softcat",
+	      "epic":"SCT",
+	      "price": 322.90,
+	      "quantity": 2000,
+	      "buyPrice": 420.00,
+	      "pastCloseOfDayPrices": [324.40, 325.10, 323.90, 323.40, 323.10, 323.00, 322.20],
+	      "buyDate":"2015-02-18"
+	    },
+	    {
+	      "name": "Royal Bank of Scotland Group",
+	      "epic":"RBS",
+	      "price": 233.00,
+	      "quantity": 8000,
+	      "buyPrice": 790.00,
+	      "pastCloseOfDayPrices": [228.00, 229.10, 228.10, 229.70, 230.90, 231.10, 231.40],
+	      "buyDate":"2016-01-15"
+	    },
+	    {
+	      "name": "NCC",
+	      "epic":"NCC",
+	      "price": 279.00,
+	      "quantity": 2000,
+	      "buyPrice": 500.00,
+	      "pastCloseOfDayPrices": [279.10, 285.00, 285.20, 286.00, 286.00, 285.20, 280.00],
+	      "buyDate":"2014-11-15"
+	    },
+	    {
+	      "name": "Stadium",
+	      "epic":"SDM",
+	      "price": 116.90,
+	      "quantity": 5000,
+	      "buyPrice": 9.00,
+	      "pastCloseOfDayPrices": [115.00, 115.00, 115.50, 115.90, 116.30, 116.40, 116.80],
+	      "buyDate":"2014-04-04"
+	    }
+	  ]
 
 /***/ }
 /******/ ]);
