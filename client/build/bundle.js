@@ -76,17 +76,8 @@
 	  // new BarChart(changeInPriceData, container1);
 	  // new BarChart(currentPriceData, container2);
 	  new LineChart(priceTrendData, container3);
-	
-	  var twit = document.getElementById("twitter-link");
-	  var name = "https://twitter.com/AbbVie";
-	  // var name = name.split(" ");
-	  twit.setAttribute('href', name);
-	
-	  console.log(twit);
-	
-	
-	
-	 
+	  
+	  // changeTwits();
 	
 	};
 	
@@ -294,6 +285,21 @@
 	      y.push(data)
 	    }
 	    return y
+	  }
+	
+	  var changeTwits = function() {
+	   var body = document.getElementsByTagName("body")[0];
+	   var div = document.getElementById("twitter");
+	   var link = div.children[0];
+	   var link2 = div.children[0];
+	   div.removeChild(link);
+	   // link.href.innerHtml = "https://twitter.com/ConocoPhillips";
+	   body.removeChild(div);
+	  link2.href = "https://twitter.com/ConocoPhillips"
+	   
+	   // link.href.innerText = "https://twitter.com/ConocoPhillips";
+	   console.log(link2.href);
+	   body.appendChild(div);
 	  }
 	
 	
