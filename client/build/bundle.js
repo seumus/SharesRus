@@ -58,6 +58,7 @@
 	window.onload = function(){
 	  var sectors = getSectors(companies);
 	  createSelect(sectors);
+	  
 	};
 	
 	var getSectors = function(companies) {
@@ -104,7 +105,11 @@
 	    if(company.Sector === this.value) {
 	      var li = document.createElement("li");
 	      li.style.cursor = "pointer";
-	      li.onclick = liOnClick;
+	      li.addEventListener("click", function() {
+	        var that = this;
+	        liOnClick(that);
+	        getEverything(that);
+	      });
 	      li.innerText = company.Name;
 	      li.id = company.Symbol;
 	      ul.appendChild(li);
@@ -113,8 +118,9 @@
 	  div.appendChild(ul);
 	}
 	
-	var liOnClick = function() {
-	  var symbol = this.id;
+	var liOnClick = function(that) {
+	  
+	  var symbol = that.id;
 	
 	  var request = new XMLHttpRequest();
 	  var url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+symbol+"%22%20and%20startDate%20%3D%20%222015-06-20%22%20and%20endDate%20%3D%20%222016-06-20%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
@@ -128,6 +134,24 @@
 	      }
 	    }
 	    request.send(null);
+	}
+	
+	var getEverything = function(that) {
+	  var symbol = that.id;
+	 
+	 
+	    var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
+	
+	    var request = new XMLHttpRequest();
+	    request.open("Get", url);
+	    request.onload = function() {
+	      if(request.status === 200) {
+	        var result = JSON.parse(request.responseText);
+	        var result = result.list.resources[0].resource.fields;
+	        console.log(result);
+	      }
+	    }
+	    request.send(null); 
 	}
 	
 	
