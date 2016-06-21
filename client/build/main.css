@@ -4,12 +4,18 @@ img {
 }
 
 body {
-  background-color: #bdf7b7;
+  background-color: #8bcad9;
+}
+
+@font-face {
+  font-family: digital;
+  src: url(DS-DIGI.TTF);
 }
 
 #scroller {
-  font-family: 'Raleway Dots', cursive;
+  font-family: digital;
   background: black;
+  padding-top: 5px;
   height: 50px;
   font-size: 40px;
   overflow: hidden;
@@ -39,7 +45,7 @@ body {
 }
 
 #nav {
-  background-color: #8bcad9;
+  background-color: #de7070;
   height: 30px;
 }
 
@@ -55,6 +61,10 @@ body {
   font-size: 25px;
 }
 
+#nav a:hover {
+  background-color: #8bcad9;
+}
+
 #twitter {
   height: 600px;
   width: 20%;
@@ -67,6 +77,7 @@ body {
 #dropdown {
   float: left;
   font-family: 'Bitter', serif;
+  color: #de7070;
   height: 600px;
   width: 20%;
   background-color: #bdf7b7;
