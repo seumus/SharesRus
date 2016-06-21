@@ -184,7 +184,7 @@ var displayInfo = function(company) {
   var td13 = document.createElement("td");
   var td14 = document.createElement("td");
 
-    td8.innerText = company.price;
+    td8.innerText =  company.price;
     td9.innerText =  company.day_high;
     td10.innerText = company.day_low;
     td11.innerText = company.change;
@@ -204,7 +204,7 @@ var displayInfo = function(company) {
   infoBox.appendChild(table);
 
   var button = document.createElement('button');
-  button.innerText = "Buy";
+  button.innerText = "Follow";
   button.id = "buy-button";
   infoBox.appendChild(button);
 
