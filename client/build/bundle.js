@@ -298,6 +298,7 @@
 	  button.innerText = "Follow";
 	
 	  button.id = "follow-button";
+	  infoBox.appendChild(button);
 	
 	
 	
