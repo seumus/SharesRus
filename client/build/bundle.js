@@ -238,7 +238,15 @@
 	        var result = result.list.resources[0].resource.fields;
 	        console.log("THIS",result);
 	        var infoBox = document.getElementById("company-description")
-	        infoBox.innerText = result.name
+	        var stock = new Stock({name:result})
+	        var buyButton = document.createElement('input')
+	        // buyButton.type = 'button'
+	        // buyButton.value = 'Buy'
+	        // infoBox.appendChild(buyButton);
+	        console.log(stock);
+	        stock.save();
+	        infoBox.innerText = "Name: " + result.name + "\n Current Price: " + result.price
+	
 	      }
 	    }
 	    request.send(null);
@@ -425,14 +433,29 @@
 
 	var Stock = function(params) {
 	  this.name = params.name;
-	  this.epic = params.epic;
-	  this.price = params.price;
-	  this.quantity = params.quantity;
-	  this.buyPrice = params.buyPrice;
-	  this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
-	  this.buyDate = params.buyDate;
+	  // this.epic = params.epic;
+	  // this.price = params.price;
+	  // this.quantity = params.quantity;
+	  // this.buyPrice = params.buyPrice;
+	  // this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
+	  // this.buyDate = params.buyDate;
 	};
 	
+	
+	
+	Stock.prototype = {
+	  save: function(){
+	    var url = 'http://localhost:3000/market';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
+	  }
+	}
 	module.exports = Stock;
 
 
@@ -450,6 +473,17 @@
 	Portfolio.prototype = {
 	  addStock: function(share){
 	    this.shares.push(share);
+	  },
+	  save: function(){
+	    var url = 'http://localhost:3000/shares';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
 	  }
 	};
 	
@@ -457,7 +491,6 @@
 	
 	
 	module.exports = Portfolio;
-	
 
 
 /***/ },

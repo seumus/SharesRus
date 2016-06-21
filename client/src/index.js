@@ -192,6 +192,13 @@ var getEverything = function(that) {
         var result = result.list.resources[0].resource.fields;
         console.log("THIS",result);
         var infoBox = document.getElementById("company-description")
+        var stock = new Stock({name:result})
+        var buyButton = document.createElement('input')
+        // buyButton.type = 'button'
+        // buyButton.value = 'Buy'
+        // infoBox.appendChild(buyButton);
+        console.log(stock);
+        stock.save();
         infoBox.innerText = "Name: " + result.name + "\n Current Price: " + result.price
 
       }

@@ -18,11 +18,16 @@ body {
 /*  background-color: white;*/
 /*  font-family: 'Bungee Shade', cursive;*/
   font-size: 70px;
-  height: auto;
+  height: 200px;
   margin: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  /*padding-top: 10px;*/
+  /*padding-bottom: 10px;*/
   text-align: center;
+  background-image: url('./images/ToysRUs.png');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
 }
 
 #nav {
