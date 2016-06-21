@@ -60,18 +60,16 @@
 	window.onload = function(){
 	  banner(buisnesses);
 	  var container3 = document.getElementById("portfolio-lineChart");
-	  priceTrendData = getPriceTrend(sampleShares);
-	  // new BarChart(changeInPriceData, container1);
-	  // new BarChart(currentPriceData, container2);
-	  new LineChart(priceTrendData, container3);
+	  // priceTrendData = getPriceTrend(sampleShares);
+	  // new LineChart(priceTrendData, container3);
+	
+	  getData(getDatesCont);
 	
 	  };
 	
 	  var banner = function(companies){
 	    var scroll = document.getElementById("scroll")
 	    for (company of companies){
-	      // console.log(company)
-	      // console.log(company.pastCloseOfDayPrices[6])
 	      var price = company.price - company.pastCloseOfDayPrices[6]
 	      var priceChange = price.toFixed(2);
 	      var currentPrice = company.price.toFixed(2)
@@ -120,23 +118,23 @@
 	    return y
 	  }
 	
-	  var pastDays = function(share) {
-	    x = []
-	    for(index of share.pastCloseOfDayPrices) {
-	      x.push(index)
-	    }
-	    return x
-	    // console.log(x);
-	  }
+	  // var pastDays = function(share) {
+	  //   x = []
+	  //   for(index of share.shares['0']['1'].dates) {
+	  //     x.push(index)
+	  //   }
+	  //   return x
+	  //   // console.log(x);
+	  // }
 	
-	  var pastDaysCont = function(share) {
-	    x = []
-	    for(index of share) {
-	      x.push(index.close)
-	    }
-	    return x
-	    // console.log(x);
-	  }
+	  // var pastDaysCont = function(share) {
+	  //   x = []
+	  //   for(index of share) {
+	  //     x.push(index.close)
+	  //   }
+	  //   return x
+	  //   // console.log(x);
+	  // }
 	
 	  var getPriceTrendCont = function(shares) {
 	    var y=[]
@@ -158,19 +156,19 @@
 	
 	
 	
-	  var getPriceTrend = function(shares) {
-	    y=[]
-	      for(share of shares) {
-	        // console.log(share);
-	        var data = {
-	          name: share.name,
-	          data: pastDays(share)
-	        }
-	        // console.log(data);
-	        y.push(data)
-	      }
-	      return y
-	    }
+	  // var getPriceTrend = function(shares) {
+	  //   y=[]
+	  //     for(share of shares) {
+	  //       // console.log(share);
+	  //       var data = {
+	  //         name: share.name,
+	  //         data: pastDays(share)
+	  //       }
+	  //       // console.log(data);
+	  //       y.push(data)
+	  //     }
+	  //     return y
+	  //   }
 	
 	
 	
@@ -197,6 +195,36 @@
 	        }
 	      });
 	    }
+	
+	    var getData = function(callback) {
+	      var url = "http://localhost:3000/market"
+	       var request = new XMLHttpRequest();
+	       request.open("Get", url);
+	       request.onload = function() {
+	         if(request.status === 200 ) {
+	           var result = JSON.parse(request.responseText);
+	           callback(result)
+	         }
+	       }
+	     request.send(null);
+	     }
+	
+	     var getDatesCont = function(data) {
+	       y = []
+	      //  console.log(data[0].shares[0]);
+	       x = data[0].shares[0][1]
+	       console.log('x', x);
+	       for(entry in x) {
+	         console.log(entry[0]);
+	         var data = {
+	          //  name: entry.share[0][0].name,
+	          //  data: "pastDays(entry)"
+	         }
+	         // console.log(data);
+	         y.push(data)
+	       }
+	       return y
+	       }
 
 
 /***/ },

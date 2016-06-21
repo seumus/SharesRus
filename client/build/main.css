@@ -107,6 +107,15 @@ body {
   margin: 0px;
 }
 
+#portfolioDisplay{
+    height: auto;
+    width: 60%;
+    background-color: #bdf7b7;
+    display: inline-block;
+    margin: 0px;
+
+}
+
 .plus {
   color: green;
 }
