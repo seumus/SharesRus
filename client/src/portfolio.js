@@ -13,11 +13,13 @@ var buisnesses = require('./sample.json')
 
 window.onload = function(){
   banner(buisnesses);
-  var container3 = document.getElementById("portfolio-lineChart");
+
   // priceTrendData = getPriceTrend(sampleShares);
-  // new LineChart(priceTrendData, container3);
+
 
   getData(getDatesCont);
+  console.log('x',cheese);
+
 
   };
 
@@ -72,14 +74,15 @@ window.onload = function(){
     return y
   }
 
-  // var pastDays = function(share) {
-  //   x = []
-  //   for(index of share.shares['0']['1'].dates) {
-  //     x.push(index)
-  //   }
-  //   return x
-  //   // console.log(x);
-  // }
+  var pastDays = function(share) {
+    x = []
+    for(index of share.shares['0'][1].dates) {
+      console.log(index.Close);
+      x.push(parseInt(index.Close))
+    }
+    return x
+    // console.log(x);
+  }
 
   // var pastDaysCont = function(share) {
   //   x = []
@@ -166,16 +169,20 @@ window.onload = function(){
      var getDatesCont = function(data) {
        y = []
       //  console.log(data[0].shares[0]);
-       x = data[0].shares[0]
-       console.log('x', x);
-       for(entry of x) {
-         console.log(entry);
-         var data = {
-           name: entry.share[0][0].name,
-          //  data: "pastDays(entry)"
+       x = data[0].shares
+      //  console.log('x', data);
+       for(entry of data) {
+         console.log(entry.shares['0'][1].dates);
+         var data2 = {
+           name: entry.shares['0'][0].name.name,
+           data: pastDays(entry)
          }
          // console.log(data);
-         y.push(data)
+         y.push(data2)
        }
-       return y
+       console.log('y',y);
+       var container3 = document.getElementById("portfolio-lineChart");
+       new LineChart(y, container3);
+      //  return y
+
        }
