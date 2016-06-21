@@ -50,10 +50,11 @@
 	var Market = __webpack_require__(3);
 	var Portfolio = __webpack_require__(5);
 	var Stock = __webpack_require__(4);
+	var Dates = __webpack_require__(6);
 	
-	var companies = __webpack_require__(6);
-	var sampleShares = __webpack_require__(7);
-	var buisnesses = __webpack_require__(8)
+	var companies = __webpack_require__(7);
+	var sampleShares = __webpack_require__(8);
+	var buisnesses = __webpack_require__(9)
 	
 	
 	
@@ -177,6 +178,8 @@
 	        var container3 = document.getElementById("lineChart");
 	        var priceTrendData2 = getPriceTrendCont(result)
 	        var dates = getDates(result)
+	        var dateObj = new Dates({dates:result})
+	        dateObj.save();
 	        new LineChart(priceTrendData2, container3, dates);
 	
 	      }
@@ -433,14 +436,29 @@
 
 	var Stock = function(params) {
 	  this.name = params.name;
-	  this.epic = params.epic;
-	  this.price = params.price;
-	  this.quantity = params.quantity;
-	  this.buyPrice = params.buyPrice;
-	  this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
-	  this.buyDate = params.buyDate;
+	  // this.epic = params.epic;
+	  // this.price = params.price;
+	  // this.quantity = params.quantity;
+	  // this.buyPrice = params.buyPrice;
+	  // this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
+	  // this.buyDate = params.buyDate;
 	};
 	
+	
+	
+	Stock.prototype = {
+	  save: function(){
+	    var url = 'http://localhost:3000/market';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
+	  }
+	}
 	module.exports = Stock;
 
 
@@ -458,6 +476,17 @@
 	Portfolio.prototype = {
 	  addStock: function(share){
 	    this.shares.push(share);
+	  },
+	  save: function(){
+	    var url = 'http://localhost:3000/shares';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
 	  }
 	};
 	
@@ -465,11 +494,42 @@
 	
 	
 	module.exports = Portfolio;
-	
 
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+	var Dates = function(params) {
+	  this.dates = params.dates;
+	  // this.epic = params.epic;
+	  // this.price = params.price;
+	  // this.quantity = params.quantity;
+	  // this.buyPrice = params.buyPrice;
+	  // this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
+	  // this.buyDate = params.buyDate;
+	};
+	
+	
+	
+	Dates.prototype = {
+	  save: function(){
+	    var url = 'http://localhost:3000/market';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
+	  }
+	}
+	module.exports = Dates;
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -2996,7 +3056,7 @@
 	]
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3094,7 +3154,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = [

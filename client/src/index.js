@@ -4,6 +4,7 @@ var LineChart= require("./lineChart.js");
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
 var Stock = require('./portfolio/stock.js');
+var Dates = require('./portfolio/dates.js');
 
 var companies = require('./data3.json');
 var sampleShares = require('./data2.json');
@@ -131,6 +132,8 @@ var liOnClick = function(that) {
         var container3 = document.getElementById("lineChart");
         var priceTrendData2 = getPriceTrendCont(result)
         var dates = getDates(result)
+        var dateObj = new Dates({dates:result})
+        dateObj.save();
         new LineChart(priceTrendData2, container3, dates);
 
       }
