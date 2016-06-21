@@ -404,7 +404,8 @@
 	
 	    var chart = new Highcharts.Chart({
 	      chart: {
-	        renderTo: container
+	        renderTo: container, 
+	        backgroundColor: "#de7070"
 	      },
 	      title: {
 	        text: "Share Information"
