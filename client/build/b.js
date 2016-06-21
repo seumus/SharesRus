@@ -64,7 +64,7 @@
 	
 	
 	  getData(getDatesCont);
-	  console.log('x',cheese);
+	  // console.log('x',cheese);
 	
 	
 	  };
@@ -123,7 +123,7 @@
 	  var pastDays = function(share) {
 	    x = []
 	    for(index of share.shares['0'][1].dates) {
-	      console.log(index.Close);
+	      // console.log(index.Close);
 	      x.push(parseInt(index.Close))
 	    }
 	    return x
@@ -216,9 +216,9 @@
 	       y = []
 	      //  console.log(data[0].shares[0]);
 	       x = data[0].shares
-	      //  console.log('x', data);
+	       console.log('x', x);
 	       for(entry of data) {
-	         console.log(entry.shares['0'][1].dates);
+	        //  console.log(entry.shares['0'][1].dates);
 	         var data2 = {
 	           name: entry.shares['0'][0].name.name,
 	           data: pastDays(entry)
@@ -226,7 +226,7 @@
 	         // console.log(data);
 	         y.push(data2)
 	       }
-	       console.log('y',y);
+	      //  console.log('y',y);
 	       var container3 = document.getElementById("portfolio-lineChart");
 	       new LineChart(y, container3);
 	      //  return y
