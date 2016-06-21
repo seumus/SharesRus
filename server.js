@@ -27,7 +27,7 @@ app.get('/market', function(req,res){
 })
 
 app.post('/market', function(req,res){
-  console.log('body', req.body)
+  // console.log('body', req.body)
 
   MongoClient.connect(url, function(err, db) {
     var collection = db.collection('market');
