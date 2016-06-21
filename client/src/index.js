@@ -4,6 +4,7 @@ var LineChart= require("./lineChart.js");
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
 var Stock = require('./portfolio/stock.js');
+var Dates = require('./portfolio/dates.js');
 
 var companies = require('./data3.json');
 var sampleShares = require('./data2.json');
@@ -30,7 +31,7 @@ window.onload = function(){
   // new BarChart(changeInPriceData, container1);
   // new BarChart(currentPriceData, container2);
   new LineChart(priceTrendData, container3);
- 
+
  getSearch();
 
 
@@ -115,7 +116,7 @@ var selectOnChange = function() {
 }
 
 var liOnClick = function(that) {
-  
+
   var symbol = that.id || that;
 
   var request = new XMLHttpRequest();
@@ -130,7 +131,11 @@ var liOnClick = function(that) {
         var container3 = document.getElementById("lineChart");
         var priceTrendData2 = getPriceTrendCont(result)
         var dates = getDates(result)
+
+        var dateObj = new Dates({dates:result})
+        dateObj.save();
         dates = dates.reverse();
+
         new LineChart(priceTrendData2, container3, dates);
 
       }
@@ -220,9 +225,14 @@ var getEverything = function(that) {
       if(request.status === 200) {
         var result = JSON.parse(request.responseText);
         var result = result.list.resources[0].resource.fields;
+        console.log("THIS",result);
+        var stock = new Stock({name:result})
+
+        console.log(stock);
+        stock.save();
 
         displayInfo(result);
-        
+
       }
     }
     request.send(null);
@@ -326,27 +336,10 @@ var getPriceTrend = function(shares) {
       var name = input.value;
       for(company of companies) {
         if(company.Name === name ){
-          
+
           liOnClick(company.Symbol);
           getEverything(company.Symbol);
         }
       }
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
