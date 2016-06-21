@@ -167,7 +167,7 @@
 	}
 	
 	var liOnClick = function(that) {
-	
+	  databaseStuff = []
 	  var symbol = that.id || that;
 	
 	  var request = new XMLHttpRequest();
@@ -202,6 +202,7 @@
 	}
 	
 	var getEverything = function(that) {
+	  databaseStuff = []
 	  var symbol = that.id || that;
 	
 	
