@@ -11,7 +11,7 @@ var sampleShares = require('./data2.json');
 var buisnesses = require('./sample.json')
 
 
-
+var databaseStuff = []
 
 window.onload = function(){
   banner(buisnesses);
@@ -136,11 +136,18 @@ var liOnClick = function(that) {
         var container3 = document.getElementById("lineChart");
         var priceTrendData2 = getPriceTrendCont(result)
         var dates = getDates(result)
-
+        var button = document.getElementById('follow-button')
         var dateObj = new Dates({dates:result})
-        dateObj.save();
+        databaseStuff.push(dateObj)
+        dataAll = new Stock({name:databaseStuff})
+        button.addEventListener("click", function() {
+          dataAll.save();
+          databaseStuff = []
+          console.log("HEREEEEE",dataAll);
+        })
+        // dateObj.save();
         dates = dates.reverse();
-
+        console.log(databaseStuff);
         new LineChart(priceTrendData2, container3, dates);
 
       }
@@ -148,11 +155,44 @@ var liOnClick = function(that) {
     request.send(null);
 }
 
+var getEverything = function(that) {
+  var symbol = that.id || that;
+
+
+    var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
+
+    var request = new XMLHttpRequest();
+    request.open("Get", url);
+    request.onload = function() {
+      if(request.status === 200) {
+        var result = JSON.parse(request.responseText);
+        var result = result.list.resources[0].resource.fields;
+        console.log("THIS",result);
+        var stock = new Stock({name:result})
+        var button2 = document.getElementById('follow-button')
+        console.log(stock);
+
+        databaseStuff.push(stock)
+
+
+        // button2.addEventListener("click", function() {
+        //   stock.save();
+        // })
+        // stock.save();
+
+        displayInfo(result);
+
+      }
+    }
+    request.send(null);
+}
+
+
 
 var displayInfo = function(company) {
   var infoBox = document.getElementById("company-description")
   infoBox.innerText = company.name
- 
+
   var table = document.createElement("table");
   var tr1 = document.createElement("tr");
   var td1 = document.createElement("td");
@@ -209,39 +249,17 @@ var displayInfo = function(company) {
   infoBox.appendChild(table);
 
   var button = document.createElement('button');
-  button.innerText = "Buy";
-  button.id = "buy-button";
+  button.innerText = "Follow";
+  button.id = "follow-button";
   infoBox.appendChild(button);
 
+
+
 }
 
 
 
 
-var getEverything = function(that) {
-  var symbol = that.id || that;
-
-
-    var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
-
-    var request = new XMLHttpRequest();
-    request.open("Get", url);
-    request.onload = function() {
-      if(request.status === 200) {
-        var result = JSON.parse(request.responseText);
-        var result = result.list.resources[0].resource.fields;
-        console.log("THIS",result);
-        var stock = new Stock({name:result})
-
-        console.log(stock);
-        stock.save();
-
-        displayInfo(result);
-
-      }
-    }
-    request.send(null);
-}
 
 
 
