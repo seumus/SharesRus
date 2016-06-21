@@ -59,7 +59,7 @@ body {
 
 
 #search-shares {
-  height: 200px;
+  height: auto;
   width: 60%;
   display: inline-block;
   margin: 0px;
@@ -67,7 +67,7 @@ body {
 
 
 #display {
-  height: 400px;
+  height: auto;
   width: 60%;
   display: inline-block;
   margin: 0px;
@@ -100,7 +100,8 @@ body {
 
 #search {
   margin: 0;
-  padding: 30px;
+  padding: 0;
+  margin-bottom: 5px;
 }
 
 ul li {

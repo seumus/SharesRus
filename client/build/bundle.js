@@ -172,7 +172,7 @@
 	        // console.log("HI");
 	        var result = JSON.parse(request.responseText);
 	        var result = result.query.results.quote;
-	        console.log("THIS ONE",result);
+	        // console.log("THIS ONE",result);
 	        var container3 = document.getElementById("lineChart");
 	        var priceTrendData2 = getPriceTrendCont(result)
 	        var dates = getDates(result)
@@ -185,8 +185,31 @@
 	}
 	
 	
-	var displayInfo = function() {
-	
+	var displayInfo = function(company) {
+	  var infoBox = document.getElementById("company-description")
+	  infoBox.innerText = company.name
+	  var p1 = document.createElement("p1");
+	  var p2 = document.createElement("p");
+	  var p3 = document.createElement("p");
+	  var p4 = document.createElement("p");
+	  var p5 = document.createElement("p");
+	  var p6 = document.createElement("p");
+	  var p7 = document.createElement("p");
+	  p1.innerText = "Price: £" + company.price;
+	  p2.innerText = "Day High: £" + company.day_high;
+	  p3.innerText = "Day Low: £" + company.day_low;
+	  p4.innerText = "Change: £" + company.change;
+	  p5.innerText = "Change Percent: %" + company.chg_percent;
+	  p6.innerText = "Year High: £" + company.year_high;
+	  p7.innerText = "Year Low: £" + company.year_low;
+	  infoBox.appendChild(p1);
+	  infoBox.appendChild(p2);
+	  infoBox.appendChild(p3);
+	  infoBox.appendChild(p4);
+	  infoBox.appendChild(p5);
+	  infoBox.appendChild(p6);
+	  infoBox.appendChild(p7);
+	  console.log(company);
 	}
 	
 	
@@ -204,9 +227,8 @@
 	      if(request.status === 200) {
 	        var result = JSON.parse(request.responseText);
 	        var result = result.list.resources[0].resource.fields;
-	        console.log("THIS",result);
-	        var infoBox = document.getElementById("company-description")
-	        infoBox.innerText = result.name
+	        displayInfo(result);
+	        
 	      }
 	    }
 	    request.send(null);
@@ -264,7 +286,7 @@
 	  for(share of shares) {
 	    close.push(parseInt(share.Close))
 	    }
-	    console.log(close);
+	    // console.log(close);
 	      // console.log(share);
 	      var data = {
 	        name: 'share',
@@ -272,7 +294,7 @@
 	      }
 	      // console.log(data);
 	      y.push(data)
-	      console.log("y",y);
+	      // console.log("y",y);
 	      return y
 	    }
 	
