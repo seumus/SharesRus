@@ -142,7 +142,8 @@ var liOnClick = function(that) {
         dataAll = new Stock({name:databaseStuff})
         button.addEventListener("click", function() {
           dataAll.save();
-          console.log(dataAll);
+          databaseStuff = []
+          console.log("HEREEEEE",dataAll);
         })
         // dateObj.save();
         dates = dates.reverse();
