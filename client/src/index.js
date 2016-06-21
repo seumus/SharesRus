@@ -139,7 +139,8 @@ var liOnClick = function(that) {
         var button = document.getElementById('follow-button')
         var dateObj = new Dates({dates:result})
         databaseStuff.push(dateObj)
-        dataAll = new Stock({name:databaseStuff})
+        dataAll = new Portfolio()
+        dataAll.addStock(databaseStuff)
         button.addEventListener("click", function() {
           dataAll.save();
           databaseStuff = []
