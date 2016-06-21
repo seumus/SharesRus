@@ -212,12 +212,12 @@
 	     var getDatesCont = function(data) {
 	       y = []
 	      //  console.log(data[0].shares[0]);
-	       x = data[0].shares[0][1]
+	       x = data[0].shares[0]
 	       console.log('x', x);
-	       for(entry in x) {
-	         console.log(entry[0]);
+	       for(entry of x) {
+	         console.log(entry);
 	         var data = {
-	          //  name: entry.share[0][0].name,
+	           name: entry.share[0][0].name,
 	          //  data: "pastDays(entry)"
 	         }
 	         // console.log(data);
