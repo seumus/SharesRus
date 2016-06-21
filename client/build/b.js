@@ -69,7 +69,7 @@
 	  // priceTrendData = getPriceTrend(sampleShares);
 	  // new LineChart(priceTrendData, container3);
 	
-	  getData(getDatesCont);
+	  // getData(getDatesCont);
 	
 	  };
 	
@@ -224,7 +224,7 @@
 	    }
 	
 	    var createTable = function(data) {
-	      console.log(data);
+	      console.log(data[0].shares["0"][0].name);
 	      var div = document.getElementById("following-table");
 	      var table = document.createElement('table');
 	      var tr1 = document.createElement('tr');
@@ -265,14 +265,14 @@
 	        var td14 = document.createElement("td");
 	        var td15 = document.createElement("td");
 	
-	          td8.innerText =  comapany.name[0].name.issuer_name
-	          td9.innerText =   comapany.name[0].name.price;
-	          td10.innerText =  comapany.name[0].name.day_high;
-	          td11.innerText =  comapany.name[0].name.day_low;
-	          td12.innerText =  comapany.name[0].name.change;
-	          td13.innerText =  comapany.name[0].name.chg_percent;
-	          td14.innerText =  comapany.name[0].name.year_high;
-	          td14.innerText =  comapany.name[0].name.year_low;
+	          td8.innerText =  comapany.shares["0"][0].name.issuer_name
+	          td9.innerText =   comapany.shares["0"][0].name.price;
+	          td10.innerText =  comapany.shares["0"][0].name.day_high;
+	          td11.innerText =  comapany.shares["0"][0].name.day_low;
+	          td12.innerText =  comapany.shares["0"][0].name.change;
+	          td13.innerText =  comapany.shares["0"][0].name.chg_percent;
+	          td14.innerText =  comapany.shares["0"][0].name.year_high;
+	          td14.innerText =  comapany.shares["0"][0].name.year_low;
 	
 	        tr2.appendChild(td8);
 	        tr2.appendChild(td9);
