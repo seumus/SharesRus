@@ -27,16 +27,30 @@ app.get('/market', function(req,res){
 })
 
 app.post('/market', function(req,res){
-  // console.log('body', req.body)
+  console.log('body', req.body)
 
   MongoClient.connect(url, function(err, db) {
     var collection = db.collection('market');
-    collection.remove({});
-    collection.insert( req.body )
-    res.status(200).end()
+    // collection.remove({});
+    collection.insert(req.body)
+    console.log(req.body);
+    res.status(200).end();
     db.close();
   });
 })
+
+// app.post('/dates', function(req,res){
+//   console.log('body', req.body)
+//
+//   MongoClient.connect(url, function(err, db) {
+//     var collection = db.collection('market');
+//     // collection.remove({});
+//     collection.insert(req.body)
+//     console.log(req.body);
+//     res.status(200).end();
+//     db.close();
+//   });
+// })
 
 app.use(express.static('client/build'));
 
