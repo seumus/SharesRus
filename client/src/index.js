@@ -77,15 +77,20 @@ var banner = function(companies){
     // console.log(priceChange)
     var span1 = document.createElement('span')
     var span2 = document.createElement('span')
+    var span3 = document.createElement('span')
     span1.innerText = " --- "
-    span2.innerText = currentPrice + " - " + company.name + " - " + priceChange
     if (priceChange > 0){
       span2.classList.add("plus")
+      span2.innerText = currentPrice + " / "  + company.name + " / " + "+" +priceChange
+      span3.innerHTML = "&#9786;"
     }
     if (priceChange < 0){
       span2.classList.add("minus")
+      span2.innerText =  company.name + " / "  +  currentPrice + " / " + priceChange
+      span3.innerHTML = "&#9785;"
     }
     scroll.appendChild(span1)
+    scroll.appendChild(span3)
     scroll.appendChild(span2)
   }
 }
