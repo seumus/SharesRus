@@ -179,7 +179,7 @@
 	        var dates = getDates(result)
 	
 	        var dateObj = new Dates({dates:result})
-	        dateObj.save();
+	        // dateObj.save();
 	        dates = dates.reverse();
 	
 	        new LineChart(priceTrendData2, container3, dates);
@@ -236,7 +236,7 @@
 	        var stock = new Stock({name:result})
 	
 	        console.log(stock);
-	        stock.save();
+	        // stock.save();
 	
 	        displayInfo(result);
 	
