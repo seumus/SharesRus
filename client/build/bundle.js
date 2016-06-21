@@ -227,6 +227,7 @@
 	      if(request.status === 200) {
 	        var result = JSON.parse(request.responseText);
 	        var result = result.list.resources[0].resource.fields;
+	
 	        displayInfo(result);
 	        
 	      }
