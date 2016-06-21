@@ -142,28 +142,67 @@ var liOnClick = function(that) {
 var displayInfo = function(company) {
   var infoBox = document.getElementById("company-description")
   infoBox.innerText = company.name
-  var p1 = document.createElement("p1");
-  var p2 = document.createElement("p");
-  var p3 = document.createElement("p");
-  var p4 = document.createElement("p");
-  var p5 = document.createElement("p");
-  var p6 = document.createElement("p");
-  var p7 = document.createElement("p");
-  p1.innerText = "Price: £" + company.price;
-  p2.innerText = "Day High: £" + company.day_high;
-  p3.innerText = "Day Low: £" + company.day_low;
-  p4.innerText = "Change: £" + company.change;
-  p5.innerText = "Change Percent: %" + company.chg_percent;
-  p6.innerText = "Year High: £" + company.year_high;
-  p7.innerText = "Year Low: £" + company.year_low;
-  infoBox.appendChild(p1);
-  infoBox.appendChild(p2);
-  infoBox.appendChild(p3);
-  infoBox.appendChild(p4);
-  infoBox.appendChild(p5);
-  infoBox.appendChild(p6);
-  infoBox.appendChild(p7);
-  console.log(company);
+ 
+  var table = document.createElement("table");
+  var tr1 = document.createElement("tr");
+  var td1 = document.createElement("td");
+  var td2 = document.createElement("td");
+  var td3 = document.createElement("td");
+  var td4 = document.createElement("td");
+  var td5 = document.createElement("td");
+  var td6 = document.createElement("td");
+  var td7 = document.createElement("td");
+  td1.innerText = "Price";
+  td2.innerText = "Day High";
+  td3.innerText = "Day Low";
+  td4.innerText = "Change";
+  td5.innerText = "Change Precent";
+  td6.innerText = "Year High";
+  td7.innerText = "Year Low";
+
+  tr1.appendChild(td1);
+  tr1.appendChild(td2);
+  tr1.appendChild(td3);
+  tr1.appendChild(td4);
+  tr1.appendChild(td5);
+  tr1.appendChild(td6);
+  tr1.appendChild(td7);
+
+  table.appendChild(tr1);
+
+  var tr2 = document.createElement("tr");
+  var td8 = document.createElement("td");
+  var td9 = document.createElement("td");
+  var td10 = document.createElement("td");
+  var td11 = document.createElement("td");
+  var td12 = document.createElement("td");
+  var td13 = document.createElement("td");
+  var td14 = document.createElement("td");
+
+    td8.innerText = company.price;
+    td9.innerText =  company.day_high;
+    td10.innerText = company.day_low;
+    td11.innerText = company.change;
+    td12.innerText =  company.chg_percent;
+    td13.innerText =  company.year_high;
+    td14.innerText =  company.year_low;
+
+  tr2.appendChild(td8);
+  tr2.appendChild(td9);
+  tr2.appendChild(td10);
+  tr2.appendChild(td11);
+  tr2.appendChild(td12);
+  tr2.appendChild(td13);
+  tr2.appendChild(td14);
+
+  table.appendChild(tr2);
+  infoBox.appendChild(table);
+
+  var button = document.createElement('button');
+  button.innerText = "Buy";
+  button.id = "buy-button";
+  infoBox.appendChild(button);
+
 }
 
 
