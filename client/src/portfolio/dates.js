@@ -1,5 +1,5 @@
-var Stock = function(params) {
-  this.name = params.name;
+var Dates = function(params) {
+  this.dates = params.dates;
   // this.epic = params.epic;
   // this.price = params.price;
   // this.quantity = params.quantity;
@@ -10,7 +10,7 @@ var Stock = function(params) {
 
 
 
-Stock.prototype = {
+Dates.prototype = {
   save: function(){
     var url = 'http://localhost:3000/market';
     var request = new XMLHttpRequest();
@@ -23,4 +23,4 @@ Stock.prototype = {
     request.send(JSON.stringify(this));
   }
 }
-module.exports = Stock;
+module.exports = Dates;
