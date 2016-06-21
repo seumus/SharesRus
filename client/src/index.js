@@ -121,7 +121,7 @@ var selectOnChange = function() {
 }
 
 var liOnClick = function(that) {
-
+  databaseStuff = []
   var symbol = that.id || that;
 
   var request = new XMLHttpRequest();
@@ -157,6 +157,7 @@ var liOnClick = function(that) {
 }
 
 var getEverything = function(that) {
+  databaseStuff = []
   var symbol = that.id || that;
 
 
