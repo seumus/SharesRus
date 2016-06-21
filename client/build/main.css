@@ -7,9 +7,15 @@ body {
   background-color: #bdf7b7;
 }
 
+@font-face {
+  font-family: digital;
+  src: url(DS-DIGI.TTF);
+}
+
 #scroller {
-  font-family: 'Raleway Dots', cursive;
+  font-family: digital;
   background: black;
+  padding-top: 5px;
   height: 50px;
   font-size: 40px;
   overflow: hidden;
