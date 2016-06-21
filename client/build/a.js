@@ -185,8 +185,7 @@
 	        var button = document.getElementById('follow-button')
 	        var dateObj = new Dates({dates:result})
 	        databaseStuff.push(dateObj)
-	        dataAll = new Portfolio()
-	        dataAll.addStock(databaseStuff)
+	        dataAll = new Stock({name:databaseStuff})
 	        button.addEventListener("click", function() {
 	          dataAll.save();
 	          databaseStuff = []
@@ -277,7 +276,7 @@
 	  var td13 = document.createElement("td");
 	  var td14 = document.createElement("td");
 	
-	    td8.innerText = company.price;
+	    td8.innerText =  company.price;
 	    td9.innerText =  company.day_high;
 	    td10.innerText = company.day_low;
 	    td11.innerText = company.change;
@@ -298,8 +297,10 @@
 	
 	  var button = document.createElement('button');
 	  button.innerText = "Follow";
+	
 	  button.id = "follow-button";
 	  infoBox.appendChild(button);
+	
 	
 	
 	
