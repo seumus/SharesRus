@@ -1,62 +1,43 @@
 // var BarChart= require("./chart.js");
 var LineChart= require("./lineChart.js");
-
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
 var Stock = require('./portfolio/stock.js');
 var Dates = require('./portfolio/dates.js');
-
 var companies = require('./data3.json');
 var sampleShares = require('./data2.json');
 var buisnesses = require('./sample.json')
-
-
 var databaseStuff = []
-
 window.onload = function(){
   banner(buisnesses);
   var sectors = getSectors(companies);
   createSelect(sectors);
-
-
   changeInPriceData = getChangeInPriceData(sampleShares);
   currentPriceData = getCurrentPriceData(sampleShares);
   priceTrendData = getPriceTrend(sampleShares);
-
   // console.log(data);
   // var container1 = document.getElementById("barChart1");
   // var container2 = document.getElementById("barChart2");
   var container3 = document.getElementById("lineChart");
-
   // new BarChart(changeInPriceData, container1);
   // new BarChart(currentPriceData, container2);
   new LineChart(priceTrendData, container3);
-
  getSearch();
-
-
-
 };
-
 var getSectors = function(companies) {
   var sectorsAll = []
   for( company of companies ) {
     sectorsAll.push(company.Sector);
   }
-
-
-
 var sectors = sectorsAll.filter(function(elem, pos) {
     return sectorsAll.indexOf(elem) == pos;
   });
   return sectors;
 }
-
 var createSelect = function(sectors) {
    var div = document.getElementById("select-container");
    var select = document.createElement('select');
    select.onchange = selectOnChange;
-
    for(sector of sectors) {
     var option = document.createElement('option');
     option.value = sector;
@@ -65,7 +46,6 @@ var createSelect = function(sectors) {
    }
    div.appendChild(select);
 }
-
 var banner = function(companies){
   var scroll = document.getElementById("scroll")
   for (company of companies){
@@ -94,7 +74,6 @@ var banner = function(companies){
     scroll.appendChild(span2)
   }
 }
-
 var selectOnChange = function() {
   // console.log(this.value);
   var div = document.getElementById("company-list-container");
@@ -119,11 +98,9 @@ var selectOnChange = function() {
   }
   div.appendChild(ul);
 }
-
 var liOnClick = function(that) {
   databaseStuff = []
   var symbol = that.id || that;
-
   var request = new XMLHttpRequest();
   var url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+symbol+"%22%20and%20startDate%20%3D%20%222015-06-20%22%20and%20endDate%20%3D%20%222016-06-20%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
     request.open("GET", url);
@@ -150,19 +127,14 @@ var liOnClick = function(that) {
         dates = dates.reverse();
         console.log(databaseStuff);
         new LineChart(priceTrendData2, container3, dates);
-
       }
     }
     request.send(null);
 }
-
 var getEverything = function(that) {
   databaseStuff = []
   var symbol = that.id || that;
-
-
     var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
-
     var request = new XMLHttpRequest();
     request.open("Get", url);
     request.onload = function() {
@@ -173,28 +145,19 @@ var getEverything = function(that) {
         var stock = new Stock({name:result})
         var button2 = document.getElementById('follow-button')
         console.log(stock);
-
         databaseStuff.push(stock)
-
-
         // button2.addEventListener("click", function() {
         //   stock.save();
         // })
         // stock.save();
-
         displayInfo(result);
-
       }
     }
     request.send(null);
 }
-
-
-
 var displayInfo = function(company) {
   var infoBox = document.getElementById("company-description")
   infoBox.innerText = company.name
-
   var table = document.createElement("table");
   var tr1 = document.createElement("tr");
   var td1 = document.createElement("td");
@@ -211,7 +174,6 @@ var displayInfo = function(company) {
   td5.innerText = "Change Precent";
   td6.innerText = "Year High";
   td7.innerText = "Year Low";
-
   tr1.appendChild(td1);
   tr1.appendChild(td2);
   tr1.appendChild(td3);
@@ -219,9 +181,7 @@ var displayInfo = function(company) {
   tr1.appendChild(td5);
   tr1.appendChild(td6);
   tr1.appendChild(td7);
-
   table.appendChild(tr1);
-
   var tr2 = document.createElement("tr");
   var td8 = document.createElement("td");
   var td9 = document.createElement("td");
@@ -230,7 +190,6 @@ var displayInfo = function(company) {
   var td12 = document.createElement("td");
   var td13 = document.createElement("td");
   var td14 = document.createElement("td");
-
     td8.innerText = company.price;
     td9.innerText =  company.day_high;
     td10.innerText = company.day_low;
@@ -238,7 +197,6 @@ var displayInfo = function(company) {
     td12.innerText =  company.chg_percent;
     td13.innerText =  company.year_high;
     td14.innerText =  company.year_low;
-
   tr2.appendChild(td8);
   tr2.appendChild(td9);
   tr2.appendChild(td10);
@@ -246,27 +204,13 @@ var displayInfo = function(company) {
   tr2.appendChild(td12);
   tr2.appendChild(td13);
   tr2.appendChild(td14);
-
   table.appendChild(tr2);
   infoBox.appendChild(table);
-
   var button = document.createElement('button');
   button.innerText = "Follow";
   button.id = "follow-button";
   infoBox.appendChild(button);
-
-
-
 }
-
-
-
-
-
-
-
-
-
 var getChangeInPriceData = function(shares) {
   y = []
   for (share of shares) {
@@ -276,8 +220,6 @@ var getChangeInPriceData = function(shares) {
   // console.log(y);
   return y
 }
-
-
 var getCurrentPriceData = function(shares) {
   y = []
   for (share of shares) {
@@ -290,7 +232,6 @@ var getCurrentPriceData = function(shares) {
   // console.log(y);
   return y
 }
-
 var pastDays = function(share) {
   x = []
   for(index of share.pastCloseOfDayPrices) {
@@ -299,7 +240,6 @@ var pastDays = function(share) {
   return x
   // console.log(x);
 }
-
 var pastDaysCont = function(share) {
   x = []
   for(index of share) {
@@ -308,7 +248,6 @@ var pastDaysCont = function(share) {
   return x
   // console.log(x);
 }
-
 var getPriceTrendCont = function(shares) {
   var y=[]
   var close = []
@@ -326,9 +265,6 @@ var getPriceTrendCont = function(shares) {
       // console.log("y",y);
       return y
     }
-
-
-
 var getPriceTrend = function(shares) {
   y=[]
     for(share of shares) {
@@ -342,9 +278,6 @@ var getPriceTrend = function(shares) {
     }
     return y
   }
-
-
-
   var getDates = function(shares) {
     y = []
     for(share of shares) {
@@ -352,7 +285,6 @@ var getPriceTrend = function(shares) {
     }
     return y
   }
-
   var getSearch = function() {
     var form = document.getElementById("search");
     form.addEventListener("submit", function(event) {
@@ -361,7 +293,6 @@ var getPriceTrend = function(shares) {
       var name = input.value;
       for(company of companies) {
         if(company.Name === name ){
-
           liOnClick(company.Symbol);
           getEverything(company.Symbol);
         }

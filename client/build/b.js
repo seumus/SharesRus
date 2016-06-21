@@ -58,13 +58,21 @@
 	
 	
 	window.onload = function(){
+	
+	  getData(createTable);
+	
+	
+	
+	
 	  banner(buisnesses);
 	
 	  // priceTrendData = getPriceTrend(sampleShares);
 	
 	
+	
 	  getData(getDatesCont);
 	  // console.log('x',cheese);
+	
 	
 	
 	  };
@@ -198,6 +206,111 @@
 	        }
 	      });
 	    }
+	
+	
+	
+	
+	
+	    var getData = function(callback) {
+	      console.log("hi");
+	        var url = "http://localhost:3000/market";
+	        var request = new XMLHttpRequest();
+	        request.open("Get", url);
+	        request.onload = function() {
+	          if(request.status === 200 ){
+	            var result = JSON.parse(request.responseText);
+	            callback(result);
+	          } else {
+	            console.log("sad")
+	          }
+	        }
+	
+	        request.send(null);
+	    }
+	
+	    var createTable = function(data) {
+	      console.log(data[0].shares["0"][0].name);
+	      var div = document.getElementById("following-table");
+	      var table = document.createElement('table');
+	      var tr1 = document.createElement('tr');
+	
+	      var td1 = document.createElement("td");
+	      var td2 = document.createElement("td");
+	      var td3 = document.createElement("td");
+	      var td4 = document.createElement("td");
+	      var td5 = document.createElement("td");
+	      var td6 = document.createElement("td");
+	      var td7 = document.createElement("td");
+	      var td88 = document.createElement("td");
+	      td1.innerText = "Name";
+	      td2.innerText = "Price";
+	      td3.innerText = "Day High";
+	      td4.innerText = "Day Low";
+	      td5.innerText = "Change";
+	      td6.innerText = "Change %";
+	      td7.innerText = "Year Low";
+	      td88.innerText = "Year High";
+	
+	      tr1.appendChild(td1);
+	      tr1.appendChild(td2);
+	      tr1.appendChild(td3);
+	      tr1.appendChild(td4);
+	      tr1.appendChild(td5);
+	      tr1.appendChild(td6);
+	      tr1.appendChild(td7);
+	      tr1.appendChild(td88);
+	
+	      table.appendChild(tr1);
+	
+	      for(comapany of data) {
+	        var tr2 = document.createElement("tr");
+	        var td8 = document.createElement("td");
+	        var td9 = document.createElement("td");
+	        var td10 = document.createElement("td");
+	        var td11 = document.createElement("td");
+	        var td12 = document.createElement("td");
+	        var td13 = document.createElement("td");
+	        var td14 = document.createElement("td");
+	        var td15 = document.createElement("td");
+	
+	          td8.innerText =  comapany.shares["0"][0].name.issuer_name
+	          td9.innerText =   comapany.shares["0"][0].name.price;
+	          td10.innerText =  comapany.shares["0"][0].name.day_high;
+	          td11.innerText =  comapany.shares["0"][0].name.day_low;
+	          td12.innerText =  comapany.shares["0"][0].name.change;
+	          td13.innerText =  comapany.shares["0"][0].name.chg_percent;
+	          td15.innerText =  comapany.shares["0"][0].name.year_high;
+	          td14.innerText =  comapany.shares["0"][0].name.year_low;
+	
+	        tr2.appendChild(td8);
+	        tr2.appendChild(td9);
+	        tr2.appendChild(td10);
+	        tr2.appendChild(td11);
+	        tr2.appendChild(td12);
+	        tr2.appendChild(td13);
+	        tr2.appendChild(td14);
+	        tr2.appendChild(td15);
+	
+	        table.appendChild(tr2);
+	      }
+	
+	      div.appendChild(table);
+	    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	    var getData = function(callback) {
 	      var url = "http://localhost:3000/market"

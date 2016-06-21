@@ -45,12 +45,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// var BarChart= require("./chart.js");
-	var LineChart= __webpack_require__(1);
+	var LineChart= __webpack_require__(2);
 	
-	var Market = __webpack_require__(2);
-	var Portfolio = __webpack_require__(4);
-	var Stock = __webpack_require__(3);
-	var Dates = __webpack_require__(5);
+	var Market = __webpack_require__(3);
+	var Portfolio = __webpack_require__(5);
+	var Stock = __webpack_require__(4);
+	var Dates = __webpack_require__(9);
 	
 	var companies = __webpack_require__(6);
 	var sampleShares = __webpack_require__(7);
@@ -185,8 +185,7 @@
 	        var button = document.getElementById('follow-button')
 	        var dateObj = new Dates({dates:result})
 	        databaseStuff.push(dateObj)
-	        dataAll = new Portfolio()
-	        dataAll.addStock(databaseStuff)
+	        dataAll = new Stock({name:databaseStuff})
 	        button.addEventListener("click", function() {
 	          dataAll.save();
 	          databaseStuff = []
@@ -277,7 +276,7 @@
 	  var td13 = document.createElement("td");
 	  var td14 = document.createElement("td");
 	
-	    td8.innerText = company.price;
+	    td8.innerText =  company.price;
 	    td9.innerText =  company.day_high;
 	    td10.innerText = company.day_low;
 	    td11.innerText = company.change;
@@ -298,8 +297,10 @@
 	
 	  var button = document.createElement('button');
 	  button.innerText = "Follow";
+	
 	  button.id = "follow-button";
 	  infoBox.appendChild(button);
+	
 	
 	
 	
@@ -417,7 +418,8 @@
 
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ function(module, exports) {
 
 	var LineChart = function(data, container, date){
@@ -439,10 +441,10 @@
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Stock = __webpack_require__(3);
+	var Stock = __webpack_require__(4);
 	
 	var Market = function() {
 	  this.shares = []
@@ -478,7 +480,7 @@
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports) {
 
 	var Stock = function(params) {
@@ -510,7 +512,7 @@
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	
@@ -541,38 +543,6 @@
 	
 	
 	module.exports = Portfolio;
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	var Dates = function(params) {
-	  this.dates = params.dates;
-	  // this.epic = params.epic;
-	  // this.price = params.price;
-	  // this.quantity = params.quantity;
-	  // this.buyPrice = params.buyPrice;
-	  // this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
-	  // this.buyDate = params.buyDate;
-	};
-	
-	
-	
-	Dates.prototype = {
-	  save: function(){
-	    var url = 'http://localhost:3000/market';
-	    var request = new XMLHttpRequest();
-	    request.open("POST", url);
-	    request.setRequestHeader("Content-Type", "application/json");
-	    request.onload = function(){
-	      if(request.status === 200){
-	      }
-	    }
-	    request.send(JSON.stringify(this));
-	  }
-	}
-	module.exports = Dates;
 
 
 /***/ },
@@ -3296,6 +3266,38 @@
 	      "buyDate":"2014-04-04"
 	    }
 	  ]
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	var Dates = function(params) {
+	  this.dates = params.dates;
+	  // this.epic = params.epic;
+	  // this.price = params.price;
+	  // this.quantity = params.quantity;
+	  // this.buyPrice = params.buyPrice;
+	  // this.pastCloseOfDayPrices = params.pastCloseOfDayPrices;
+	  // this.buyDate = params.buyDate;
+	};
+	
+	
+	
+	Dates.prototype = {
+	  save: function(){
+	    var url = 'http://localhost:3000/market';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
+	  }
+	}
+	module.exports = Dates;
+
 
 /***/ }
 /******/ ]);
