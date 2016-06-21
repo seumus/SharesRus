@@ -185,7 +185,8 @@
 	        var button = document.getElementById('follow-button')
 	        var dateObj = new Dates({dates:result})
 	        databaseStuff.push(dateObj)
-	        dataAll = new Stock({name:databaseStuff})
+	        dataAll = new Portfolio()
+	        dataAll.addStock(databaseStuff)
 	        button.addEventListener("click", function() {
 	          dataAll.save();
 	          databaseStuff = []
@@ -523,7 +524,7 @@
 	    this.shares.push(share);
 	  },
 	  save: function(){
-	    var url = 'http://localhost:3000/shares';
+	    var url = 'http://localhost:3000/market';
 	    var request = new XMLHttpRequest();
 	    request.open("POST", url);
 	    request.setRequestHeader("Content-Type", "application/json");
