@@ -1,7 +1,7 @@
 /*Index*/
 
 body {
-  background-color: grey;
+  background-color: #fff;
 }
 
 #scroller {
@@ -26,9 +26,9 @@ body {
 }
 
 #nav {
-  background-color: char;
+  background-color: #fff;
   height: 30px;
-  background-color: #383838;
+  background-color: #fff;
 }
 
 #nav a {
@@ -46,6 +46,11 @@ body {
   display: inline-block;
   float: right;
   overflow: scroll;
+  background-color: pink;
+}
+
+twitter-timeline {
+  background: pink;
 }
 
 #dropdown {
