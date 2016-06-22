@@ -60,11 +60,10 @@
 	var databaseStuff = []
 	
 	window.onload = function(){
-	  banner(buisnesses);
+	  // banner(buisnesses);
 	  var sectors = getSectors(companies);
 	  createSelect(sectors);
 	  ftseLoad();
-	  console.log(ftseLoad())
 	
 	
 	  changeInPriceData = getChangeInPriceData(sampleShares);
@@ -82,22 +81,25 @@
 	
 	 getSearch();
 	
-	 var ftseLoad = function(){
-	     var url = 'https://spreadsheets.google.com/feeds/list/0AhySzEddwIC1dEtpWF9hQUhCWURZNEViUmpUeVgwdGc/1/public/basic?alt=json-in-script'
-	
-	     var request = new XMLHttpRequest();
-	     request.open("Get", url);
-	     request.onload = function() {
-	       if(request.status === 200) {
-	         var result = JSON.parse(request.responseText);
-	         var result = result.list.resources[0].resource.fields;
-	         console.log(result);
-	       }
-	     }
-	     request.send(null);
-	 }
 	
 	};
+	
+	var ftseLoad = function(){
+	var url = 'https://spreadsheets.google.com/feeds/list/0AhySzEddwIC1dEtpWF9hQUhCWURZNEViUmpUeVgwdGc/1/public/basic?alt=json'
+	
+	var request = new XMLHttpRequest();
+	request.open("Get", url);
+	    request.onload = function() {
+	      if(request.status === 200) {
+	      console.log("got the data")
+	      var jsonString = request.responseText
+	      var info = JSON.parse(jsonString)
+	      var companies = info.feed.entry
+	      banner(companies)
+	      }
+	    }
+	    request.send(null);
+	}
 	
 	var getSectors = function(companies) {
 	  var sectorsAll = []
@@ -128,40 +130,39 @@
 	}
 	
 	var banner = function(companies){
-	  var scroll = document.getElementById("scroll")
+	var scroll = document.getElementById("scroll")
 	  for (company of companies){
-	    // console.log(company)
-	    // console.log(company.pastCloseOfDayPrices[6])
-	    var price = company.price - company.pastCloseOfDayPrices[6]
-	    var priceChange = price.toFixed(2);
-	    var currentPrice = company.price.toFixed(2)
-	    // console.log(priceChange)
-	    var span1 = document.createElement('span')
-	    var span2 = document.createElement('span')
-	    var span3 = document.createElement('span')
-	    span1.innerText = " --- "
+	
+	  var c = company.content.$t
+	  var com = c.split(" ")
+	  var priceChange = com[com.length-1]
+	  var span1 = document.createElement('span')
+	  var span2 = document.createElement('span')
+	  var span3 = document.createElement('span')
+	  span1.innerText = " --- "
 	    if (priceChange > 0){
-	      span2.classList.add("plus")
-	      span2.innerText = currentPrice + " / "  + company.name + " / " + "+" +priceChange
-	      span3.innerHTML = "&#9786;"
+	    span2.classList.add("plus")
+	    span2.innerText = c
+	    span3.innerHTML = "&#9786;"
 	    }
 	    if (priceChange < 0){
-	      span2.classList.add("minus")
-	      span2.innerText =  company.name + " / "  +  currentPrice + " / " + priceChange
-	      span3.innerHTML = "&#9785;"
+	    span2.classList.add("minus")
+	    span2.innerText =  c
+	    span3.innerHTML = "&#9785;"
 	    }
-	    scroll.appendChild(span1)
-	    scroll.appendChild(span3)
-	    scroll.appendChild(span2)
+	  scroll.appendChild(span1)
+	  scroll.appendChild(span3)
+	  scroll.appendChild(span2)
 	  }
 	}
 	
 	var selectOnChange = function() {
-	  // console.log(this.value);
+	  console.log(this.value);
 	  var div = document.getElementById("company-list-container");
 	  var ul = document.createElement('ul');
 	  if(div.childNodes[0]) {
 	    var child = div.childNodes[0];
+	    console.log("child",child)
 	    div.removeChild(child);
 	  }
 	  for(company of companies) {
@@ -316,16 +317,7 @@
 	  button.id = "follow-button";
 	  infoBox.appendChild(button);
 	
-	
-	
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	var getChangeInPriceData = function(shares) {
@@ -3317,4 +3309,4 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=a.js.map

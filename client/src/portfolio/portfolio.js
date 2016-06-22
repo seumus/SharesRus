@@ -10,7 +10,7 @@ Portfolio.prototype = {
     this.shares.push(share);
   },
   save: function(){
-    var url = 'http://localhost:3000/shares';
+    var url = 'http://localhost:3000/market';
     var request = new XMLHttpRequest();
     request.open("POST", url);
     request.setRequestHeader("Content-Type", "application/json");

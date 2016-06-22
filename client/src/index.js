@@ -11,12 +11,13 @@ var sampleShares = require('./data2.json');
 var buisnesses = require('./sample.json')
 
 
-
+var databaseStuff = []
 
 window.onload = function(){
-  banner(buisnesses);
+  // banner(buisnesses);
   var sectors = getSectors(companies);
   createSelect(sectors);
+  ftseLoad();
 
 
   changeInPriceData = getChangeInPriceData(sampleShares);
@@ -35,8 +36,24 @@ window.onload = function(){
  getSearch();
 
 
-
 };
+
+var ftseLoad = function(){
+var url = 'https://spreadsheets.google.com/feeds/list/0AhySzEddwIC1dEtpWF9hQUhCWURZNEViUmpUeVgwdGc/1/public/basic?alt=json'
+
+var request = new XMLHttpRequest();
+request.open("Get", url);
+    request.onload = function() {
+      if(request.status === 200) {
+      console.log("got the data")
+      var jsonString = request.responseText
+      var info = JSON.parse(jsonString)
+      var companies = info.feed.entry
+      banner(companies)
+      }
+    }
+    request.send(null);
+}
 
 var getSectors = function(companies) {
   var sectorsAll = []
@@ -67,40 +84,39 @@ var createSelect = function(sectors) {
 }
 
 var banner = function(companies){
-  var scroll = document.getElementById("scroll")
+var scroll = document.getElementById("scroll")
   for (company of companies){
-    // console.log(company)
-    // console.log(company.pastCloseOfDayPrices[6])
-    var price = company.price - company.pastCloseOfDayPrices[6]
-    var priceChange = price.toFixed(2);
-    var currentPrice = company.price.toFixed(2)
-    // console.log(priceChange)
-    var span1 = document.createElement('span')
-    var span2 = document.createElement('span')
-    var span3 = document.createElement('span')
-    span1.innerText = " --- "
+
+  var c = company.content.$t
+  var com = c.split(" ")
+  var priceChange = com[com.length-1]
+  var span1 = document.createElement('span')
+  var span2 = document.createElement('span')
+  var span3 = document.createElement('span')
+  span1.innerText = " --- "
     if (priceChange > 0){
-      span2.classList.add("plus")
-      span2.innerText = currentPrice + " / "  + company.name + " / " + "+" +priceChange
-      span3.innerHTML = "&#9786;"
+    span2.classList.add("plus")
+    span2.innerText = c
+    span3.innerHTML = "&#9786;"
     }
     if (priceChange < 0){
-      span2.classList.add("minus")
-      span2.innerText =  company.name + " / "  +  currentPrice + " / " + priceChange
-      span3.innerHTML = "&#9785;"
+    span2.classList.add("minus")
+    span2.innerText =  c
+    span3.innerHTML = "&#9785;"
     }
-    scroll.appendChild(span1)
-    scroll.appendChild(span3)
-    scroll.appendChild(span2)
+  scroll.appendChild(span1)
+  scroll.appendChild(span3)
+  scroll.appendChild(span2)
   }
 }
 
 var selectOnChange = function() {
-  // console.log(this.value);
+  console.log(this.value);
   var div = document.getElementById("company-list-container");
   var ul = document.createElement('ul');
   if(div.childNodes[0]) {
     var child = div.childNodes[0];
+    console.log("child",child)
     div.removeChild(child);
   }
   for(company of companies) {
@@ -121,7 +137,7 @@ var selectOnChange = function() {
 }
 
 var liOnClick = function(that) {
-
+  databaseStuff = []
   var symbol = that.id || that;
 
   var request = new XMLHttpRequest();
@@ -136,11 +152,19 @@ var liOnClick = function(that) {
         var container3 = document.getElementById("lineChart");
         var priceTrendData2 = getPriceTrendCont(result)
         var dates = getDates(result)
-
+        var button = document.getElementById('follow-button')
         var dateObj = new Dates({dates:result})
-        dateObj.save();
+        databaseStuff.push(dateObj)
+        dataAll = new Portfolio()
+        dataAll.addStock(databaseStuff)
+        button.addEventListener("click", function() {
+          dataAll.save();
+          databaseStuff = []
+          console.log("HEREEEEE",dataAll);
+        })
+        // dateObj.save();
         dates = dates.reverse();
-
+        console.log(databaseStuff);
         new LineChart(priceTrendData2, container3, dates);
 
       }
@@ -148,11 +172,45 @@ var liOnClick = function(that) {
     request.send(null);
 }
 
+var getEverything = function(that) {
+  databaseStuff = []
+  var symbol = that.id || that;
+
+
+    var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
+
+    var request = new XMLHttpRequest();
+    request.open("Get", url);
+    request.onload = function() {
+      if(request.status === 200) {
+        var result = JSON.parse(request.responseText);
+        var result = result.list.resources[0].resource.fields;
+        console.log("THIS",result);
+        var stock = new Stock({name:result})
+        var button2 = document.getElementById('follow-button')
+        console.log(stock);
+
+        databaseStuff.push(stock)
+
+
+        // button2.addEventListener("click", function() {
+        //   stock.save();
+        // })
+        // stock.save();
+
+        displayInfo(result);
+
+      }
+    }
+    request.send(null);
+}
+
+
 
 var displayInfo = function(company) {
   var infoBox = document.getElementById("company-description")
   infoBox.innerText = company.name
- 
+
   var table = document.createElement("table");
   var tr1 = document.createElement("tr");
   var td1 = document.createElement("td");
@@ -209,42 +267,11 @@ var displayInfo = function(company) {
   infoBox.appendChild(table);
 
   var button = document.createElement('button');
-  button.innerText = "Buy";
-  button.id = "buy-button";
+  button.innerText = "Follow";
+  button.id = "follow-button";
   infoBox.appendChild(button);
 
 }
-
-
-
-
-var getEverything = function(that) {
-  var symbol = that.id || that;
-
-
-    var url = "http://finance.yahoo.com/webservice/v1/symbols/"+symbol+"/quote?format=json&view=detail"
-
-    var request = new XMLHttpRequest();
-    request.open("Get", url);
-    request.onload = function() {
-      if(request.status === 200) {
-        var result = JSON.parse(request.responseText);
-        var result = result.list.resources[0].resource.fields;
-        console.log("THIS",result);
-        var stock = new Stock({name:result})
-
-        console.log(stock);
-        stock.save();
-
-        displayInfo(result);
-
-      }
-    }
-    request.send(null);
-}
-
-
-
 
 
 var getChangeInPriceData = function(shares) {
@@ -348,3 +375,5 @@ var getPriceTrend = function(shares) {
       }
     });
   }
+
+

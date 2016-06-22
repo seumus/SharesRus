@@ -2,8 +2,8 @@ var LineChart = function(data, container, date){
 
     var chart = new Highcharts.Chart({
       chart: {
-        renderTo: container, 
-        backgroundColor: "#de7070"
+        renderTo: container,
+        backgroundColor: '#8bcad9',
       },
       title: {
         text: "Share Information"
