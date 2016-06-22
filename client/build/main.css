@@ -221,3 +221,47 @@ ul li {
 
 
 /*Portfolio*/
+
+#main {
+  width: 80%;
+  display: inline-block;
+}
+
+
+#following-table table {
+  width: 100%;
+  color: #8bcad9;
+}
+
+#following-table td:nth-child(even){
+  background-color: #ffe14f
+}
+
+#following-table td:nth-child(odd){
+  background-color: #de7070
+}
+
+#forcast {
+  background-color: #8bcad9;
+  color: #de7070;
+  height: auto;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  float: right;
+  margin-bottom: 20px
+}
+
+#forcastSubmit {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 20px
+}
+
+
+

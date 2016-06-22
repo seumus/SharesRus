@@ -229,6 +229,7 @@
 	    }
 	
 	    var createTable = function(data) {
+	      console.log(data)
 	      console.log(data[0].shares["0"][0].name);
 	      var div = document.getElementById("following-table");
 	      var table = document.createElement('table');
