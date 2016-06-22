@@ -21,7 +21,7 @@ window.onload = function(){
   var container3 = document.getElementById("lineChart");
   // new BarChart(changeInPriceData, container1);
   // new BarChart(currentPriceData, container2);
-  new LineChart(priceTrendData, container3);
+  // new LineChart(priceTrendData, container3);
  getSearch();
 };
 var getSectors = function(companies) {
