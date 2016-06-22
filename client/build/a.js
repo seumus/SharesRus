@@ -342,7 +342,10 @@
 	          liOnClick(company.Symbol);
 	          getEverything(company.Symbol);
 	        }
+	        
 	      }
+	               liOnClick(name);
+	               getEverything(name);
 	    });
 	  }
 
