@@ -52,6 +52,16 @@ app.post('/boughtshares', function(req,res){
   });
 })
 
+app.delete('/market', function(req,res){
+
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('market')
+    collection.deleteOne(req.body)
+    res.status(200).end();
+    db.close();
+  })
+})
+
 // app.post('/dates', function(req,res){
 //   console.log('body', req.body)
 //

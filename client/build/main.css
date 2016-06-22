@@ -271,3 +271,18 @@ ul li {
   visibility: hidden;
 }
 
+.delete {
+
+  font-family: 'Permanent Marker', cursive;
+  color: red;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
