@@ -52,9 +52,9 @@
 	var Stock = __webpack_require__(3);
 	var Dates = __webpack_require__(5);
 	
-	var companies = __webpack_require__(6);
-	var sampleShares = __webpack_require__(7);
-	var buisnesses = __webpack_require__(8)
+	var companies = __webpack_require__(7);
+	var sampleShares = __webpack_require__(8);
+	var buisnesses = __webpack_require__(9)
 	
 	
 	window.onload = function(){
@@ -350,7 +350,7 @@
 	        for(var i = 1; i < tr.length; i++) {
 	          // console.log(company);
 	          var tds = tr[i].childNodes;
-	          var lastTd = tds[tds.length -1 ];
+	          var lastTd = tds[tds.length -2 ];
 	          var price = parseInt(tds[1].innerText);
 	          var precent = forcast.value;
 	          var result = price + (price * (precent/100));
@@ -415,6 +415,11 @@
 	
 	           x.addEventListener("click", function() {
 	             var parent = this.parentElement;
+	             var table = document.getElementsByTagName('table')[0]
+	             table.removeChild(parent)
+	             var request = new XMLHttpRequest()
+	             request.open('delete', 'http://localhost:3000/market')
+	             request.send(parent.id)
 	             console.log(parent.id);
 	           })
 	         }
@@ -582,7 +587,8 @@
 
 
 /***/ },
-/* 6 */
+/* 6 */,
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3109,7 +3115,7 @@
 	]
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3207,7 +3213,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = [

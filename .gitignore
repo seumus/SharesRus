@@ -1,1 +1,7 @@
 /node_modules
+/client/build/a.js
+/client/build/b.js
+/client/build/c.js
+/client/build/a.js.map
+/client/build/b.js.map
+/client/build/c.js.map
