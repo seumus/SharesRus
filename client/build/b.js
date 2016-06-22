@@ -78,7 +78,7 @@
 	
 	  getBoughtData(makePie);
 	  // console.log('x',cheese);
-	  forcast();
+	  // forcast();
 	
 	
 	
@@ -278,8 +278,8 @@
 	      var td2 = document.createElement("td");
 	      var td3 = document.createElement("td");
 	      var td4 = document.createElement("td");
-	      // var td5 = document.createElement("td");
-	      // var td6 = document.createElement("td");
+	      var td5 = document.createElement("td");
+	      var td6 = document.createElement("td");
 	      // var td7 = document.createElement("td");
 	      // var td88 = document.createElement("td");
 	      // var td99 = document.createElement("td");
@@ -289,7 +289,8 @@
 	      td2.innerText = "Price";
 	      td3.innerText = "Quantity";
 	      td4.innerText = "Total";
-	      // td5.innerText = "Change";
+	      td5.innerText = "Buy";
+	      td6.innerText = "Sell";
 	      // td6.innerText = "Change %";
 	      // td7.innerText = "Year Low";
 	      // td88.innerText = "Year High";
@@ -299,8 +300,8 @@
 	      tr1.appendChild(td2);
 	      tr1.appendChild(td3);
 	      tr1.appendChild(td4);
-	      // tr1.appendChild(td5);
-	      // tr1.appendChild(td6);
+	      tr1.appendChild(td5);
+	      tr1.appendChild(td6);
 	      // tr1.appendChild(td7);
 	      // tr1.appendChild(td88);
 	      // tr1.appendChild(td99);
@@ -308,10 +309,13 @@
 	      table.appendChild(tr1);
 	
 	
-	      for(comapany of data) {
+	      for(var i = 0; i < data.length; i++ ) {
+	        // console.log(data);
 	        var tr2 = document.createElement("tr");
-	        // tr2.id = data[i]._id;
-	        // var td100 = document.createElement('td');
+	        tr2.id = data[i]._id;
+	        var td100 = document.createElement('td');
+	        var td200 = document.createElement('td');
+	        var td201 = document.createElement('td');
 	        var td8 = document.createElement("td");
 	        var td9 = document.createElement("td");
 	        var td10 = document.createElement("td");
@@ -324,21 +328,27 @@
 	        // var td16 = document.createElement("td");
 	        // td16.classList.add("hidden")
 	
+	        td100.classList.add('delete');
+	
 	
 	
 	        // var x = 0
 	
 	
 	
-	          td8.innerText =  comapany.name
-	          td9.innerText =   comapany.price
-	          td10.innerText =  comapany.quantity
-	          td11.innerText =  (comapany.quantity * comapany.price)
+	          td8.innerText =  data[i].name
+	          td9.innerText =   data[i].price
+	          td10.innerText =  data[i].quantity
+	          td11.innerText =  (data[i].quantity * data[i].price)
 	          // td12.innerText =  comapany.shares["0"][0].name.change;
 	          // td13.innerText =  comapany.shares["0"][0].name.chg_percent;
 	          // td15.innerText =  comapany.shares["0"][0].name.year_high;
 	          // td14.innerText =  comapany.shares["0"][0].name.year_low;
-	
+	          td100.innerText = "Sell All";
+	          td200.contentEditable = true
+	          td201.contentEditable = true
+	          td200.innerText = 0
+	          td201.innerText = 0
 	
 	
 	
@@ -349,6 +359,9 @@
 	        tr2.appendChild(td9);
 	        tr2.appendChild(td10);
 	        tr2.appendChild(td11);
+	        tr2.appendChild(td200)
+	        tr2.appendChild(td201)
+	        tr2.appendChild(td100);
 	
 	        // tr2.appendChild(td12);
 	        // tr2.appendChild(td13);
@@ -359,37 +372,53 @@
 	
 	        table.appendChild(tr2);
 	      }
-	
+	      var updateButton = document.getElementById('updateButton')
+	      updateButton.value = 'Update'
+	      updateButton.addEventListener('click', function() {
+	        var rows = document.getElementsByTagName('tr');
+	        for(var i = 1; i < rows.length; i++ ){
+	          var kids = rows[i].childNodes;
+	          console.log("cheese",kids);
+	          kids[2].innerText = parseInt(kids[2].innerText) + parseInt(kids[4].innerText) - parseInt(kids[5].innerText)
+	          kids[4].innerText = 0
+	          kids[5].innerText = 0
+	          kids[3].innerText = parseInt(kids[1].innerText) * parseInt(kids[2].innerText);
+	          var request = new XMLHttpRequest();
+	          request.open("Put","http://localhost:3000/boughtshares");
+	          request.setRequestHeader('Content-Type','application/json');
+	          request.send(JSON.stringify({name:kids[0].innerText, quantity:kids[2].innerText}));
+	        }
+	        getBoughtData(makePie);
+	      })
 	      div.appendChild(table);
 	      unFollow();
 	    }
 	
 	
-	
-	    var forcast = function() {
-	      var forcastSubmit = document.getElementById('forcastInput')
-	      forcastSubmit.addEventListener('submit', function(e) {
-	        e.preventDefault();
-	       var tr = document.getElementsByTagName('tr');
-	       var forcast = document.getElementById('forcast');
-	       var tds = document.getElementsByClassName("hidden");
-	       for(td of tds) {
-	        td.style.visibility = "visible";
-	       }
-	
-	        for(var i = 1; i < tr.length; i++) {
-	          // console.log(company);
-	          var tds = tr[i].childNodes;
-	
-	          var lastTd = tds[tds.length - 2 ];
-	          var price = parseInt(tds[1].innerText);
-	          var precent = forcast.value;
-	          var result = price + (price * (precent/100));
-	          lastTd.innerText = result;
-	        }
-	      })
-	
-	  }
+	  //   var forcast = function() {
+	  //     var forcastSubmit = document.getElementById('forcastInput')
+	  //     forcastSubmit.addEventListener('submit', function(e) {
+	  //       e.preventDefault();
+	  //      var tr = document.getElementsByTagName('tr');
+	  //      var forcast = document.getElementById('forcast');
+	  //      var tds = document.getElementsByClassName("hidden");
+	  //      for(td of tds) {
+	  //       td.style.visibility = "visible";
+	  //      }
+	  //
+	  //       for(var i = 1; i < tr.length; i++) {
+	  //         // console.log(company);
+	  //         var tds = tr[i].childNodes;
+	  //
+	  //         var lastTd = tds[tds.length - 2 ];
+	  //         var price = parseInt(tds[1].innerText);
+	  //         var precent = forcast.value;
+	  //         var result = price + (price * (precent/100));
+	  //         lastTd.innerText = result;
+	  //       }
+	  //     })
+	  //
+	  // }
 	
 	    var getData = function(callback) {
 	      var url = "http://localhost:3000/market"
@@ -443,16 +472,25 @@
 	       }
 	
 	
-	var unFollow = function() {
-	  var xElements = document.getElementsByClassName("delete");
-	  for( x of xElements) {
+	       var unFollow = function() {
+	         var xElements = document.getElementsByClassName("delete");
+	         for( x of xElements) {
 	
-	    x.addEventListener("click", function() {
-	      var parent = this.parentElement;
-	      console.log(parent.id);
-	    })
-	  }
-	}
+	           x.addEventListener("click", function() {
+	             var parent = this.parentElement;
+	             var table = document.getElementsByTagName('table')[0]
+	             table.removeChild(parent)
+	             var request = new XMLHttpRequest()
+	             request.open('delete', 'http://localhost:3000/boughtshares')
+	             request.send(parent.id)
+	             console.log(parent.id);
+	           })
+	         }
+	       }
+	
+	       var sellAmount = function() {
+	
+	       }
 
 
 /***/ },
@@ -3347,13 +3385,14 @@
 	  var chart = new Highcharts.Chart({
 	    chart: {
 	      type: 'pie',
-	      renderTo: container
+	      renderTo: container,
+	      backgroundColor: '#ffe14f'
 	    },
 	    title: {
 	          text: "Portfolio Summary"
 	       },
 	    series: [{name: "Chart",
-	              data: data  
+	              data: data
 	        }]
 	  });
 	

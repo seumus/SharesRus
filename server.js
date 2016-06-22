@@ -62,10 +62,30 @@ app.post('/boughtshares', function(req,res){
   });
 })
 
+app.put('/boughtshares', function(req,res){
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('boughtshares');
+    console.log(req.body);
+    collection.update({'name':req.body.name},{$set:{'quantity': req.body.quantity}})
+    res.status(200).end();
+    db.close();
+  })
+})
+
 app.delete('/market', function(req,res){
 
   MongoClient.connect(url, function(err, db) {
     var collection = db.collection('market')
+    collection.deleteOne(req.body)
+    res.status(200).end();
+    db.close();
+  })
+})
+
+app.delete('/boughtshares', function(req,res){
+
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('boughtshares')
     collection.deleteOne(req.body)
     res.status(200).end();
     db.close();
