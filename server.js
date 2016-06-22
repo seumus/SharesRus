@@ -39,6 +39,29 @@ app.post('/market', function(req,res){
   });
 })
 
+app.post('/boughtshares', function(req,res){
+  // console.log('body', req.body)
+
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('boughtshares');
+    // collection.remove({});
+    collection.insert(req.body)
+    console.log(req.body);
+    res.status(200).end();
+    db.close();
+  });
+})
+
+app.delete('/market', function(req,res){
+
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('market')
+    collection.deleteOne(req.body)
+    res.status(200).end();
+    db.close();
+  })
+})
+
 // app.post('/dates', function(req,res){
 //   console.log('body', req.body)
 //
