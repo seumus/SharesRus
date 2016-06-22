@@ -14,12 +14,17 @@ var buisnesses = require('./sample.json')
 
 window.onload = function(){
 
+
   getBoughtData(createTable);
 
 
 
 
-  banner(buisnesses);
+  // banner(buisnesses);
+
+  // getData(createTable);
+  ftseLoad();
+
 
   // priceTrendData = getPriceTrend(sampleShares);
 
@@ -29,32 +34,51 @@ window.onload = function(){
   // console.log('x',cheese);
   forcast();
 
+
+
   };
 
+  var ftseLoad = function(){
+  var url = 'https://spreadsheets.google.com/feeds/list/0AhySzEddwIC1dEtpWF9hQUhCWURZNEViUmpUeVgwdGc/1/public/basic?alt=json'
+
+  var request = new XMLHttpRequest();
+  request.open("Get", url);
+      request.onload = function() {
+        if(request.status === 200) {
+        console.log("got the data")
+        var jsonString = request.responseText
+        var info = JSON.parse(jsonString)
+        var companies = info.feed.entry
+        banner(companies)
+        }
+      }
+      request.send(null);
+  }
+
   var banner = function(companies){
-    var scroll = document.getElementById("scroll")
+  var scroll = document.getElementById("scroll")
     for (company of companies){
-      var price = company.price - company.pastCloseOfDayPrices[6]
-      var priceChange = price.toFixed(2);
-      var currentPrice = company.price.toFixed(2)
-      // console.log(priceChange)
-      var span1 = document.createElement('span')
-      var span2 = document.createElement('span')
-      var span3 = document.createElement('span')
-      span1.innerText = " --- "
+
+    var c = company.content.$t
+    var com = c.split(" ")
+    var priceChange = com[com.length-1]
+    var span1 = document.createElement('span')
+    var span2 = document.createElement('span')
+    var span3 = document.createElement('span')
+    span1.innerText = " --- "
       if (priceChange > 0){
-        span2.classList.add("plus")
-        span2.innerText = currentPrice + " / "  + company.name + " / " + "+" +priceChange
-        span3.innerHTML = "&#9786;"
+      span2.classList.add("plus")
+      span2.innerText = c
+      span3.innerHTML = "&#9786;"
       }
       if (priceChange < 0){
-        span2.classList.add("minus")
-        span2.innerText =  company.name + " / "  +  currentPrice + " / " + priceChange
-        span3.innerHTML = "&#9785;"
+      span2.classList.add("minus")
+      span2.innerText =  c
+      span3.innerHTML = "&#9785;"
       }
-      scroll.appendChild(span1)
-      scroll.appendChild(span3)
-      scroll.appendChild(span2)
+    scroll.appendChild(span1)
+    scroll.appendChild(span3)
+    scroll.appendChild(span2)
     }
   }
 
@@ -237,13 +261,16 @@ window.onload = function(){
 
       table.appendChild(tr1);
 
+
       for(comapany of data) {
-        // console.log("cheese",comapany);
         var tr2 = document.createElement("tr");
+        // tr2.id = data[i]._id;
+        // var td100 = document.createElement('td');
         var td8 = document.createElement("td");
         var td9 = document.createElement("td");
         var td10 = document.createElement("td");
         var td11 = document.createElement("td");
+
         // var td12 = document.createElement("td");
         // var td13 = document.createElement("td");
         // var td14 = document.createElement("td");
@@ -252,7 +279,9 @@ window.onload = function(){
         // td16.classList.add("hidden")
 
 
+
         // var x = 0
+
 
 
           td8.innerText =  comapany.name
@@ -268,10 +297,13 @@ window.onload = function(){
 
 
 
+
+
         tr2.appendChild(td8);
         tr2.appendChild(td9);
         tr2.appendChild(td10);
         tr2.appendChild(td11);
+
         // tr2.appendChild(td12);
         // tr2.appendChild(td13);
         // tr2.appendChild(td14);
@@ -282,9 +314,8 @@ window.onload = function(){
         table.appendChild(tr2);
       }
 
-
-
       div.appendChild(table);
+      unFollow();
     }
 
 
@@ -303,7 +334,8 @@ window.onload = function(){
         for(var i = 1; i < tr.length; i++) {
           // console.log(company);
           var tds = tr[i].childNodes;
-          var lastTd = tds[tds.length -1 ];
+
+          var lastTd = tds[tds.length - 2 ];
           var price = parseInt(tds[1].innerText);
           var precent = forcast.value;
           var result = price + (price * (precent/100));
@@ -363,3 +395,15 @@ window.onload = function(){
          console.log('x', x);
          new PieChart(x, container4)
        }
+
+
+var unFollow = function() {
+  var xElements = document.getElementsByClassName("delete");
+  for( x of xElements) {
+
+    x.addEventListener("click", function() {
+      var parent = this.parentElement;
+      console.log(parent.id);
+    })
+  }
+}

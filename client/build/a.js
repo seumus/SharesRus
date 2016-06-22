@@ -78,9 +78,6 @@
 	
 	  // new BarChart(changeInPriceData, container1);
 	  // new BarChart(currentPriceData, container2);
-	  // new LineChart(priceTrendData, container3);
-	
-	  new LineChart(priceTrendData, container3);
 	
 	 getSearch();
 	
@@ -176,6 +173,7 @@
 	        var that = this;
 	        liOnClick(that);
 	        getEverything(that);
+	        clearBio();
 	      });
 	      li.innerText = company.Name;
 	      li.id = company.Symbol;
@@ -224,7 +222,6 @@
 	
 	        // dateObj.save();
 	        dates = dates.reverse();
-	        console.log(databaseStuff);
 	        new LineChart(priceTrendData2, container3, dates);
 	
 	      }
@@ -449,6 +446,12 @@
 	               liOnClick(name);
 	               getEverything(name);
 	    });
+	  }
+	
+	  var clearBio = function() {
+	    var bio = document.getElementById('bio')
+	    bio.style.visibility = "hidden"
+	    console.log("something", bio)
 	  }
 
 

@@ -61,10 +61,7 @@
 	
 	  getData(createTable);
 	
-	
-	
-	
-	  banner(buisnesses);
+	  ftseLoad();
 	
 	  // priceTrendData = getPriceTrend(sampleShares);
 	
@@ -76,30 +73,47 @@
 	
 	  };
 	
+	  var ftseLoad = function(){
+	  var url = 'https://spreadsheets.google.com/feeds/list/0AhySzEddwIC1dEtpWF9hQUhCWURZNEViUmpUeVgwdGc/1/public/basic?alt=json'
+	
+	  var request = new XMLHttpRequest();
+	  request.open("Get", url);
+	      request.onload = function() {
+	        if(request.status === 200) {
+	        console.log("got the data")
+	        var jsonString = request.responseText
+	        var info = JSON.parse(jsonString)
+	        var companies = info.feed.entry
+	        banner(companies)
+	        }
+	      }
+	      request.send(null);
+	  }
+	
 	  var banner = function(companies){
-	    var scroll = document.getElementById("scroll")
+	  var scroll = document.getElementById("scroll")
 	    for (company of companies){
-	      var price = company.price - company.pastCloseOfDayPrices[6]
-	      var priceChange = price.toFixed(2);
-	      var currentPrice = company.price.toFixed(2)
-	      // console.log(priceChange)
-	      var span1 = document.createElement('span')
-	      var span2 = document.createElement('span')
-	      var span3 = document.createElement('span')
-	      span1.innerText = " --- "
+	
+	    var c = company.content.$t
+	    var com = c.split(" ")
+	    var priceChange = com[com.length-1]
+	    var span1 = document.createElement('span')
+	    var span2 = document.createElement('span')
+	    var span3 = document.createElement('span')
+	    span1.innerText = " --- "
 	      if (priceChange > 0){
-	        span2.classList.add("plus")
-	        span2.innerText = currentPrice + " / "  + company.name + " / " + "+" +priceChange
-	        span3.innerHTML = "&#9786;"
+	      span2.classList.add("plus")
+	      span2.innerText = c
+	      span3.innerHTML = "&#9786;"
 	      }
 	      if (priceChange < 0){
-	        span2.classList.add("minus")
-	        span2.innerText =  company.name + " / "  +  currentPrice + " / " + priceChange
-	        span3.innerHTML = "&#9785;"
+	      span2.classList.add("minus")
+	      span2.innerText =  c
+	      span3.innerHTML = "&#9785;"
 	      }
-	      scroll.appendChild(span1)
-	      scroll.appendChild(span3)
-	      scroll.appendChild(span2)
+	    scroll.appendChild(span1)
+	    scroll.appendChild(span3)
+	    scroll.appendChild(span2)
 	    }
 	  }
 	
@@ -228,92 +242,97 @@
 	    }
 	
 	    var createTable = function(data) {
-	      console.log(data);
-	      var div = document.getElementById("following-table");
-	      var table = document.createElement('table');
-	      var tr1 = document.createElement('tr');
+	         var div = document.getElementById("following-table");
+	         var table = document.createElement('table');
+	         var tr1 = document.createElement('tr');
 	
-	      var td1 = document.createElement("td");
-	      var td2 = document.createElement("td");
-	      var td3 = document.createElement("td");
-	      var td4 = document.createElement("td");
-	      var td5 = document.createElement("td");
-	      var td6 = document.createElement("td");
-	      var td7 = document.createElement("td");
-	      var td88 = document.createElement("td");
-	      var td99 = document.createElement("td");
-	      td99.classList.add("hidden")
+	         var td1 = document.createElement("td");
+	         var td2 = document.createElement("td");
+	         var td3 = document.createElement("td");
+	         var td4 = document.createElement("td");
+	         var td5 = document.createElement("td");
+	         var td6 = document.createElement("td");
+	         var td7 = document.createElement("td");
+	         var td88 = document.createElement("td");
+	         var td99 = document.createElement("td");
+	         td99.classList.add("hidden")
 	
-	      td1.innerText = "Name";
-	      td2.innerText = "Price";
-	      td3.innerText = "Day High";
-	      td4.innerText = "Day Low";
-	      td5.innerText = "Change";
-	      td6.innerText = "Change %";
-	      td7.innerText = "Year Low";
-	      td88.innerText = "Year High";
-	      td99.innerText = "Forcast";
+	         td1.innerText = "Name";
+	         td2.innerText = "Price";
+	         td3.innerText = "Day High";
+	         td4.innerText = "Day Low";
+	         td5.innerText = "Change";
+	         td6.innerText = "Change %";
+	         td7.innerText = "Year Low";
+	         td88.innerText = "Year High";
+	         td99.innerText = "Forcast";
 	
-	      tr1.appendChild(td1);
-	      tr1.appendChild(td2);
-	      tr1.appendChild(td3);
-	      tr1.appendChild(td4);
-	      tr1.appendChild(td5);
-	      tr1.appendChild(td6);
-	      tr1.appendChild(td7);
-	      tr1.appendChild(td88);
-	      tr1.appendChild(td99);
+	         tr1.appendChild(td1);
+	         tr1.appendChild(td2);
+	         tr1.appendChild(td3);
+	         tr1.appendChild(td4);
+	         tr1.appendChild(td5);
+	         tr1.appendChild(td6);
+	         tr1.appendChild(td7);
+	         tr1.appendChild(td88);
+	         tr1.appendChild(td99);
 	
-	      table.appendChild(tr1);
+	         table.appendChild(tr1);
 	
-	      for(comapany of data) {
-	        var tr2 = document.createElement("tr");
-	        var td8 = document.createElement("td");
-	        var td9 = document.createElement("td");
-	        var td10 = document.createElement("td");
-	        var td11 = document.createElement("td");
-	        var td12 = document.createElement("td");
-	        var td13 = document.createElement("td");
-	        var td14 = document.createElement("td");
-	        var td15 = document.createElement("td");
-	        var td16 = document.createElement("td");
-	        td16.classList.add("hidden")
-	
-	
-	        // var x = 0
-	
-	
-	          td8.innerText =  comapany.shares["0"][0].name.issuer_name
-	          td9.innerText =   comapany.shares["0"][0].name.price;
-	          td10.innerText =  comapany.shares["0"][0].name.day_high;
-	          td11.innerText =  comapany.shares["0"][0].name.day_low;
-	          td12.innerText =  comapany.shares["0"][0].name.change;
-	          td13.innerText =  comapany.shares["0"][0].name.chg_percent;
-	          td15.innerText =  comapany.shares["0"][0].name.year_high;
-	          td14.innerText =  comapany.shares["0"][0].name.year_low;
+	         for(var i = 0; i < data.length; i++ ) {
+	           var tr2 = document.createElement("tr");
+	           tr2.id = data[i]._id;
+	           var td100 = document.createElement('td');
+	           var td8 = document.createElement("td");
+	           var td9 = document.createElement("td");
+	           var td10 = document.createElement("td");
+	           var td11 = document.createElement("td");
+	           var td12 = document.createElement("td");
+	           var td13 = document.createElement("td");
+	           var td14 = document.createElement("td");
+	           var td15 = document.createElement("td");
+	           var td16 = document.createElement("td");
+	           td16.classList.add("hidden")
+	           td100.classList.add('delete');
 	
 	
+	           // var x = 0
 	
 	
-	
-	        tr2.appendChild(td8);
-	        tr2.appendChild(td9);
-	        tr2.appendChild(td10);
-	        tr2.appendChild(td11);
-	        tr2.appendChild(td12);
-	        tr2.appendChild(td13);
-	        tr2.appendChild(td14);
-	        tr2.appendChild(td15);
-	        tr2.appendChild(td16);
-	
-	
-	        table.appendChild(tr2);
-	      }
+	             td8.innerText =  data[i].shares["0"][0].name.issuer_name
+	             td9.innerText =   data[i].shares["0"][0].name.price;
+	             td10.innerText =  data[i].shares["0"][0].name.day_high;
+	             td11.innerText =  data[i].shares["0"][0].name.day_low;
+	             td12.innerText =  data[i].shares["0"][0].name.change;
+	             td13.innerText =  data[i].shares["0"][0].name.chg_percent;
+	             td15.innerText =  data[i].shares["0"][0].name.year_high;
+	             td14.innerText =  data[i].shares["0"][0].name.year_low;
+	             td100.innerText = "X";
 	
 	
 	
-	      div.appendChild(table);
-	    }
+	
+	
+	           tr2.appendChild(td8);
+	           tr2.appendChild(td9);
+	           tr2.appendChild(td10);
+	           tr2.appendChild(td11);
+	           tr2.appendChild(td12);
+	           tr2.appendChild(td13);
+	           tr2.appendChild(td14);
+	           tr2.appendChild(td15);
+	           tr2.appendChild(td16);
+	           tr2.appendChild(td100);
+	
+	
+	           table.appendChild(tr2);
+	         }
+	
+	
+	
+	         div.appendChild(table);
+	         unFollow();
+	       }
 	
 	
 	
@@ -388,6 +407,17 @@
 	       new LineChart(y, container3);
 	      //  return y
 	
+	       }
+	
+	       var unFollow = function() {
+	         var xElements = document.getElementsByClassName("delete");
+	         for( x of xElements) {
+	
+	           x.addEventListener("click", function() {
+	             var parent = this.parentElement;
+	             console.log(parent.id);
+	           })
+	         }
 	       }
 
 
