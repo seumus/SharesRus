@@ -51,11 +51,11 @@
 	var Portfolio = __webpack_require__(4);
 	var Stock = __webpack_require__(3);
 	var Dates = __webpack_require__(5);
-	var BoughtShares = __webpack_require__(6);
+	var BoughtShares = __webpack_require__(9);
 	
-	var companies = __webpack_require__(7);
-	var sampleShares = __webpack_require__(8);
-	var buisnesses = __webpack_require__(9)
+	var companies = __webpack_require__(6);
+	var sampleShares = __webpack_require__(7);
+	var buisnesses = __webpack_require__(8)
 	
 	
 	var databaseStuff = []
@@ -617,34 +617,6 @@
 
 /***/ },
 /* 6 */
-/***/ function(module, exports) {
-
-	var BoughtShares = function(params) {
-	  this.name = params.name;
-	  this.price = params.price;
-	  this.quantity = params.quantity;
-	
-	};
-	
-	
-	BoughtShares.prototype = {
-	  save: function(){
-	    var url = 'http://localhost:3000/boughtshares';
-	    var request = new XMLHttpRequest();
-	    request.open("POST", url);
-	    request.setRequestHeader("Content-Type", "application/json");
-	    request.onload = function(){
-	      if(request.status === 200){
-	      }
-	    }
-	    request.send(JSON.stringify(this));
-	  }
-	}
-	module.exports = BoughtShares;
-
-
-/***/ },
-/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3171,7 +3143,7 @@
 	]
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3269,7 +3241,7 @@
 
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3364,6 +3336,34 @@
 	      "buyDate":"2014-04-04"
 	    }
 	  ]
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	var BoughtShares = function(params) {
+	  this.name = params.name;
+	  this.price = params.price;
+	  this.quantity = params.quantity;
+	
+	};
+	
+	
+	BoughtShares.prototype = {
+	  save: function(){
+	    var url = 'http://localhost:3000/boughtshares';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
+	  }
+	}
+	module.exports = BoughtShares;
+
 
 /***/ }
 /******/ ]);
