@@ -26,6 +26,16 @@ app.get('/market', function(req,res){
   });
 })
 
+app.get('/boughtshares', function(req,res){
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('boughtshares');
+    collection.find({}).toArray(function(err, docs) {
+      res.json(docs);
+      db.close();
+    });
+  });
+})
+
 app.post('/market', function(req,res){
   // console.log('body', req.body)
 

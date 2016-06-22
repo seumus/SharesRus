@@ -8,11 +8,11 @@ var PieChart = function(data, container){
     title: {
           text: "Portfolio Summary"
        },
-    series: [
-          {
-              data: data
-          }
-          ]
+    series: [{name: "Chart",
+              data: data  
+        }]
   });
 
 }
+
+module.exports = PieChart;

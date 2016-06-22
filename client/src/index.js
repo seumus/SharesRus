@@ -32,12 +32,10 @@ window.onload = function(){
 
   // new BarChart(changeInPriceData, container1);
   // new BarChart(currentPriceData, container2);
-<<<<<<< HEAD
   // new LineChart(priceTrendData, container3);
-=======
+
   new LineChart(priceTrendData, container3);
 
->>>>>>> 76302911bd4c282af4f5c2bba422cb67a5ebb355
  getSearch();
 
 
@@ -240,7 +238,7 @@ var displayInfo = function(company) {
   td2.innerText = "Day High";
   td3.innerText = "Day Low";
   td4.innerText = "Change";
-  td5.innerText = "Change Precent";
+  td5.innerText = "Change Percent";
   td6.innerText = "Year High";
   td7.innerText = "Year Low";
 

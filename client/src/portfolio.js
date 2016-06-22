@@ -1,5 +1,6 @@
 // var BarChart= require("./chart.js");
 var LineChart= require("./lineChart.js");
+var PieChart= require("./pieChart.js");
 
 var Market = require('./portfolio/market.js');
 var Portfolio = require('./portfolio/portfolio.js');
@@ -13,7 +14,7 @@ var buisnesses = require('./sample.json')
 
 window.onload = function(){
 
-  getData(createTable);
+  getBoughtData(createTable);
 
 
 
@@ -24,7 +25,7 @@ window.onload = function(){
 
 
 
-  getData(getDatesCont);
+  getBoughtData(makePie);
   // console.log('x',cheese);
   forcast();
 
@@ -181,8 +182,25 @@ window.onload = function(){
         request.send(null);
     }
 
+    var getBoughtData = function(callback) {
+      var url = "http://localhost:3000/boughtshares"
+      var request = new XMLHttpRequest();
+      request.open("Get", url);
+      request.onload = function() {
+        if(request.status === 200 ){
+          var result = JSON.parse(request.responseText);
+          callback(result);
+        } else {
+          console.log("sad")
+        }
+      }
+
+      request.send(null);
+    }
+
     var createTable = function(data) {
-      var div = document.getElementById("following-table");
+      // console.log(data);
+      var div = document.getElementById("bought-table");
       var table = document.createElement('table');
       var tr1 = document.createElement('tr');
 
@@ -190,60 +208,61 @@ window.onload = function(){
       var td2 = document.createElement("td");
       var td3 = document.createElement("td");
       var td4 = document.createElement("td");
-      var td5 = document.createElement("td");
-      var td6 = document.createElement("td");
-      var td7 = document.createElement("td");
-      var td88 = document.createElement("td");
-      var td99 = document.createElement("td");
-      td99.classList.add("hidden")
+      // var td5 = document.createElement("td");
+      // var td6 = document.createElement("td");
+      // var td7 = document.createElement("td");
+      // var td88 = document.createElement("td");
+      // var td99 = document.createElement("td");
+      // td99.classList.add("hidden")
 
       td1.innerText = "Name";
       td2.innerText = "Price";
-      td3.innerText = "Day High";
-      td4.innerText = "Day Low";
-      td5.innerText = "Change";
-      td6.innerText = "Change %";
-      td7.innerText = "Year Low";
-      td88.innerText = "Year High";
-      td99.innerText = "Forcast";
+      td3.innerText = "Quantity";
+      td4.innerText = "Total";
+      // td5.innerText = "Change";
+      // td6.innerText = "Change %";
+      // td7.innerText = "Year Low";
+      // td88.innerText = "Year High";
+      // td99.innerText = "Forcast";
 
       tr1.appendChild(td1);
       tr1.appendChild(td2);
       tr1.appendChild(td3);
       tr1.appendChild(td4);
-      tr1.appendChild(td5);
-      tr1.appendChild(td6);
-      tr1.appendChild(td7);
-      tr1.appendChild(td88);
-      tr1.appendChild(td99);
+      // tr1.appendChild(td5);
+      // tr1.appendChild(td6);
+      // tr1.appendChild(td7);
+      // tr1.appendChild(td88);
+      // tr1.appendChild(td99);
 
       table.appendChild(tr1);
 
       for(comapany of data) {
+        // console.log("cheese",comapany);
         var tr2 = document.createElement("tr");
         var td8 = document.createElement("td");
         var td9 = document.createElement("td");
         var td10 = document.createElement("td");
         var td11 = document.createElement("td");
-        var td12 = document.createElement("td");
-        var td13 = document.createElement("td");
-        var td14 = document.createElement("td");
-        var td15 = document.createElement("td");
-        var td16 = document.createElement("td");
-        td16.classList.add("hidden")
+        // var td12 = document.createElement("td");
+        // var td13 = document.createElement("td");
+        // var td14 = document.createElement("td");
+        // var td15 = document.createElement("td");
+        // var td16 = document.createElement("td");
+        // td16.classList.add("hidden")
 
 
         // var x = 0
 
 
-          td8.innerText =  comapany.shares["0"][0].name.issuer_name
-          td9.innerText =   comapany.shares["0"][0].name.price;
-          td10.innerText =  comapany.shares["0"][0].name.day_high;
-          td11.innerText =  comapany.shares["0"][0].name.day_low;
-          td12.innerText =  comapany.shares["0"][0].name.change;
-          td13.innerText =  comapany.shares["0"][0].name.chg_percent;
-          td15.innerText =  comapany.shares["0"][0].name.year_high;
-          td14.innerText =  comapany.shares["0"][0].name.year_low;
+          td8.innerText =  comapany.name
+          td9.innerText =   comapany.price
+          td10.innerText =  comapany.quantity
+          td11.innerText =  (comapany.quantity * comapany.price)
+          // td12.innerText =  comapany.shares["0"][0].name.change;
+          // td13.innerText =  comapany.shares["0"][0].name.chg_percent;
+          // td15.innerText =  comapany.shares["0"][0].name.year_high;
+          // td14.innerText =  comapany.shares["0"][0].name.year_low;
 
 
 
@@ -253,17 +272,17 @@ window.onload = function(){
         tr2.appendChild(td9);
         tr2.appendChild(td10);
         tr2.appendChild(td11);
-        tr2.appendChild(td12);
-        tr2.appendChild(td13);
-        tr2.appendChild(td14);
-        tr2.appendChild(td15);
-        tr2.appendChild(td16);
+        // tr2.appendChild(td12);
+        // tr2.appendChild(td13);
+        // tr2.appendChild(td14);
+        // tr2.appendChild(td15);
+        // tr2.appendChild(td16);
 
 
         table.appendChild(tr2);
       }
 
-    
+
 
       div.appendChild(table);
     }
@@ -280,34 +299,19 @@ window.onload = function(){
        for(td of tds) {
         td.style.visibility = "visible";
        }
-       
+
         for(var i = 1; i < tr.length; i++) {
           // console.log(company);
           var tds = tr[i].childNodes;
-          var lastTd = tds[tds.length -1 ]; 
+          var lastTd = tds[tds.length -1 ];
           var price = parseInt(tds[1].innerText);
           var precent = forcast.value;
           var result = price + (price * (precent/100));
           lastTd.innerText = result;
         }
       })
-  
+
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     var getData = function(callback) {
       var url = "http://localhost:3000/market"
@@ -322,23 +326,40 @@ window.onload = function(){
      request.send(null);
      }
 
-     var getDatesCont = function(data) {
-       y = []
-      //  console.log(data[0].shares[0]);
-       x = data[0].shares
-       console.log('x', x);
-       for(entry of data) {
-        //  console.log(entry.shares['0'][1].dates);
-         var data2 = {
-           name: entry.shares['0'][0].name.name,
-           data: pastDays(entry)
-         }
-         // console.log(data);
-         y.push(data2)
-       }
-      //  console.log('y',y);
-       var container3 = document.getElementById("portfolio-lineChart");
-       new LineChart(y, container3);
-      //  return y
+    //  var getDatesCont = function(data) {
+    //    y = []
+    //   //  console.log(data[0].shares[0]);
+    //    x = data[0].shares
+    //    console.log('x', x);
+    //    for(entry of data) {
+    //     //  console.log(entry.shares['0'][1].dates);
+    //      var data2 = {
+    //        name: entry.shares['0'][0].name.name,
+    //        data: pastDays(entry)
+    //      }
+    //      // console.log(data);
+    //      y.push(data2)
+    //    }
+    //   //  console.log('y',y);
+    //    var container3 = document.getElementById("portfolio-lineChart");
+    //    new LineChart(y, container3);
+    //   //  return y
+     //
+    //    }
 
+       var makePie = function(data) {
+         var x = []
+
+         for(entry of data) {
+          //  console.log(entry);
+           var data2 = {
+             name: entry.name,
+             y: parseInt(entry.quantity)
+           }
+           x.push(data2)
+         }
+
+         var container4 = document.getElementById("portfolio-pieChart");
+         console.log('x', x);
+         new PieChart(x, container4)
        }
