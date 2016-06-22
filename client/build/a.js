@@ -160,6 +160,7 @@
 	        var priceTrendData2 = getPriceTrendCont(result)
 	        var dates = getDates(result)
 	        var button = document.getElementById('follow-button')
+	        var button4 = document.getElementById('buy-button')
 	        var dateObj = new Dates({dates:result})
 	        databaseStuff.push(dateObj)
 	        dataAll = new Portfolio()
@@ -168,6 +169,10 @@
 	          dataAll.save();
 	          databaseStuff = []
 	          console.log("HEREEEEE",dataAll);
+	        })
+	
+	        button4.addEventListener("click", function() {
+	
 	        })
 	        // dateObj.save();
 	        dates = dates.reverse();
@@ -189,13 +194,8 @@
 	        var result = result.list.resources[0].resource.fields;
 	        console.log("THIS",result);
 	        var stock = new Stock({name:result})
-	        var button2 = document.getElementById('follow-button')
 	        console.log(stock);
 	        databaseStuff.push(stock)
-	        // button2.addEventListener("click", function() {
-	        //   stock.save();
-	        // })
-	        // stock.save();
 	        displayInfo(result);
 	      }
 	    }
@@ -253,9 +253,14 @@
 	  table.appendChild(tr2);
 	  infoBox.appendChild(table);
 	  var button = document.createElement('button');
+	  var button2 = document.createElement('button');
+	  var input = document.createElement('input')
 	  button.innerText = "Follow";
+	  button2.innerText = "Buy";
 	  button.id = "follow-button";
+	  button2.id = "buy-button";
 	  infoBox.appendChild(button);
+	  infoBox.appendChild(button2);
 	}
 	var getChangeInPriceData = function(shares) {
 	  y = []

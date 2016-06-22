@@ -196,6 +196,7 @@ window.onload = function(){
       var td6 = document.createElement("td");
       var td7 = document.createElement("td");
       var td88 = document.createElement("td");
+      var td99 = document.createElement("td");
       td1.innerText = "Name";
       td2.innerText = "Price";
       td3.innerText = "Day High";
@@ -204,6 +205,7 @@ window.onload = function(){
       td6.innerText = "Change %";
       td7.innerText = "Year Low";
       td88.innerText = "Year High";
+      td99.innerText = "Forcast";
 
       tr1.appendChild(td1);
       tr1.appendChild(td2);
@@ -213,6 +215,7 @@ window.onload = function(){
       tr1.appendChild(td6);
       tr1.appendChild(td7);
       tr1.appendChild(td88);
+      tr1.appendChild(td99);
 
       table.appendChild(tr1);
 
@@ -227,6 +230,10 @@ window.onload = function(){
         var td14 = document.createElement("td");
         var td15 = document.createElement("td");
 
+
+        // var x = 0
+
+
           td8.innerText =  comapany.shares["0"][0].name.issuer_name
           td9.innerText =   comapany.shares["0"][0].name.price;
           td10.innerText =  comapany.shares["0"][0].name.day_high;
@@ -235,6 +242,10 @@ window.onload = function(){
           td13.innerText =  comapany.shares["0"][0].name.chg_percent;
           td15.innerText =  comapany.shares["0"][0].name.year_high;
           td14.innerText =  comapany.shares["0"][0].name.year_low;
+
+
+
+
 
         tr2.appendChild(td8);
         tr2.appendChild(td9);
@@ -245,11 +256,41 @@ window.onload = function(){
         tr2.appendChild(td14);
         tr2.appendChild(td15);
 
+
         table.appendChild(tr2);
       }
+      var forcastSubmit = document.getElementById('forcastSubmit')
+      var forcast = document.getElementById('forcast')
+
+      forcastSubmit.addEventListener('click', function() {
+        var tr = document.getElementsByTagName('tr');
+        console.log(tr);
+        for(i in tr) {
+          console.log(tr[i]);
+          var td = document.createElement("td");
+          // console.log(company);
+          var som = i.childNodes;
+          console.log("cheese",som);
+          var num = parseInt(comapany.shares["0"][0].name.price)
+          var num1 = forcast.value
+          var num2 = num + (num * (num1/100))
+          // console.log(num2);
+          // td16.innerText = 0
+          // td16.innerText =  num2
+          // tr2.appendChild(td16);
+          // table.appendChild(tr2);
+        }
+      })
 
       div.appendChild(table);
     }
+
+
+
+  //   var forcast = function() {
+  //
+  //
+  // }
 
 
 
