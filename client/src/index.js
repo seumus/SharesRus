@@ -32,8 +32,12 @@ window.onload = function(){
 
   // new BarChart(changeInPriceData, container1);
   // new BarChart(currentPriceData, container2);
+<<<<<<< HEAD
+  // new LineChart(priceTrendData, container3);
+=======
   new LineChart(priceTrendData, container3);
 
+>>>>>>> 76302911bd4c282af4f5c2bba422cb67a5ebb355
  getSearch();
 
 
