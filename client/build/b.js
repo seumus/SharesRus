@@ -58,20 +58,28 @@
 	
 	
 	window.onload = function(){
+	
+	  getData(createTable);
+	
+	
+	
+	
 	  banner(buisnesses);
-	  var container3 = document.getElementById("portfolio-lineChart");
-	  priceTrendData = getPriceTrend(sampleShares);
-	  // new BarChart(changeInPriceData, container1);
-	  // new BarChart(currentPriceData, container2);
-	  new LineChart(priceTrendData, container3);
+	
+	  // priceTrendData = getPriceTrend(sampleShares);
+	
+	
+	
+	  getData(getDatesCont);
+	  // console.log('x',cheese);
+	
+	
 	
 	  };
 	
 	  var banner = function(companies){
 	    var scroll = document.getElementById("scroll")
 	    for (company of companies){
-	      // console.log(company)
-	      // console.log(company.pastCloseOfDayPrices[6])
 	      var price = company.price - company.pastCloseOfDayPrices[6]
 	      var priceChange = price.toFixed(2);
 	      var currentPrice = company.price.toFixed(2)
@@ -122,21 +130,22 @@
 	
 	  var pastDays = function(share) {
 	    x = []
-	    for(index of share.pastCloseOfDayPrices) {
-	      x.push(index)
+	    for(index of share.shares['0'][1].dates) {
+	      // console.log(index.Close);
+	      x.push(parseInt(index.Close))
 	    }
 	    return x
 	    // console.log(x);
 	  }
 	
-	  var pastDaysCont = function(share) {
-	    x = []
-	    for(index of share) {
-	      x.push(index.close)
-	    }
-	    return x
-	    // console.log(x);
-	  }
+	  // var pastDaysCont = function(share) {
+	  //   x = []
+	  //   for(index of share) {
+	  //     x.push(index.close)
+	  //   }
+	  //   return x
+	  //   // console.log(x);
+	  // }
 	
 	  var getPriceTrendCont = function(shares) {
 	    var y=[]
@@ -158,19 +167,19 @@
 	
 	
 	
-	  var getPriceTrend = function(shares) {
-	    y=[]
-	      for(share of shares) {
-	        // console.log(share);
-	        var data = {
-	          name: share.name,
-	          data: pastDays(share)
-	        }
-	        // console.log(data);
-	        y.push(data)
-	      }
-	      return y
-	    }
+	  // var getPriceTrend = function(shares) {
+	  //   y=[]
+	  //     for(share of shares) {
+	  //       // console.log(share);
+	  //       var data = {
+	  //         name: share.name,
+	  //         data: pastDays(share)
+	  //       }
+	  //       // console.log(data);
+	  //       y.push(data)
+	  //     }
+	  //     return y
+	  //   }
 	
 	
 	
@@ -197,6 +206,186 @@
 	        }
 	      });
 	    }
+	
+	
+	
+	
+	
+	    var getData = function(callback) {
+	      console.log("hi");
+	        var url = "http://localhost:3000/market";
+	        var request = new XMLHttpRequest();
+	        request.open("Get", url);
+	        request.onload = function() {
+	          if(request.status === 200 ){
+	            var result = JSON.parse(request.responseText);
+	            callback(result);
+	          } else {
+	            console.log("sad")
+	          }
+	        }
+	
+	        request.send(null);
+	    }
+	
+	    var createTable = function(data) {
+	      console.log(data[0].shares["0"][0].name);
+	      var div = document.getElementById("following-table");
+	      var table = document.createElement('table');
+	      var tr1 = document.createElement('tr');
+	
+	      var td1 = document.createElement("td");
+	      var td2 = document.createElement("td");
+	      var td3 = document.createElement("td");
+	      var td4 = document.createElement("td");
+	      var td5 = document.createElement("td");
+	      var td6 = document.createElement("td");
+	      var td7 = document.createElement("td");
+	      var td88 = document.createElement("td");
+	      var td99 = document.createElement("td");
+	      td1.innerText = "Name";
+	      td2.innerText = "Price";
+	      td3.innerText = "Day High";
+	      td4.innerText = "Day Low";
+	      td5.innerText = "Change";
+	      td6.innerText = "Change %";
+	      td7.innerText = "Year Low";
+	      td88.innerText = "Year High";
+	      td99.innerText = "Forcast";
+	
+	      tr1.appendChild(td1);
+	      tr1.appendChild(td2);
+	      tr1.appendChild(td3);
+	      tr1.appendChild(td4);
+	      tr1.appendChild(td5);
+	      tr1.appendChild(td6);
+	      tr1.appendChild(td7);
+	      tr1.appendChild(td88);
+	      tr1.appendChild(td99);
+	
+	      table.appendChild(tr1);
+	
+	      for(comapany of data) {
+	        var tr2 = document.createElement("tr");
+	        var td8 = document.createElement("td");
+	        var td9 = document.createElement("td");
+	        var td10 = document.createElement("td");
+	        var td11 = document.createElement("td");
+	        var td12 = document.createElement("td");
+	        var td13 = document.createElement("td");
+	        var td14 = document.createElement("td");
+	        var td15 = document.createElement("td");
+	
+	
+	        // var x = 0
+	
+	
+	          td8.innerText =  comapany.shares["0"][0].name.issuer_name
+	          td9.innerText =   comapany.shares["0"][0].name.price;
+	          td10.innerText =  comapany.shares["0"][0].name.day_high;
+	          td11.innerText =  comapany.shares["0"][0].name.day_low;
+	          td12.innerText =  comapany.shares["0"][0].name.change;
+	          td13.innerText =  comapany.shares["0"][0].name.chg_percent;
+	          td15.innerText =  comapany.shares["0"][0].name.year_high;
+	          td14.innerText =  comapany.shares["0"][0].name.year_low;
+	
+	
+	
+	
+	
+	        tr2.appendChild(td8);
+	        tr2.appendChild(td9);
+	        tr2.appendChild(td10);
+	        tr2.appendChild(td11);
+	        tr2.appendChild(td12);
+	        tr2.appendChild(td13);
+	        tr2.appendChild(td14);
+	        tr2.appendChild(td15);
+	
+	
+	        table.appendChild(tr2);
+	      }
+	      var forcastSubmit = document.getElementById('forcastSubmit')
+	      var forcast = document.getElementById('forcast')
+	
+	      forcastSubmit.addEventListener('click', function() {
+	        var tr = document.getElementsByTagName('tr');
+	        console.log(tr);
+	        for(i in tr) {
+	          console.log(tr[i]);
+	          var td = document.createElement("td");
+	          // console.log(company);
+	          var som = i.childNodes;
+	          console.log("cheese",som);
+	          var num = parseInt(comapany.shares["0"][0].name.price)
+	          var num1 = forcast.value
+	          var num2 = num + (num * (num1/100))
+	          // console.log(num2);
+	          // td16.innerText = 0
+	          // td16.innerText =  num2
+	          // tr2.appendChild(td16);
+	          // table.appendChild(tr2);
+	        }
+	      })
+	
+	      div.appendChild(table);
+	    }
+	
+	
+	
+	  //   var forcast = function() {
+	  //
+	  //
+	  // }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	    var getData = function(callback) {
+	      var url = "http://localhost:3000/market"
+	       var request = new XMLHttpRequest();
+	       request.open("Get", url);
+	       request.onload = function() {
+	         if(request.status === 200 ) {
+	           var result = JSON.parse(request.responseText);
+	           callback(result)
+	         }
+	       }
+	     request.send(null);
+	     }
+	
+	     var getDatesCont = function(data) {
+	       y = []
+	      //  console.log(data[0].shares[0]);
+	       x = data[0].shares
+	       console.log('x', x);
+	       for(entry of data) {
+	        //  console.log(entry.shares['0'][1].dates);
+	         var data2 = {
+	           name: entry.shares['0'][0].name.name,
+	           data: pastDays(entry)
+	         }
+	         // console.log(data);
+	         y.push(data2)
+	       }
+	      //  console.log('y',y);
+	       var container3 = document.getElementById("portfolio-lineChart");
+	       new LineChart(y, container3);
+	      //  return y
+	
+	       }
 
 
 /***/ },
