@@ -193,7 +193,15 @@ ul li {
   float: right;
   margin-bottom: 20px
 }
-
+#updateButton {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
 #company-description {
   text-align: center;
   color: #de7070;
