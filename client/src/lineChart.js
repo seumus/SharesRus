@@ -4,7 +4,6 @@ var LineChart = function(data, container, date){
       chart: {
         renderTo: container,
         backgroundColor: '#8bcad9',
-        lineColor: '#ffffff'
       },
       title: {
         text: "Share Information"

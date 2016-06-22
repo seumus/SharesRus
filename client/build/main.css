@@ -4,7 +4,7 @@ img {
 }
 
 body {
-  background-color: #8bcad9;
+  background-color: #bdf7b7;
 }
 
 @font-face {
@@ -89,10 +89,8 @@ body {
 
 #search-shares {
   height: auto;
-
   background-color: #bdf7b7;
   padding-bottom: 10px;
-
   width: 60%;
   display: inline-block;
   margin: 0px;
@@ -127,10 +125,7 @@ body {
 
 /*Main Page*/
 
-#share-search {
-  height: 150px;
-  background-color: white;
-}
+
 
 #results {
   height: 750px;
@@ -157,6 +152,73 @@ ul li {
   padding-bottom: 5px;
   margin-left: 0px;
 }
+
+#search {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#share-search {
+  background-color: #8bcad9;
+  color: #de7070;
+  height: auto;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+}
+
+#search-submit {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#follow-button {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 20px
+}
+
+#company-description {
+  text-align: center;
+  color: #de7070;
+  font-weight: bold;
+}
+
+#company-description table {
+  width: 100%;
+  color: #8bcad9;
+}
+
+#company-description td:nth-child(even){
+  background-color: #ffe14f
+}
+
+#company-description td:nth-child(odd){
+  background-color: #de7070
+}
+
+#select-container select{
+  background-color: #8bcad9;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 13px;
+  border: none;
+  padding: 20px 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 
 /*Portfolio*/
 
