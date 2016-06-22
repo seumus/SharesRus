@@ -52,9 +52,9 @@
 	var Stock = __webpack_require__(3);
 	var Dates = __webpack_require__(5);
 	
-	var companies = __webpack_require__(6);
-	var sampleShares = __webpack_require__(7);
-	var buisnesses = __webpack_require__(8)
+	var companies = __webpack_require__(7);
+	var sampleShares = __webpack_require__(8);
+	var buisnesses = __webpack_require__(9)
 	
 	
 	window.onload = function(){
@@ -552,7 +552,8 @@
 
 
 /***/ },
-/* 6 */
+/* 6 */,
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3079,7 +3080,7 @@
 	]
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3177,7 +3178,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = [

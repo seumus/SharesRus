@@ -51,14 +51,11 @@
 	var Portfolio = __webpack_require__(4);
 	var Stock = __webpack_require__(3);
 	var Dates = __webpack_require__(5);
-<<<<<<< HEAD
-	var BoughtShares = __webpack_require__(9);
-=======
+	var BoughtShares = __webpack_require__(6);
 	
->>>>>>> 95f5576fff1d2e1876db628f8e37c72cda1efe98
-	var companies = __webpack_require__(6);
-	var sampleShares = __webpack_require__(7);
-	var buisnesses = __webpack_require__(8)
+	var companies = __webpack_require__(7);
+	var sampleShares = __webpack_require__(8);
+	var buisnesses = __webpack_require__(9)
 	
 	
 	var databaseStuff = []
@@ -203,11 +200,8 @@
 	        var priceTrendData2 = getPriceTrendCont(result)
 	        var dates = getDates(result)
 	        var button = document.getElementById('follow-button')
-<<<<<<< HEAD
 	        var button4 = document.getElementById('buy-button')
 	
-=======
->>>>>>> 95f5576fff1d2e1876db628f8e37c72cda1efe98
 	        var dateObj = new Dates({dates:result})
 	        databaseStuff.push(dateObj)
 	        dataAll = new Portfolio()
@@ -217,7 +211,6 @@
 	          databaseStuff = []
 	          console.log("HEREEEEE",dataAll);
 	        })
-<<<<<<< HEAD
 	        button4.addEventListener("click", function() {
 	
 	          var input = document.getElementById('buyInput')
@@ -227,9 +220,6 @@
 	          cheese.save();
 	        })
 	
-	
-=======
->>>>>>> 95f5576fff1d2e1876db628f8e37c72cda1efe98
 	        // dateObj.save();
 	        dates = dates.reverse();
 	        console.log(databaseStuff);
@@ -255,24 +245,17 @@
 	        var result = result.list.resources[0].resource.fields;
 	        console.log("THIS",result);
 	        var stock = new Stock({name:result})
-<<<<<<< HEAD
-	
-=======
 	        var button2 = document.getElementById('follow-button')
->>>>>>> 95f5576fff1d2e1876db628f8e37c72cda1efe98
 	        console.log(stock);
 	
 	        databaseStuff.push(stock)
-	
-<<<<<<< HEAD
-=======
 	
 	        // button2.addEventListener("click", function() {
 	        //   stock.save();
 	        // })
 	        // stock.save();
 	
->>>>>>> 95f5576fff1d2e1876db628f8e37c72cda1efe98
+	
 	        displayInfo(result);
 	
 	      }
@@ -342,27 +325,22 @@
 	  infoBox.appendChild(table);
 	
 	  var button = document.createElement('button');
-<<<<<<< HEAD
 	  var button2 = document.createElement('button');
 	  var input = document.createElement('input');
 	  input.id = "buyInput"
 	  input.type = 'number'
 	  input.value = 1
 	
-=======
->>>>>>> 95f5576fff1d2e1876db628f8e37c72cda1efe98
 	  button.innerText = "Follow";
+	  button2.innerText = "Buy"
 	  button.id = "follow-button";
-<<<<<<< HEAD
 	  button2.id = "buy-button";
 	
 	  infoBox.appendChild(button);
 	  infoBox.appendChild(input);
 	  infoBox.appendChild(button2);
-=======
-	  infoBox.appendChild(button);
 	
->>>>>>> 95f5576fff1d2e1876db628f8e37c72cda1efe98
+	
 	}
 	
 	
@@ -464,28 +442,12 @@
 	          liOnClick(company.Symbol);
 	          getEverything(company.Symbol);
 	        }
-	        
+	
 	      }
 	               liOnClick(name);
 	               getEverything(name);
 	    });
 	  }
-	
-<<<<<<< HEAD
-	  // var saveToDB = function(){
-	  //   var url = 'http://localhost:3000/boughtshares';
-	  //   var request = new XMLHttpRequest();
-	  //   request.open("POST", url);
-	  //   request.setRequestHeader("Content-Type", "application/json");
-	  //   request.onload = function(){
-	  //     if(request.status === 200){
-	  //     }
-	  //   }
-	  //   request.send(JSON.stringify(this));
-	  // }
-=======
-	
->>>>>>> 95f5576fff1d2e1876db628f8e37c72cda1efe98
 
 
 /***/ },
@@ -650,6 +612,34 @@
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+	var BoughtShares = function(params) {
+	  this.name = params.name;
+	  this.price = params.price;
+	  this.quantity = params.quantity;
+	
+	};
+	
+	
+	BoughtShares.prototype = {
+	  save: function(){
+	    var url = 'http://localhost:3000/boughtshares';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
+	  }
+	}
+	module.exports = BoughtShares;
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3176,7 +3166,7 @@
 	]
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3274,7 +3264,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -3369,34 +3359,6 @@
 	      "buyDate":"2014-04-04"
 	    }
 	  ]
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	var BoughtShares = function(params) {
-	  this.name = params.name;
-	  this.price = params.price;
-	  this.quantity = params.quantity;
-	
-	};
-	
-	
-	BoughtShares.prototype = {
-	  save: function(){
-	    var url = 'http://localhost:3000/boughtshares';
-	    var request = new XMLHttpRequest();
-	    request.open("POST", url);
-	    request.setRequestHeader("Content-Type", "application/json");
-	    request.onload = function(){
-	      if(request.status === 200){
-	      }
-	    }
-	    request.send(JSON.stringify(this));
-	  }
-	}
-	module.exports = BoughtShares;
-
 
 /***/ }
 /******/ ]);

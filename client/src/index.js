@@ -286,6 +286,7 @@ var displayInfo = function(company) {
   input.value = 1
 
   button.innerText = "Follow";
+  button2.innerText = "Buy"
   button.id = "follow-button";
   button2.id = "buy-button";
 
