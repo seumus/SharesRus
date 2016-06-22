@@ -50,6 +50,7 @@
 	var Portfolio = __webpack_require__(4);
 	var Stock = __webpack_require__(3);
 	var Dates = __webpack_require__(5);
+	var BoughtShares = __webpack_require__(9);
 	var companies = __webpack_require__(6);
 	var sampleShares = __webpack_require__(7);
 	var buisnesses = __webpack_require__(8)
@@ -155,12 +156,13 @@
 	        // console.log("HI");
 	        var result = JSON.parse(request.responseText);
 	        var result = result.query.results.quote;
-	        // console.log("THIS ONE",result);
+	        // console.log("THIS ONE",result[0]);
 	        var container3 = document.getElementById("lineChart");
 	        var priceTrendData2 = getPriceTrendCont(result)
 	        var dates = getDates(result)
 	        var button = document.getElementById('follow-button')
 	        var button4 = document.getElementById('buy-button')
+	
 	        var dateObj = new Dates({dates:result})
 	        databaseStuff.push(dateObj)
 	        dataAll = new Portfolio()
@@ -170,10 +172,16 @@
 	          databaseStuff = []
 	          console.log("HEREEEEE",dataAll);
 	        })
-	
 	        button4.addEventListener("click", function() {
 	
+	          var input = document.getElementById('buyInput')
+	          console.log(input.value);
+	          var cheese = new BoughtShares({name: databaseStuff[0].name.name, price: databaseStuff[0].name.price, quantity: input.value})
+	          console.log(cheese);
+	          cheese.save();
 	        })
+	
+	
 	        // dateObj.save();
 	        dates = dates.reverse();
 	        console.log(databaseStuff);
@@ -194,8 +202,10 @@
 	        var result = result.list.resources[0].resource.fields;
 	        console.log("THIS",result);
 	        var stock = new Stock({name:result})
+	
 	        console.log(stock);
 	        databaseStuff.push(stock)
+	
 	        displayInfo(result);
 	      }
 	    }
@@ -254,12 +264,18 @@
 	  infoBox.appendChild(table);
 	  var button = document.createElement('button');
 	  var button2 = document.createElement('button');
-	  var input = document.createElement('input')
+	  var input = document.createElement('input');
+	  input.id = "buyInput"
+	  input.type = 'number'
+	  input.value = 1
+	
 	  button.innerText = "Follow";
 	  button2.innerText = "Buy";
 	  button.id = "follow-button";
 	  button2.id = "buy-button";
+	
 	  infoBox.appendChild(button);
+	  infoBox.appendChild(input);
 	  infoBox.appendChild(button2);
 	}
 	var getChangeInPriceData = function(shares) {
@@ -350,6 +366,18 @@
 	      }
 	    });
 	  }
+	
+	  // var saveToDB = function(){
+	  //   var url = 'http://localhost:3000/boughtshares';
+	  //   var request = new XMLHttpRequest();
+	  //   request.open("POST", url);
+	  //   request.setRequestHeader("Content-Type", "application/json");
+	  //   request.onload = function(){
+	  //     if(request.status === 200){
+	  //     }
+	  //   }
+	  //   request.send(JSON.stringify(this));
+	  // }
 
 
 /***/ },
@@ -3234,6 +3262,34 @@
 	      "buyDate":"2014-04-04"
 	    }
 	  ]
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	var BoughtShares = function(params) {
+	  this.name = params.name;
+	  this.price = params.price;
+	  this.quantity = params.quantity;
+	
+	};
+	
+	
+	BoughtShares.prototype = {
+	  save: function(){
+	    var url = 'http://localhost:3000/boughtshares';
+	    var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = function(){
+	      if(request.status === 200){
+	      }
+	    }
+	    request.send(JSON.stringify(this));
+	  }
+	}
+	module.exports = BoughtShares;
+
 
 /***/ }
 /******/ ]);
