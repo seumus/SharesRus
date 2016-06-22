@@ -25,7 +25,7 @@ window.onload = function(){
 
 
   getData(getDatesCont);
-  console.log('x',cheese);
+  // console.log('x',cheese);
 
 
 
@@ -85,7 +85,7 @@ window.onload = function(){
   var pastDays = function(share) {
     x = []
     for(index of share.shares['0'][1].dates) {
-      console.log(index.Close);
+      // console.log(index.Close);
       x.push(parseInt(index.Close))
     }
     return x
@@ -178,7 +178,7 @@ window.onload = function(){
             console.log("sad")
           }
         }
-       
+
         request.send(null);
     }
 
@@ -195,13 +195,17 @@ window.onload = function(){
       var td5 = document.createElement("td");
       var td6 = document.createElement("td");
       var td7 = document.createElement("td");
-      td1.innerText = "Price";
-      td2.innerText = "Day High";
-      td3.innerText = "Day Low";
-      td4.innerText = "Change";
-      td5.innerText = "Change Precent";
-      td6.innerText = "Year High";
+      var td88 = document.createElement("td");
+      var td99 = document.createElement("td");
+      td1.innerText = "Name";
+      td2.innerText = "Price";
+      td3.innerText = "Day High";
+      td4.innerText = "Day Low";
+      td5.innerText = "Change";
+      td6.innerText = "Change %";
       td7.innerText = "Year Low";
+      td88.innerText = "Year High";
+      td99.innerText = "Forcast";
 
       tr1.appendChild(td1);
       tr1.appendChild(td2);
@@ -210,6 +214,8 @@ window.onload = function(){
       tr1.appendChild(td5);
       tr1.appendChild(td6);
       tr1.appendChild(td7);
+      tr1.appendChild(td88);
+      tr1.appendChild(td99);
 
       table.appendChild(tr1);
 
@@ -224,14 +230,22 @@ window.onload = function(){
         var td14 = document.createElement("td");
         var td15 = document.createElement("td");
 
+
+        // var x = 0
+
+
           td8.innerText =  comapany.shares["0"][0].name.issuer_name
           td9.innerText =   comapany.shares["0"][0].name.price;
           td10.innerText =  comapany.shares["0"][0].name.day_high;
           td11.innerText =  comapany.shares["0"][0].name.day_low;
           td12.innerText =  comapany.shares["0"][0].name.change;
           td13.innerText =  comapany.shares["0"][0].name.chg_percent;
-          td14.innerText =  comapany.shares["0"][0].name.year_high;
+          td15.innerText =  comapany.shares["0"][0].name.year_high;
           td14.innerText =  comapany.shares["0"][0].name.year_low;
+
+
+
+
 
         tr2.appendChild(td8);
         tr2.appendChild(td9);
@@ -242,11 +256,41 @@ window.onload = function(){
         tr2.appendChild(td14);
         tr2.appendChild(td15);
 
+
         table.appendChild(tr2);
       }
+      var forcastSubmit = document.getElementById('forcastSubmit')
+      var forcast = document.getElementById('forcast')
+
+      forcastSubmit.addEventListener('click', function() {
+        var tr = document.getElementsByTagName('tr');
+        console.log(tr);
+        for(i in tr) {
+          console.log(tr[i]);
+          var td = document.createElement("td");
+          // console.log(company);
+          var som = i.childNodes;
+          console.log("cheese",som);
+          var num = parseInt(comapany.shares["0"][0].name.price)
+          var num1 = forcast.value
+          var num2 = num + (num * (num1/100))
+          // console.log(num2);
+          // td16.innerText = 0
+          // td16.innerText =  num2
+          // tr2.appendChild(td16);
+          // table.appendChild(tr2);
+        }
+      })
 
       div.appendChild(table);
     }
+
+
+
+  //   var forcast = function() {
+  //
+  //
+  // }
 
 
 
@@ -280,9 +324,9 @@ window.onload = function(){
        y = []
       //  console.log(data[0].shares[0]);
        x = data[0].shares
-      //  console.log('x', data);
+       console.log('x', x);
        for(entry of data) {
-         console.log(entry.shares['0'][1].dates);
+        //  console.log(entry.shares['0'][1].dates);
          var data2 = {
            name: entry.shares['0'][0].name.name,
            data: pastDays(entry)
@@ -290,10 +334,9 @@ window.onload = function(){
          // console.log(data);
          y.push(data2)
        }
-       console.log('y',y);
+      //  console.log('y',y);
        var container3 = document.getElementById("portfolio-lineChart");
        new LineChart(y, container3);
       //  return y
 
        }
-
