@@ -26,8 +26,7 @@ window.onload = function(){
 
   getData(getDatesCont);
   // console.log('x',cheese);
-
-
+  forcast();
 
   };
 
@@ -197,6 +196,8 @@ window.onload = function(){
       var td7 = document.createElement("td");
       var td88 = document.createElement("td");
       var td99 = document.createElement("td");
+      td99.classList.add("hidden")
+
       td1.innerText = "Name";
       td2.innerText = "Price";
       td3.innerText = "Day High";
@@ -229,6 +230,8 @@ window.onload = function(){
         var td13 = document.createElement("td");
         var td14 = document.createElement("td");
         var td15 = document.createElement("td");
+        var td16 = document.createElement("td");
+        td16.classList.add("hidden")
 
 
         // var x = 0
@@ -255,42 +258,42 @@ window.onload = function(){
         tr2.appendChild(td13);
         tr2.appendChild(td14);
         tr2.appendChild(td15);
+        tr2.appendChild(td16);
 
 
         table.appendChild(tr2);
       }
-      var forcastSubmit = document.getElementById('forcastSubmit')
-      var forcast = document.getElementById('forcast')
 
-      forcastSubmit.addEventListener('click', function() {
-        var tr = document.getElementsByTagName('tr');
-        console.log(tr);
-        for(i in tr) {
-          console.log(tr[i]);
-          var td = document.createElement("td");
-          // console.log(company);
-          var som = i.childNodes;
-          console.log("cheese",som);
-          var num = parseInt(comapany.shares["0"][0].name.price)
-          var num1 = forcast.value
-          var num2 = num + (num * (num1/100))
-          // console.log(num2);
-          // td16.innerText = 0
-          // td16.innerText =  num2
-          // tr2.appendChild(td16);
-          // table.appendChild(tr2);
-        }
-      })
+    
 
       div.appendChild(table);
     }
 
 
 
-  //   var forcast = function() {
-  //
-  //
-  // }
+    var forcast = function() {
+      var forcastSubmit = document.getElementById('forcastInput')
+      forcastSubmit.addEventListener('submit', function(e) {
+        e.preventDefault();
+       var tr = document.getElementsByTagName('tr');
+       var forcast = document.getElementById('forcast');
+       var tds = document.getElementsByClassName("hidden");
+       for(td of tds) {
+        td.style.visibility = "visible";
+       }
+       
+        for(var i = 1; i < tr.length; i++) {
+          // console.log(company);
+          var tds = tr[i].childNodes;
+          var lastTd = tds[tds.length -1 ]; 
+          var price = parseInt(tds[1].innerText);
+          var precent = forcast.value;
+          var result = price + (price * (precent/100));
+          lastTd.innerText = result;
+        }
+      })
+  
+  }
 
 
 

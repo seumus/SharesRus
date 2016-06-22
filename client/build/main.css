@@ -159,3 +159,7 @@ ul li {
 }
 
 /*Portfolio*/
+
+.hidden {
+  visibility: hidden;
+}
