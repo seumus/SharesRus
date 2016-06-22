@@ -1,0 +1,288 @@
+/*Index*/
+img {
+  width: 100%;
+}
+
+body {
+  background-color: #bdf7b7;
+}
+
+@font-face {
+  font-family: digital;
+  src: url(DS-DIGI.TTF);
+}
+
+#scroller {
+  font-family: digital;
+  background: black;
+  padding-top: 5px;
+  height: 50px;
+  font-size: 40px;
+  overflow: hidden;
+  position: relative;
+  color: white;
+}
+
+#title {
+  font-size: 70px;
+  height: 200px;
+  height: auto;
+  background-color: #ffe14f;
+  margin: 0;
+  /*padding-top: 10px;*/
+  /*padding-bottom: 10px;*/
+  text-align: center;
+  /*background-image: url('./images/ToysRUs.png');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;*/
+
+}
+
+#title img {
+  width: 70%;
+  height: 70%;
+}
+
+#nav {
+  background-color: #de7070;
+  height: 30px;
+}
+
+
+
+#nav a {
+  display: inline-block;
+  float: right;
+  font-family: 'Bitter', serif;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: black;
+  font-size: 25px;
+}
+
+#nav a:hover {
+  background-color: #8bcad9;
+}
+
+#twitter {
+  height: 600px;
+  width: 20%;
+  background-color: #bdf7b7;
+  display: inline-block;
+  float: right;
+  overflow: scroll;
+}
+
+#dropdown {
+  float: left;
+  font-family: 'Bitter', serif;
+  color: #de7070;
+  height: 600px;
+  width: 25%;
+  background-color: #bdf7b7;
+  display: inline-block;
+  overflow: scroll;
+  list-style-type: none;
+}
+
+
+#search-shares {
+  height: auto;
+  background-color: #bdf7b7;
+  padding-bottom: 10px;
+  width: 75%;
+  display: inline-block;
+  margin: 0px;
+}
+
+
+#display {
+  height: auto;
+  width: 75%;
+  background-color: #bdf7b7;
+  display: inline-block;
+  margin: 0px;
+}
+
+#portfolioDisplay{
+    height: auto;
+    width: 75%;
+    background-color: #bdf7b7;
+    display: inline-block;
+    margin: 0px;
+
+}
+
+.plus {
+  color: green;
+}
+
+.minus {
+  color: red;
+}
+
+
+/*Main Page*/
+
+
+
+#results {
+  height: 750px;
+  background-color: magenta;
+}
+
+#search-form {
+  text-align: center;
+}
+
+#search {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+#dropdown ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style-type: none;
+  padding-bottom: 5px;
+  margin-left: 0px;
+}
+
+#search {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#share-search {
+  background-color: #8bcad9;
+  color: #de7070;
+  height: auto;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+}
+
+#search-submit {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#follow-button {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 20px
+}
+
+#company-description {
+  text-align: center;
+  color: #de7070;
+  font-weight: bold;
+}
+
+#company-description table {
+  width: 100%;
+  color: #8bcad9;
+}
+
+#company-description td:nth-child(even){
+  background-color: #ffe14f
+}
+
+#company-description td:nth-child(odd){
+  background-color: #de7070
+}
+
+#select-container select{
+  background-color: #8bcad9;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 13px;
+  border: none;
+  padding: 20px 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+/*Portfolio*/
+
+
+#main {
+  width: 80%;
+  display: inline-block;
+}
+
+
+#following-table table {
+  width: 100%;
+  color: #8bcad9;
+}
+
+#following-table td:nth-child(even){
+  background-color: #ffe14f
+}
+
+#following-table td:nth-child(odd){
+  background-color: #de7070
+}
+
+#forcast {
+  background-color: #8bcad9;
+  color: #de7070;
+  height: auto;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  float: right;
+  margin-bottom: 20px
+}
+
+#forcastSubmit {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 20px
+}
+
+
+
+
+.hidden {
+  visibility: hidden;
+}
+
+.delete {
+
+  font-family: 'Permanent Marker', cursive;
+  color: red;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+

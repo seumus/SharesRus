@@ -16,9 +16,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-app.get('/portfolio', function(req,res){
+app.get('/market', function(req,res){
   MongoClient.connect(url, function(err, db) {
-    var collection = db.collection('portfolio');
+    var collection = db.collection('market');
     collection.find({}).toArray(function(err, docs) {
       res.json(docs);
       db.close();
@@ -26,20 +26,64 @@ app.get('/portfolio', function(req,res){
   });
 })
 
-app.post('/portfolio', function(req,res){
-  // console.log('body', req.body)
+app.get('/boughtshares', function(req,res){
   MongoClient.connect(url, function(err, db) {
-    var collection = db.collection('shares');
-    collection.insert(
-      {
-        // "name": req.body.name,
-        // "balance": req.body.value
-      }
-    )
-    res.status(200).end()
+    var collection = db.collection('boughtshares');
+    collection.find({}).toArray(function(err, docs) {
+      res.json(docs);
+      db.close();
+    });
+  });
+})
+
+app.post('/market', function(req,res){
+  // console.log('body', req.body)
+
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('market');
+    // collection.remove({});
+    collection.insert(req.body)
+    console.log(req.body);
+    res.status(200).end();
     db.close();
   });
 })
+
+app.post('/boughtshares', function(req,res){
+  // console.log('body', req.body)
+
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('boughtshares');
+    // collection.remove({});
+    collection.insert(req.body)
+    console.log(req.body);
+    res.status(200).end();
+    db.close();
+  });
+})
+
+app.delete('/market', function(req,res){
+
+  MongoClient.connect(url, function(err, db) {
+    var collection = db.collection('market')
+    collection.deleteOne(req.body)
+    res.status(200).end();
+    db.close();
+  })
+})
+
+// app.post('/dates', function(req,res){
+//   console.log('body', req.body)
+//
+//   MongoClient.connect(url, function(err, db) {
+//     var collection = db.collection('market');
+//     // collection.remove({});
+//     collection.insert(req.body)
+//     console.log(req.body);
+//     res.status(200).end();
+//     db.close();
+//   });
+// })
 
 app.use(express.static('client/build'));
 

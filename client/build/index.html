@@ -1,12 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Shares R Us</title>
-    <script src='bundle.js'></script>
-  </head>
-  <body>
-    <h1>Shares R Us</h1>
 
-  </body>
+<head>
+  <title>SharesRUS</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+ <link href='https://fonts.googleapis.com/css?family=Bitter:400,400italic,700' rel='stylesheet' type='text/css'>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src='a.js'></script>
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</head>
+<body>
+<div id="scroller"><marquee id="scroll" scrollamount="10" direction="right" loop=-1 width="100%">
+</marquee></div>
+
+<div>
+
+
+<h1 id="title"><img src="./images/ToysRUs.png"></h1>
+
+<nav id="nav">
+<a href="./index.html">HOME</a>
+<a href="./portfolio.html">PORTFOLIO</a>
+<a href="./following.html">FOLLOWING</a>
+</nav>
+</div>
+
+<div id="twitter">
+  <a class="twitter-timeline" href="https://twitter.com/hcndashwood/lists/economics-twitter-feed" data-chrome ="noheader transparent"></a>
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+
+<div id="main">
+
+  <div id="dropdown">
+    <div id="select-container"></div>
+    <div id="company-list-container"></div>
+  </div>
+
+  <div id="search-shares">
+
+    <form id="search">
+
+      <input id="share-search" type="text" name="share-search">
+      <input id="search-submit" type="submit" name="search-submit" value="Search">
+
+    </form>
+  </div>
+
+  <div id="display">
+    <div id="company-description"></div>
+    <div id="lineChart" width="500" height="400"></div>
+    <div id="bio">
+      <p>Welcome to Shares R Us, a magical place to track your favourite shares.</p>
+      <p>Check out our shares on the left or follow our customised twitter feed on the right.</p>
+    </div>
+  </div>
+
+  <div id="opening-spiel">
+    <p>Welcome to Shares R Us, a magical place to track your favourite shares.</p>
+    <p>Check out our shares on the left or follow our customised twitter feed on the right.</p>
+  </div>
+
+</div>
+
+ <audio autoplay="autoplay">
+  <source src="song.mp3">
+</audio>
+
+
+
 </html>

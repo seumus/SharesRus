@@ -1,7 +1,9 @@
 var config = {
-  entry: "./src/index.js",
+  entry: {a:"./src/index.js",
+          b:"./src/portfolio.js",
+          c:"./src/following.js"},
   output:{
-    filename: "bundle.js",
+    filename: "[name].js",
     path: "./build"
   },
   devtool: "source-map"
