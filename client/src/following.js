@@ -182,6 +182,7 @@ window.onload = function(){
     }
 
     var createTable = function(data) {
+      console.log(data);
       var div = document.getElementById("following-table");
       var table = document.createElement('table');
       var tr1 = document.createElement('tr');
@@ -263,7 +264,7 @@ window.onload = function(){
         table.appendChild(tr2);
       }
 
-    
+
 
       div.appendChild(table);
     }
@@ -280,18 +281,18 @@ window.onload = function(){
        for(td of tds) {
         td.style.visibility = "visible";
        }
-       
+
         for(var i = 1; i < tr.length; i++) {
           // console.log(company);
           var tds = tr[i].childNodes;
-          var lastTd = tds[tds.length -1 ]; 
+          var lastTd = tds[tds.length -1 ];
           var price = parseInt(tds[1].innerText);
           var precent = forcast.value;
           var result = price + (price * (precent/100));
           lastTd.innerText = result;
         }
       })
-  
+
   }
 
 
