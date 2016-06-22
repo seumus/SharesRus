@@ -28,10 +28,22 @@
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
 
-  <div id="main">
-   <div id="following-table"></div>
-   <div id="forcastInput">
-     <input id="forcast" type="number" name="name" value="1">
-     <input id="forcastSubmit" type="submit" name="Add Forcast" value="Add Forcast">
+    <div id="main">
+     <div id="following-table"></div>
+     <form id="forcastInput">
+       <input id="forcast" type="number" name="name" value="1">
+       <input id="forcastSubmit" type="submit" name="Add Forcast" value="Add Forcast">
+      </form>
     </div>
-  </div>
+
+    <div id="portfolioDisplay">
+      <div id="portfolio-company-description"></div>
+      <div id="portfolio-lineChart" width="500" height="400"></div>
+    </div>
+
+    <audio autoplay="autoplay">
+      <source src="song.mp3">
+    </audio>
+
+
+  </html>

@@ -15,10 +15,7 @@ window.onload = function(){
 
   getData(createTable);
 
-
-
-
-  banner(buisnesses);
+  ftseLoad();
 
   // priceTrendData = getPriceTrend(sampleShares);
 
@@ -30,30 +27,47 @@ window.onload = function(){
 
   };
 
+  var ftseLoad = function(){
+  var url = 'https://spreadsheets.google.com/feeds/list/0AhySzEddwIC1dEtpWF9hQUhCWURZNEViUmpUeVgwdGc/1/public/basic?alt=json'
+
+  var request = new XMLHttpRequest();
+  request.open("Get", url);
+      request.onload = function() {
+        if(request.status === 200) {
+        console.log("got the data")
+        var jsonString = request.responseText
+        var info = JSON.parse(jsonString)
+        var companies = info.feed.entry
+        banner(companies)
+        }
+      }
+      request.send(null);
+  }
+
   var banner = function(companies){
-    var scroll = document.getElementById("scroll")
+  var scroll = document.getElementById("scroll")
     for (company of companies){
-      var price = company.price - company.pastCloseOfDayPrices[6]
-      var priceChange = price.toFixed(2);
-      var currentPrice = company.price.toFixed(2)
-      // console.log(priceChange)
-      var span1 = document.createElement('span')
-      var span2 = document.createElement('span')
-      var span3 = document.createElement('span')
-      span1.innerText = " --- "
+
+    var c = company.content.$t
+    var com = c.split(" ")
+    var priceChange = com[com.length-1]
+    var span1 = document.createElement('span')
+    var span2 = document.createElement('span')
+    var span3 = document.createElement('span')
+    span1.innerText = " --- "
       if (priceChange > 0){
-        span2.classList.add("plus")
-        span2.innerText = currentPrice + " / "  + company.name + " / " + "+" +priceChange
-        span3.innerHTML = "&#9786;"
+      span2.classList.add("plus")
+      span2.innerText = c
+      span3.innerHTML = "&#9786;"
       }
       if (priceChange < 0){
-        span2.classList.add("minus")
-        span2.innerText =  company.name + " / "  +  currentPrice + " / " + priceChange
-        span3.innerHTML = "&#9785;"
+      span2.classList.add("minus")
+      span2.innerText =  c
+      span3.innerHTML = "&#9785;"
       }
-      scroll.appendChild(span1)
-      scroll.appendChild(span3)
-      scroll.appendChild(span2)
+    scroll.appendChild(span1)
+    scroll.appendChild(span3)
+    scroll.appendChild(span2)
     }
   }
 
