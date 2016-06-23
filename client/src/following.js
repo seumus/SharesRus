@@ -375,6 +375,7 @@ window.onload = function(){
              request.open('delete', 'http://localhost:3000/market')
              request.send(parent.id)
              console.log(parent.id);
+             getData(getDatesCont);
            })
          }
        }

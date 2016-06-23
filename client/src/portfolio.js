@@ -310,6 +310,10 @@ window.onload = function(){
           td200.innerText = 0
           td201.innerText = 0
 
+          // td100.addEventListener('click', function() {
+          //   getBoughtData(makePie);
+          // })
+
 
 
 
@@ -473,6 +477,7 @@ window.onload = function(){
              request.open('delete', 'http://localhost:3000/boughtshares')
              request.send(parent.id)
              console.log(parent.id);
+             getBoughtData(makePie);
            })
          }
        }

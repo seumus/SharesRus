@@ -131,6 +131,7 @@ body {
   font-size: 25px;
   font-family: 'Bitter', serif;
   color: #de7070;
+  text-align: center;
 }
 
 #results {
@@ -278,7 +279,10 @@ ul li {
   margin-bottom: 20px
 }
 
-
+#gif {
+  width: 70%;
+  height: 70%;
+}
 
 
 .hidden {
@@ -310,4 +314,25 @@ td:nth-child(even){
 
 td:nth-child(odd){
   background-color: #de7070
+}
+
+#buyInput {
+  background-color: #8bcad9;
+  color: #de7070;
+  height: auto;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  float: left;
+  margin-bottom: 20px
+}
+
+#buy-button {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  float: left;
 }
