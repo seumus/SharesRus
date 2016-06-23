@@ -315,3 +315,24 @@ td:nth-child(even){
 td:nth-child(odd){
   background-color: #de7070
 }
+
+#buyInput {
+  background-color: #8bcad9;
+  color: #de7070;
+  height: auto;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  float: left;
+  margin-bottom: 20px
+}
+
+#buy-button {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  float: left;
+}
