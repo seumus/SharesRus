@@ -304,7 +304,7 @@ window.onload = function(){
         for(var i = 1; i < tr.length; i++) {
           // console.log(company);
           var tds = tr[i].childNodes;
-          var lastTd = tds[tds.length -1 ];
+          var lastTd = tds[tds.length -2 ];
           var price = parseInt(tds[1].innerText);
           var precent = forcast.value;
           var result = price + (price * (precent/100));
@@ -369,6 +369,11 @@ window.onload = function(){
 
            x.addEventListener("click", function() {
              var parent = this.parentElement;
+             var table = document.getElementsByTagName('table')[0]
+             table.removeChild(parent)
+             var request = new XMLHttpRequest()
+             request.open('delete', 'http://localhost:3000/market')
+             request.send(parent.id)
              console.log(parent.id);
            })
          }

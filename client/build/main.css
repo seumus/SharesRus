@@ -47,13 +47,15 @@ body {
 #nav {
   background-color: #de7070;
   height: 30px;
+  text-align: center;
+
 }
 
 
 
 #nav a {
   display: inline-block;
-  float: right;
+  text-decoration: none;
   font-family: 'Bitter', serif;
   margin-left: 5px;
   margin-right: 5px;
@@ -125,7 +127,11 @@ body {
 
 /*Main Page*/
 
-
+#bio {
+  font-size: 25px;
+  font-family: 'Bitter', serif;
+  color: #de7070;
+}
 
 #results {
   height: 750px;
@@ -187,7 +193,15 @@ ul li {
   float: right;
   margin-bottom: 20px
 }
-
+#updateButton {
+  background-color: #bdf7b7;
+  color: #de7070;
+  font-family: 'Bitter', serif;
+  font-size: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
 #company-description {
   text-align: center;
   color: #de7070;
@@ -279,10 +293,21 @@ ul li {
   cursor: pointer;
 }
 
+table {
+  padding-top: 5px;
+  width: 100%;
+  color: #8bcad9;
+  font-family: 'Bitter', serif;
+}
 
+td {
+  padding: 3px;
+}
 
+td:nth-child(even){
+  background-color: #ffe14f
+}
 
-
-
-
-
+td:nth-child(odd){
+  background-color: #de7070
+}
